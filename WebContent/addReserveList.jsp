@@ -14,7 +14,7 @@ user.setUsrName("ito");
 session.setAttribute("userInfo", user);
 %>
 </head>
-<body onload="location.href='/ideal/controller/COPY_ReserveListSvl'">
+<body onload="location.href='/ideal/controller/ReserveListSvl'">
 
 </body>
 </html>

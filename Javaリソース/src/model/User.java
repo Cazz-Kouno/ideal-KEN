@@ -74,6 +74,7 @@ public class User {
             preparedStatement.setString(2, password);
             // SQLを実行
             resultSet = preparedStatement.executeQuery();
+            System.out.println(preparedStatement);
             if (resultSet.next()) {
                 // Userオブジェクトに取得した情報を設定
                 User user = new User();

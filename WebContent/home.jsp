@@ -10,7 +10,7 @@ body{text-align:center;}
 </style>
 </head><p>
 <body>
-<h1>■ Restaurante IDEALLE ■</h1>
+<div style="font-size:70px;">■ Restaurante IDEALLE ■</div>
 <p>ここにメッセージを表示</p>
 <p><a href="/ideal/controller/ShowMenuSvl">●メニュー紹介</a></p>
 <p><a href="userLogin.jsp">●ログイン</a></p>

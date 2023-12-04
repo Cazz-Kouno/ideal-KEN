@@ -41,18 +41,23 @@ public class UserLoginSvl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("usrId"));
 		String pass = request.getParameter("password");
+		String name = request.getParameter("usrName");
 		
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession(false);
 		RequestDispatcher rd = null;
 		
 		try {
+			System.out.println("1");
 			User user = User.login(id,pass);
+			System.out.println("2");
+			System.out.println(user);
 			if(user == null) {
 				IdealException ie = new IdealException(IdealException.ERR_NO_NOT_MEMBER_EXCEPTION);
 				throw ie;
 			}else {
 				session.setAttribute("userInfo", user);
+				session.setAttribute("usrName", user);
 				rd = request.getRequestDispatcher("../userIndex.jsp");
 			}
 		} catch(IdealException e) {

@@ -477,6 +477,10 @@ public class Reserve implements Serializable {
 			resultSet = preparedStatement.executeQuery();
 			
 			if (resultSet.next()) {
+				ｔableLoc.setTableId(resultSet.getInt("table_id"));
+				ｔableLoc.setTableName(resultSet.getString("table_name"));
+				ｔableLoc.setMaxCapacity(resultSet.getInt("max_capacity"));
+				
 				return ｔableLoc;
 			}else {
 				return null;

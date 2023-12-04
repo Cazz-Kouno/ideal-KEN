@@ -62,6 +62,7 @@ public class CourseOperationSvl extends HttpServlet {
 				rd = request.getRequestDispatcher("home.jsp");
 			} else {
 				Course course = null;
+				ArrayList<Coursectl> coursectl = null;
 				switch(mode) {
 				case INSERT:
 					course = new Course();
@@ -71,16 +72,16 @@ public class CourseOperationSvl extends HttpServlet {
 					course.setDetail(request.getParameter("detail"));
 					course.setTypeId(100);
 					
-					ArrayList<Coursectl> coursectl = new ArrayList<>();
+					coursectl = new ArrayList<>();
 					Coursectl menu = null;
 					for(String type:menuType) {
 						if(request.getParameter(type) != null) {
 							menu = new Coursectl();
-							menu.setM_Id(request.getParameter(type));
+							menu.setM_Id(Integer.parseInt(request.getParameter(type)));
 							coursectl.add(menu);
 						}
 					}
-					Coursectl.updateCourse(course,mode,coursectl);
+					Course.updateCourse(course,mode,coursectl);
 					rd = request.getRequestDispatcher("/ideal/controller/MenuMaintenanceSvl");
 					break;
 				case UPDATE:
@@ -92,23 +93,23 @@ public class CourseOperationSvl extends HttpServlet {
 					course.setDetail(request.getParameter("detail"));
 					course.setTypeId(100);
 					
-					ArrayList<Coursectl> coursectl = new ArrayList<>();
-					Coursectl menu = null;
+					coursectl = new ArrayList<>();
+					menu = null;
 					for(String type:menuType) {
 						if(request.getParameter(type) != null) {
 							menu = new Coursectl();
-							menu.setM_Id(request.getParameter(type));
+							menu.setM_Id(Integer.parseInt(request.getParameter(type)));
 							coursectl.add(menu);
 						}
 					}
 
-					Coursectl.updateCourse(course,mode,coursectl);
+					Course.updateCourse(course,mode,coursectl);
 					rd = request.getRequestDispatcher("/ideal/controller/MenuMaintenanceSvl");
 					break;
 				case DELETE:
-					ArrayList<Coursectl> coursectl = new ArrayList<>();
+					coursectl = new ArrayList<>();
 
-					Coursectl.updateCourse(course,mode,coursectl);
+					Course.updateCourse(course,mode,coursectl);
 					rd = request.getRequestDispatcher("/ideal/controller/MenuMaintenanceSvl");
 
 					break;
@@ -116,23 +117,11 @@ public class CourseOperationSvl extends HttpServlet {
 				}
 				request.setAttribute("typeId", typeId);
 				
-
 			}
 
-		} catch (IdealException e) {
+		} catch (IdealException e) {		//Courseクラス完成時に、スローされませんエラーがきえるはず
 			session.setAttribute("msg", e.getMsg());
-
-			switch(mode) {
-			case INSERT:
-				rd = request.getRequestDispatcher("/ideal/controller/MenuInsertSvl");
-				break;
-			case UPDATE:
-				rd = request.getRequestDispatcher("/ideal/controller/MenuUpdateSvl");
-				break;
-			case DELETE:
-				rd = request.getRequestDispatcher("/ideal/controller/MenuDeleteSvl");
-				break;
-			}
+			rd = request.getRequestDispatcher("/ideal/controller/MenuMaintenanceSvl");
 		} finally {
 			rd.forward(request, response);
 		}

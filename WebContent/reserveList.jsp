@@ -13,20 +13,15 @@ table{
 border:2px glay solid;
 }
 th{
-border:2px solid glay;
+border:2px solid glay;?
 }
 td{
 border:2px solid glay;
 }
 reserveList
 </style>
-<JSP:useBean id="reserveList_esc" class="java.util.ArrayList" scope="session"/>
-<JSP:useBean id="userInfo_esc" class="ideal.model.User" scope="session"/>
-<% 
-User userInfo = new User();
-userInfo.setUsrName("ito");
-ArrayList<Reserve> reserveList = Reserve.getReserveList(1);
-%>
+<jsp:useBean id="reserveList" class="java.util.ArrayList" scope="session"/>
+<jsp:useBean id="userInfo" class="model.User" scope="session"/>
 </head>
 <body>
 <h1><%=userInfo.getUsrName() %>様、ご予約一覧</h1>
@@ -44,8 +39,8 @@ ArrayList<Reserve> reserveList = Reserve.getReserveList(1);
 <td>登録日時</td>
 </tr>
 <%
-for(Reserve reserve:reserveList){
-	// Reserve reserve = (Reserve)obj;
+for(Object obj:reserveList){
+	Reserve reserve = (Reserve)obj;
 %>			
 <tr>
 <td><%= reserve.getRsvId() %></td>
@@ -64,7 +59,11 @@ String formattedDateTime = String.format("%04d年%02d月%02d日 %02d時%02d分",
 <td><%= reserve.getPerson() %></td>
 <td><%= reserve.getCourseName() %></td>
 <td><%= reserve.getTableName() %></td>
-<td><%= reserve.getAppDate() %></td>
+<%
+formattedDateTime = String.format("%04d年%02d月%02d日 %02d時%02d分", reserve.getAppYy(), reserve.getAppMm(), reserve.getAppDd(), reserve.getAppHh(), reserve.getAppMm());
+%>
+<td><%=  formattedDateTime  %>
+</td>
 <td>変更</td>
 <td>取消</td>
 </tr>	
@@ -80,7 +79,7 @@ String formattedDateTime = String.format("%04d年%02d月%02d日 %02d時%02d分",
 </table>
 
 
-<p><a href="home.jsp">処理メニューに戻る</a></p>
+<p><a href="../home.jsp">処理メニューに戻る</a></p>
 <br>
 		
 		

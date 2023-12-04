@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Course;
+import model.Coursectl;
 import model.IdealException;
 import model.Menu;
 import model.MenuType;
@@ -64,11 +65,11 @@ public class MenuDeleteSvl extends HttpServlet {
 						}
 					}
 					request.setAttribute("typeMenuList", menuTypes);
-					request.setAttribute("oneCourse", Course.getOneCourseList(menuId));
+					request.setAttribute("oneCourse", Course.getOneCourseList(menuId));	//クラス完成待ち
 					rd = request.getRequestDispatcher("/ideal/courseUpdate.jsp");
 
 				} else {
-					CourseCtl.CourseMenuChk(menuId);
+					Coursectl.courseMenuChk(menuId);
 					request.setAttribute("oneMenu", Menu.getMenu(menuId));
 					
 					rd = request.getRequestDispatcher("/ideal/controller/ShowMenuSvl");

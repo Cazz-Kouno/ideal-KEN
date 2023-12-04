@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -107,7 +108,7 @@ public class Course {
 		return menuId;
 	}
 
-	public String getmenuName() {
+	public String getMenuName() {
 		return menuName;
 	}
 
@@ -133,12 +134,12 @@ public class Course {
 			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test_heidi", "admin", "5290MySQLadmin1791");
 
 			sql = "SELECT c_id, c_name, detail, orderFlg, price, t_id FROM course WHERE c_id = ?";
-		
+
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, c_Id);
-		
+
 			rs = pst.executeQuery();
-	
+
 			if (rs.next()) {
 
 				crs = new Course();
@@ -175,8 +176,8 @@ public class Course {
 		}
 	}
 
-    /////////////////////////////////////////////////////////////////////////
-	
+	//--------------------------------------------------------------------------------------------//
+
 	public static ArrayList<Course> getOneCourse(int c_Id) throws IdealException {
 
 		//		InitialContext ic = null;
@@ -201,8 +202,8 @@ public class Course {
 					+ "JOIN coursectl cc USING(c_id) "
 					+ "JOIN menu m USING(m_id) "
 					+ "WHERE c.c_id = ?";
-			
-System.out.println(sql);
+
+			System.out.println("getOneCourse の: " + sql);
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, c_Id);
 			rs = pst.executeQuery();
@@ -243,86 +244,154 @@ System.out.println(sql);
 		}
 	}
 
-	// 比較の為に AutoCloseable の try-with-resources 形式で記述してみる。
-	public static ArrayList<Course> getCourseList(int t_Id) throws IdealException{
+	//--------------------------------------------------------------------------------------------//
+
+	public static ArrayList<Course> getCourseList() throws IdealException {
 		ArrayList<Course> alCrsLst = new ArrayList<>();
-		
+
+		String sql = "SELECT "
+				+ "c.c_id, "
+				+ "c.c_Name, "
+				+ "c.detail, "
+				+ "c.orderFlg, "
+				+ "c.price, "
+				+ "c.t_id, "
+				+ "m.t_id, "
+				+ "m.m_id, "
+				+ "m.m_Name "
+				+ "FROM course c JOIN coursectl cc ON c.c_id = cc.c_id "
+				+ "JOIN menu m ON cc.m_id = m.m_id ";
+
+		// 上記 sqlで c.t_id と m.t_id のカラム名表示の重複を避けたい場合は m.t_id as mt_id, m.m_id, m.m_Name を採用予定
+
+		System.out.println("getCourseList の：" + sql);
+
+		// 比較の為に AutoCloseable の try-with-resources 形式で記述してみる。
 		// 外出しの static con は通用しない？
-//        try (Connection con = DriverManager.getConnection(
-//        		"jdbc:mysql://localhost:3306/test_heidi", "admin", "5290MySQLadmin1791")){
-      try (Connection con = DriverManager.getConnection(
-		"jdbc:mariadb://localhost:3306/ideal", "root", "root")){
-    	  
-          String sql = "SELECT "
-          		+ "c.c_id, "
-          		+ "c.c_name, "
-          		+ "c.detail, "
-          		+ "c.orderFlg, "
-          		+ "c.price, "
-          		+ "c.t_id, "
-          		+ "m.t_id, "
-          		+ "m.m_id, "
-          		+ "m.m_Name "
-          		+ "FROM course c JOIN coursectl cc ON c.c_id = cc.c_id "
-          		+ "JOIN menu m ON cc.m_id = m.m_id "
-          		+ "WHERE c.c_id = ? ";
-          
-          System.out.println("1");
-          
-            // ここの pst も static が通用しない！
-          try (PreparedStatement pst = con.prepareStatement(sql)) {
-              pst.setInt(1, t_Id);
+		//		try (Connection con = DriverManager.getConnection(
+		//				"jdbc:mysql://localhost:3306/test_heidi", "admin", "5290MySQLadmin1791");
+		//				PreparedStatement pst = con.prepareStatement(sql);) {
 
-              try (ResultSet rs = pst.executeQuery()) {
-                  while (rs.next()) {
-                      Course crs = new Course();
-                      try {
-                          crs.setCourseId(rs.getInt("c.c_id"));
-                          crs.setCourseName(rs.getString("c.c_name"));
-                          crs.setDetail(rs.getString("c.detail"));
-                          crs.setOrderFlg(rs.getInt("c.orderFlg"));
-                          crs.setPrice(rs.getInt("c.price"));
-                          crs.setTypeId(rs.getInt("c.t_id"));
-                          //crs.setTypeName(rs.getString(""));
-                      } catch (SQLException e) {
-                      
-                          throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
-                      }
+		try (Connection con = DriverManager.getConnection(
+				"jdbc:mariadb://localhost:3306/ideal", "root", "root");
+				PreparedStatement pst = con.prepareStatement(sql);) {
 
-                      alCrsLst.add(crs);
-                  }
-              }
-          }
+			// ここの pst も static が通用しない！
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					Course crs = new Course();
+					try {
+						crs.setCourseId(rs.getInt("c.c_id"));
+						crs.setCourseName(rs.getString("c.c_Name"));
+						crs.setDetail(rs.getString("c.detail"));
+						crs.setOrderFlg(rs.getInt("c.orderFlg"));
+						crs.setPrice(rs.getInt("c.price"));
+						crs.setTypeId(rs.getInt("c.t_id"));
+						crs.setMenuId(rs.getInt("m.t_id"));
+						crs.setTypeName(rs.getString("m.m_Name"));
+					} catch (SQLDataException e) {
+						e.printStackTrace();
+						throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
+					}
 
-            return alCrsLst;
-        } catch (SQLException e) {
-            throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
-        }
+					alCrsLst.add(crs);
+				}
+			}
+
+			return alCrsLst;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
+		}
 	}
 
-	public static ArrayList<Course> getTypeCourseList(int t_Id) {
-		ArrayList<Course> crs = new ArrayList<>();
-		try {
+	//--------------------------------------------------------------------------------------------//	
 
-		} catch (Exception e) {
+	public static ArrayList<Course> getTypeCourseList(int t_Id) throws IdealException {
+		ArrayList<Course> alTpCrsLst = new ArrayList<>();
 
-		} finally {
+		String sql = "SELECT c.c_id, "
+				+ "c.c_Name, "
+				+ "c.detail, "
+				+ "c.orderFlg, "
+				+ "c.price, "
+				+ "m.t_name  "
+				+ "FROM course c JOIN menutype m using(t_id) WHERE t_id = ?";
+		System.out.println("getTypeCourseList: " + sql);
 
+		try (Connection con = DriverManager.getConnection(
+				"jdbc:mariadb://localhost:3306/ideal", "root", "root");
+				PreparedStatement pst = con.prepareStatement(sql);) {
+
+			//	    try (Connection con = DriverManager.getConnection(
+			//	            "jdbc:mysql://localhost:3306/test_heidi", "admin", "5290MySQLadmin1791");
+			//	         PreparedStatement pst = con.prepareStatement(sql);) {
+
+			pst.setInt(1, t_Id);
+
+			try (ResultSet rs = pst.executeQuery()) {
+
+				while (rs.next()) {
+					Course crs = new Course();
+					try {
+						crs.setCourseId(rs.getInt("c.c_id"));
+						crs.setCourseName(rs.getString("c.c_Name"));
+						crs.setDetail(rs.getString("c.detail"));
+						crs.setOrderFlg(rs.getInt("c.orderFlg"));
+						crs.setPrice(rs.getInt("c.price"));
+						crs.setTypeName(rs.getString("m.t_name"));
+					} catch (SQLDataException e) {
+						e.printStackTrace();
+						throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
+					}
+
+					alTpCrsLst.add(crs);
+				}
+			}
+
+			return alTpCrsLst;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
 		}
-		return crs;
 	}
 
-	
-	public static ArrayList<Coursectl> updateCourse() {
-		ArrayList<Coursectl> crsCtl = new ArrayList<>();
+	//--------------------------------------------------------------------------------------------//	
+
+	public static int updateCourse(Course crs, int mode, ArrayList<Coursectl> alCctl)throws IdealException{	
+		
+		for(Coursectl cCtl:alCctl) {
+		
+				
+			}
+		
 		try {
-
-		} catch (Exception e) {
-
-		} finally {
-
+			Coursectl.courseMenuChk(1); // m_Id
+		} catch (IdealException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
-		return crsCtl;
+
+		
+
+
+//			switch (mode) {
+//			case MenuOperationSvl.INSERT:
+//				break;
+//
+//			case MenuOperationSvl.UPDATE:
+//				break;
+//
+//			case MenuOperationSvl.DELETE:
+//				break;
+//			default:
+//				break;
+//			}
+		
+		return mode;
+
 	}
 
 }

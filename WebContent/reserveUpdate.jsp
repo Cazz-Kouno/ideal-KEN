@@ -19,7 +19,7 @@
 </head>
 <body>
 <body>
-<h1>XXX様ご予約変更</h1>
+<h1><%=userInfo.getUsrName() %>様ご予約変更</h1>
 	
 <p>ここにメッセージを表示</p>
 	
@@ -29,7 +29,7 @@
 <tr>
 <th>予約番号</th>
 <td>
-999
+<%= reserve.getRsvId() %>
 </td>
 </tr>
 			

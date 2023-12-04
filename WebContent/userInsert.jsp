@@ -75,7 +75,7 @@
         }
     %>
 
-    <form name="userInsertForm" action="UserOperationSvl." method="post" onsubmit="return dataCheck(this);">
+    <form name="userInsertForm" action="/ideal/UserOperationSvl." method="post" onsubmit="return dataCheck(this);">
         <table>
             <tr>
                 <th>お名前</th>
@@ -108,7 +108,7 @@
 
     <br />
 
-    <!-- ⑧．ホームページに戻る -->
-    <a href="home.jsp">ホームページに戻る</a>
+    <!-- ⑨．処理メニューに戻る -->
+    <a href="home.jsp">処理メニューに戻る</a>
 </body>
 </html>

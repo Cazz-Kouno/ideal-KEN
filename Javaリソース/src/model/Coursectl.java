@@ -26,21 +26,21 @@ public class Coursectl implements Serializable {
 	
 	//Setters and Getters
 	
-	public int getC_id() {
+	public int getC_Id() {
 		return c_id;
 	}
 	
-	public void setC_id(int c_id) {
+	public void setC_Id(int c_id) {
 		this.c_id=c_id;
 		
 	}
 	
-	public int getM_id() {
+	public int getM_Id() {
 		return m_id;
 
 }
 	
-	public void setM_id(int m_id) {
+	public void setM_Id(int m_id) {
 		this.m_id=m_id;
 		
 	}

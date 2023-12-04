@@ -19,7 +19,7 @@
 </head>
 <body>
 <body>
-<h1>XXX様ご予約取消</h1>
+<h1><%=userInfo.getUsrName() %>様ご予約取消</h1>
 	
 <p>ここにメッセージを表示</p>
 	
@@ -29,35 +29,48 @@
 <tr>
 <th>予約番号</th>
 <td>
-999
+<%= reserve.getRsvId() %>
 </td>
 </tr>
 
 <tr>
 <th>日付</th>
 <td>
-2016年9月10日
+<%
+int year = reserve.getRsvYy();
+int month = reserve.getRsvMm();
+int day = reserve.getRsvDd();
+
+String formattedDateTime = String.format("%04d年%02d月%02d日", year, month, day);
+%>
+<%= formattedDateTime %>
 </td>
 </tr>
 			
 <tr>
 <th>時刻</th>
 <td>
-18時30分
+<%
+int hour = reserve.getRsvHh();
+int minute = reserve.getRsvMi();
+
+String formattedDateTime = String.format("%02d時%02d分", hour, minute);
+%>
+<%= formattedDateTime %>
 </td>
 </tr>	
 
 <tr>
 <th>人数</th>
 <td>
-4名
+<%= reserve.getPerson() %>
 </td>
 </tr>
 
 <tr>
 <th>コース</th>
 <td>
-Aコース(牛肉料理)
+<%= reserve.getCourseName() %>
 </td>
 </tr>
 

@@ -13,7 +13,8 @@ body{text-align:center;}
 table{width:100%;}
 </style>
 
-<% ArrayList<Course> courseList = (ArrayList<Course>)session.getAttribute("courseList"); %>
+<%-- ArrayList<Course> courseList = (ArrayList<Course>)session.getAttribute("courseList"); --%>
+<% ArrayList<Course> courseList = Course.getCourseList(); %>
 <% ArrayList<Menu> menuList = (ArrayList<Menu>)(session.getAttribute("menuList")); %>
 <% int count = 0;boolean change = false; %>
 <% String admininfo = String.valueOf(session.getAttribute("adminInfo")); %>
@@ -21,7 +22,13 @@ table{width:100%;}
 <body>
 
 <h1>メニュー紹介</h1>
-<p>■コース料理</p>
+<h1>■コース料理</h1>
+
+.border{
+   max-width:300px
+   }
+   
+
 <%
 for(Course list_id:courseList){ 
 	if(list_id.getCourseId() != count){
