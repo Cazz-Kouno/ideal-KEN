@@ -56,12 +56,12 @@ public class AdminLoginSvl extends HttpServlet {
 				rd = request.getRequestDispatcher("../adminIndex.jsp");				System.out.println("1");
 			}
 		} catch(IdealException e) {
-			session.setAttribute("msg", e.getMsg());
+			request.setAttribute("msg", e.getMsg());
 			rd = request.getRequestDispatcher("../adminLogin.jsp");
 			e.printStackTrace();
 
 		} catch(Exception e2) {
-			session.setAttribute("msg", e2.getMessage());
+			request.setAttribute("msg", e2.getMessage());
 			rd = request.getRequestDispatcher("../adminLogin.jsp");
 			e2.printStackTrace();
 

@@ -51,7 +51,7 @@ private static final long serialVersionUID = 1L;
                 request.setAttribute("msg", errorMessage);
 
                 // エラーが発生した場合、顧客処理選択画面に遷移
-                String url = "/customerProcessingSelection.jsp";
+                String url = "../useIndex.jsp";
                 request.getRequestDispatcher(url).forward(request, response);
                 return; // エラーが発生した場合、これ以降の処理はスキップ
             }

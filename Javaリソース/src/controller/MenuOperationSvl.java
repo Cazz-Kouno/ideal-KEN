@@ -51,7 +51,7 @@ public class MenuOperationSvl extends HttpServlet {
 		Menu menu = null;
 		try {
 			if (session.getAttribute("adminInfo") == null) {
-				rd = request.getRequestDispatcher("/ideal/home.jsp");
+				rd = request.getRequestDispatcher("../home.jsp");
 			} else {
 				String menuName = request.getParameter("menuName");
 				String detail = request.getParameter("detail");
@@ -83,8 +83,8 @@ public class MenuOperationSvl extends HttpServlet {
 			}
 
 		} catch (IdealException e) {
-			session.setAttribute("msg", e.getMsg());
-			session.setAttribute("oneMenu", menu);
+			request.setAttribute("msg", e.getMsg());
+			request.setAttribute("oneMenu", menu);
 
 			switch(mode) {
 			case INSERT:

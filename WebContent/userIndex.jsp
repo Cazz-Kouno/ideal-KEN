@@ -8,14 +8,25 @@
 <title>会員処理選択画面</title>
 <link rel="stylesheet" type="text/css" href="login.css" />
 <style>
-body{text-align:center;}
+body{text-align:center;
+
+background:linear-gradient(red,white,green);
+}
+
+html{
+min-height:100%;
+}
+
+
+
+}
 </style>
 </head>
 <body>
 <h1>■ Restaurante IDEALLE ■</h1>
 <%
     // セッションからユーザーIDを取得
-    User user = (User)(session.getAttribute("usrName"));
+    User user = (User)(session.getAttribute("userInfo"));
 	String usrName = null;
     		
     if (user != null) {
@@ -29,7 +40,7 @@ body{text-align:center;}
     }
 
     // メッセージがnullでない場合にのみ表示
-    String message = (String) session.getAttribute("msg");
+    String message = (String) request.getAttribute("msg");
     if (message != null && !message.isEmpty()) {
 %>
  <div>
@@ -41,11 +52,11 @@ body{text-align:center;}
 <form name="UserloginForm" action="/ideal/controller/UserLoginSvl" method="post" 
        											 onsubmit="return dataCheck(this);">
 
-<p><a href="ShowMenuSvl">●メニュー紹介</a></p>
-<p><a href="ReserveListSvl">●ご予約</a></p>
-<p><a href="UserUpdateSvl">●お客様情報変更
-<p><a href="UserDeleteSvl">●お客様脱会手続き</a></p>
-<p><a href="UserLogoffSvl">●ログオフ</a></p>
+<p><a href="/ideal/controller/ShowMenuSvl">●メニュー紹介</a></p>
+<p><a href="/ideal/controller/ReserveListSvl">●ご予約</a></p>
+<p><a href="/ideal/controller/UserUpdateSvl">●お客様情報変更
+<p><a href="/ideal/controller/UserDeleteSvl">●お客様脱会手続き</a></p>
+<p><a href="/ideal/controller/UserLogoffSvl">●ログオフ</a></p>
 </form>
 
 </body>

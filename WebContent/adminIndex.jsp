@@ -6,6 +6,20 @@
 <head>
     <meta charset="UTF-8">
     <title>管理者処理選択</title>
+    
+    <style>
+       	body{
+            width: 100%;
+            text-align:center;
+            
+            background:linear-gradient(red,white,white,green);
+            }
+
+        html{
+            min-height:100%;
+            
+            }
+            </style>
 </head>
 
 <body>

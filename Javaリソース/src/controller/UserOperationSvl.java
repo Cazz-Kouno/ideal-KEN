@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.IdealException;
-import model.Menu;
 import model.User;
 
 /**
@@ -53,7 +52,7 @@ public class UserOperationSvl extends HttpServlet {
 		int mode = Integer.parseInt(request.getParameter("mode"));
 			if (mode != INSERT && session_user == null) {
 				rd = request.getRequestDispatcher("/ideal/home.jsp");
-			} else if (mode == INSERT || mode == UPDATE) {
+			} else if(mode == INSERT || mode == UPDATE){
 				request_user.setUsrName(request.getParameter("usrName"));
 				request_user.setAddress(request.getParameter("address"));
 				request_user.setPhone(request.getParameter("phone"));
@@ -70,67 +69,37 @@ public class UserOperationSvl extends HttpServlet {
 				session.setAttribute("userInfo", request_user);
 				rd = request.getRequestDispatcher("../userInsertCompletion.jsp");
 				}catch (IdealException e) {
-					// TODO: handle exception
-					
+					request.setAttribute("msg", e.getMsg());
+					request.setAttribute("user", request_user);
+					rd = request.getRequestDispatcher("../userInsert.jsp");
+
 				}
 				break;
 			case UPDATE:
+				try {
 				request_user = User.update(request_user);
 				session.setAttribute("userInfo", request_user);
-				rd = request.getRequestDispatcher("../userInsertCompletion.jsp");
+				rd = request.getRequestDispatcher("../userIndex.jsp");
+				}catch (IdealException e) {
+					request.setAttribute("msg", e.getMsg());
+					rd = request.getRequestDispatcher("UserUpdateSvl");
+
+				}
 				break;
 			case DELETE:
+				try {
+				User.delete(request_user);
+				session = request.getSession(true);
+				rd = request.getRequestDispatcher("../home.jsp");
+				}catch (IdealException e) {
+					request.setAttribute("msg", e.getMsg());
+					rd = request.getRequestDispatcher("UserDeleteSvl");
+
+				}
+
 				break;
 			}
-			//			if (session.getAttribute("adminInfo") == null) {
-			//				rd = request.getRequestDispatcher("/ideal/home.jsp");
-			//			} else {
-			//				String menuName = request.getParameter("menuName");
-			//				String detail = request.getParameter("detail");
-			//				int orderFlg = 0;
-			//				int price = 0;
-			//				int typeId = 0;
-			//				try {
-			//					orderFlg = Integer.parseInt(request.getParameter("orderFlg"));
-			//				} catch (NumberFormatException e) {
-			//				}
-			//				try {
-			//					price = Integer.parseInt(request.getParameter("price"));
-			//				} catch (NumberFormatException e) {
-			//				}
-			//				try {
-			//					typeId = Integer.parseInt(request.getParameter("mode"));
-			//				} catch (NumberFormatException e) {
-			//				}
-			//				
-			//				menu = new Menu();
-			//				menu.setMenuName(menuName);
-			//				menu.setDetail(detail);
-			//				menu.setOrderFlg(orderFlg);
-			//				menu.setPrice(price);
-			//				menu.setTypeId(typeId);
-			//				request.setAttribute("typeId", typeId);
-			//				Menu.updateMenu(menu, mode);
-			//				rd = request.getRequestDispatcher("/ideal/controller/MenuMaintenanceSvl");
-			//			}
-
-		} catch (IdealException e) {
-			session.setAttribute("msg", e.getMsg());
-			//			session.setAttribute("oneMenu", menu);
-			//
-			//			switch (mode) {
-			//			case INSERT:
-			//				rd = request.getRequestDispatcher("/ideal/controller/MenuInsertSvl");
-			//				break;
-			//			case UPDATE:
-			//				rd = request.getRequestDispatcher("/ideal/controller/MenuUpdateSvl");
-			//				break;
-			//			case DELETE:
-			//				rd = request.getRequestDispatcher("/ideal/controller/MenuDeleteSvl");
-			//				break;
-		} finally {
 			rd.forward(request, response);
-		}
 	}
 
 }

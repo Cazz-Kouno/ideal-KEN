@@ -55,7 +55,7 @@ public class ShowMenuSvl extends HttpServlet {
 //			rd = request.getRequestDispatcher("../home.jsp");
 
 		} catch (IdealException e) {
-			session.setAttribute("msg", e.getMsg());
+			request.setAttribute("msg", e.getMsg());
 			if(name == null) {
 				rd = request.getRequestDispatcher("../home.jsp");
 			}else {

@@ -276,7 +276,7 @@ public class User {
         }
     }
 
-    public static void delete(User user) throws IdealException, SQLException {
+    public static void delete(User user) throws IdealException{
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -297,6 +297,7 @@ public class User {
             preparedStatement.setInt(1, user.getUsrId());
             // SQLを実行
             preparedStatement.executeUpdate();
+            preparedStatement.close();
 
             // PreparedStatementを使用してSQLを実行（顧客テーブルからの削除）
             preparedStatement = connection.prepareStatement(deleteUserSql);
@@ -313,9 +314,11 @@ public class User {
                 if (connection != null) {
                     connection.rollback();
                 }
+                }catch(SQLException e2) {
 
                 // データベース関連の例外が捕捉された場合、IdealExceptionに変換してスロー
                 throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
+                }
             } finally {
                 try {
                     // クローズ処理
@@ -331,9 +334,4 @@ public class User {
                 }
             }
         }
-    }
-	public static User getlogin() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
 }

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.*,controller.*" %>
+
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -7,7 +10,11 @@
     
     <style>
        	table {
-            width: 100%;}
+            width: 100%;
+            text-align:center;
+            background:linear-gradient(red,white,white,green);}
+        html{
+            min-height:100%;
         th, td {
             padding: 8px;
             text-align: left;
@@ -35,10 +42,10 @@
         function dataCheck(obj) {
             // 必須項目の未入力チェック
             if (obj.elements['usrName'].value.length == 0 ||
+            	obj.elements['usrId'].value.length == 0 ||
                 obj.elements['address'].value.length == 0 ||
                 obj.elements['phone'].value.length == 0 ||
-                obj.elements['mail'].value.length == 0 ||
-                obj.elements['password'].value.length == 0) {
+                obj.elements['mail'].value.length == 0 ||{
                 alert("必須項目を入力してください。");
                 return false;
             }
@@ -75,40 +82,39 @@
     <%
         }
     %>
-
-    <form name="userDeleteForm" action="/ideal/UserOperationSvl." method="post" onsubmit="return dataCheck(this);">
+<jsp:useBean id="userInfo" class="model.User" scope="session"/>
+    <form name="userDeleteForm" action="/ideal/controller/UserOperationSvl" method="post" onsubmit="return dataCheck(this);">
         <table>
         	<tr>
                 <th>お客様ID</th>
-                <td><input type="text" name="usrId" size="30" maxlength="30" style="ime-mode: active;" /></td>
+                <td><%= userInfo.getUsrId() %></td>
             </tr>
             <tr>
                 <th>お名前</th>
-                <td><input type="text" name="usrName" size="30" maxlength="30" style="ime-mode: active;" /></td>
+                <td><%= userInfo.getUsrName() %></td>
             </tr>
             <tr>
                 <th>住所</th>
-                <td><textarea name="address" rows="4" cols="50" style="ime-mode: active;"></textarea></td>
+                <td><%= userInfo.getAddress() %></td>
             </tr>
             <tr>
                 <th>電話番号</th>
-                <td><input type="text" name="phone" size="15" maxlength="20" style="ime-mode: inactive;" /></td>
+                <td><%= userInfo.getPhone() %></td>
             </tr>
             <tr>
                 <th>E-mail</th>
-                <td><input type="text" name="mail" size="30" maxlength="100" style="ime-mode: inactive;" /></td>
+                <td><%= userInfo.getMail() %></td>
             </tr>
             <tr>
                 <td><td2>確認し、脱会ボタンをクリックしてください。</td2>
                 <id="sub" colspan="2">
                     <input type="submit" value="脱会" />
-					 <input type="hidden" name="mode" value="削除処理" />
+					 <input type="hidden" name="mode" value=<%= UserOperationSvl.DELETE %> />
        				 <input type="hidden" name="usrId" size="8" maxlength="8" style="ime-mode: inactive;" /></td>
                 </td>
             </tr>
         </table>
     </form>
-
     <br />
 
     <!-- 9．処理メニューに戻る -->

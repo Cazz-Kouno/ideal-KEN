@@ -48,7 +48,7 @@ public class MenuInsertSvl extends HttpServlet {
 		RequestDispatcher rd = null;
 		try {
 			if (session.getAttribute("adminInfo") == null) {
-				rd = request.getRequestDispatcher("/ideal/home.jsp");
+				rd = request.getRequestDispatcher("../home.jsp");
 			} else {
 				int typeId = Integer.parseInt(request.getParameter("typeId"));
 				if (typeId == 100) {
@@ -60,12 +60,12 @@ public class MenuInsertSvl extends HttpServlet {
 						}
 					}
 					request.setAttribute("typeMenuList", menuTypes);
-					rd = request.getRequestDispatcher("/ideal/courseInsert.jsp");
+					rd = request.getRequestDispatcher("../courseInsert.jsp");
 
 				} else {
 					request.setAttribute("mType", MenuType.getAllType());
 					request.setAttribute("typeId", typeId);
-					rd = request.getRequestDispatcher("/ideal/menuInsert.jsp");
+					rd = request.getRequestDispatcher("../menuInsert.jsp");
 				}
 			}
 

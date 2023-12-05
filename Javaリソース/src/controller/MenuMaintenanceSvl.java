@@ -57,8 +57,11 @@ public class MenuMaintenanceSvl extends HttpServlet {
 				if(request.getParameter("typeId") != null) {
 					typeId = Integer.parseInt(request.getParameter("typeId"));
 				}
+				request.setAttribute("typeId",typeId);
 				request.setAttribute("mType",MenuType.getAllType());
 				request.setAttribute("menu",Menu.getMenu(typeId));
+//				Menu oneMenu = new Menu();
+//				request.setAttribute("oneMenu", oneMenu);
 				rd = request.getRequestDispatcher("../menuMaintenance.jsp");
 			}
 

@@ -9,7 +9,15 @@
 <meta charset="UTF-8">
 <title>メニュー紹介</title>
 <style>
-body{text-align:center;}
+body{text-align:center;
+
+background:linear-gradient(red,white,white,green);
+}
+
+html{
+min-height:100%;
+}
+}
 table{width:100%;}
 </style>
 
@@ -99,6 +107,12 @@ for(Menu id:menuList){
 %>
 </table>
 <br>
-<p><a href="/ideal/home.jsp">[戻る]</a></p>
+<p><% if(session.getAttribute("userInfo") == null){ %>
+<a href="../home.jsp">[戻る]</a>
+<% }else{ %>
+<a href="../userIndex.jsp">[戻る]</a>
+<% } %>
+
+</p>
 </body>
 </html>

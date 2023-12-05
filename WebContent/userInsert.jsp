@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.*,controller.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +9,15 @@
     
     <style>
        	table {
-            width: 100%;}
+            width: 100%;
+            body{text-align:center;
+            background:linear-gradient(red,white,white,green);
+            }
+
+        html{
+            min-height:100%;
+            }
+            }
         th, td {
             padding: 8px;
             text-align: left;
@@ -74,8 +84,8 @@
     <%
         }
     %>
-
-    <form name="userInsertForm" action="/ideal/UserOperationSvl." method="post" onsubmit="return dataCheck(this);">
+<jsp:useBean id="userInfo" class="model.User" scope="session"/>
+    <form name="userInsertForm" action="/ideal/controller/UserOperationSvl" method="post" onsubmit="return dataCheck(this);">
         <table>
             <tr>
                 <th>お名前</th>
@@ -83,7 +93,7 @@
             </tr>
             <tr>
                 <th>住所</th>
-                <td><textarea name="address" rows="4" cols="50" style="ime-mode: active;"></textarea></td>
+                <td><input type="text" name="address" rows="4" cols="50" style="ime-mode: active;"></td>
             </tr>
             <tr>
                 <th>電話番号</th>
@@ -100,10 +110,10 @@
             <tr>
                 <td id="sub" colspan="2">
                     <input type="submit" value="登録" />
+       				 <input type="hidden" name="mode" value=<%= UserOperationSvl.INSERT %> /></td>
                 </td>
             </tr>
         </table>
-        <input type="hidden" name="mode" value="登録処理" />
     </form>
 
     <br />

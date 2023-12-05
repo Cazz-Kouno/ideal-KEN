@@ -8,7 +8,21 @@
 
 <style>
         table {
-            width: 100%;}
+            width: 100%;
+            
+        
+            text-align:center;
+            
+            background:linear-gradient(red,white,);
+            }
+
+        html{
+            min-height:100%;
+            
+            }
+            
+            
+            }
         th, td {
             padding: 8px;
             text-align: left;

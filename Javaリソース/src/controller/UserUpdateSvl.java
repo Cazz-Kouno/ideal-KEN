@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.IdealException;
 import model.User;
 
 /**
@@ -48,11 +49,12 @@ public class UserUpdateSvl extends HttpServlet {
 				request.getSession(true);
 				rd = request.getRequestDispatcher("../home.jsp");
 			} else {
+				User.update(session_user);
 				rd = request.getRequestDispatcher("../userUpdate.jsp");
 			}
-		} catch (Exception e) {
+		} catch (IdealException e) {
 			rd = request.getRequestDispatcher("../userIndex.jsp");
-			e.printStackTrace();
+			request.setAttribute("msg", e.getMsg());
 		} finally {
 			rd.forward(request, response);
 		}

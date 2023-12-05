@@ -5,13 +5,23 @@
 <head>
     <meta charset="UTF-8">
     <title>お客様ログイン画面</title>
+    
     <link rel="stylesheet" type="text/css" href="login.css" />
     
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;}
+            margin: 20px;
+            
+            text-align:center;
+            background:linear-gradient(red,white,white,green);
+            }
+
+html{
+min-height:100%;
+}
+            }
         h2 {
             color: #333;}
         div {
@@ -57,7 +67,6 @@
 <body>
     <h2>お客様ログイン</h2>
     <br />
-    <p>ここにメッセージを表示</p>
     <%-- メッセージがnullでない場合にのみ表示 --%>
     <%
         String message = (String) request.getAttribute("msg");
@@ -87,7 +96,7 @@
         </table>
     </form>
     <br />
-    <a href="HomePage.jsp">ホームページ</a>
+    <a href="home.jsp">ホームページ</a>
 </body>
 
 </html>

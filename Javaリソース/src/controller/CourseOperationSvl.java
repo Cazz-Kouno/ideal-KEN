@@ -120,7 +120,7 @@ public class CourseOperationSvl extends HttpServlet {
 			}
 
 		} catch (IdealException e) {		//Courseクラス完成時に、スローされませんエラーがきえるはず
-			session.setAttribute("msg", e.getMsg());
+			request.setAttribute("msg", e.getMsg());
 			rd = request.getRequestDispatcher("/ideal/controller/MenuMaintenanceSvl");
 		} finally {
 			rd.forward(request, response);

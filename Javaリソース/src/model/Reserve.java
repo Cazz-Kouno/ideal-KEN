@@ -32,10 +32,10 @@ public class Reserve implements Serializable {
 	private int appHh;//
 	private int appMi;//
 
-	static Connection connection = null;
-	static PreparedStatement preparedStatement = null;
-	static ResultSet resultSet = null;
-	static String sql = null;
+//	static Connection connection = null;
+//	static PreparedStatement preparedStatement = null;
+//	static ResultSet resultSet = null;
+//	static String sql = null;
 	
 	//コンストラクター
 	public Reserve() {
@@ -204,12 +204,12 @@ public class Reserve implements Serializable {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		String sql = null;
-
 		
 		try {
 			// データベースから顧客IDに基づいて予約情報を取得する処理
 			//initialContext = new InitialContext();
 			//dataSource = (DataSource) initialContext.lookup("java:comp/env/mariadb");
+			
 			connection = DriverManager.getConnection
 					("jdbc:mariadb://localhost:3306/ideal","root","root");
 
@@ -310,10 +310,17 @@ public class Reserve implements Serializable {
 
 	// 予約IDで予約情報を取得する
 	public static Reserve getReserve(int rsvId) throws IdealException {
+
 		
 		Reserve reserve = new Reserve();
+		 Connection connection = null;
+		 PreparedStatement preparedStatement = null;
+		 ResultSet resultSet = null;
+		 String sql = null;
+		 
 		try {
 			// データベースからReservation IDに基づいて予約情報を取得する処理
+			
 
 			connection = DriverManager.getConnection
 					("jdbc:mariadb://localhost:3306/ideal","root","root");
@@ -409,6 +416,10 @@ public class Reserve implements Serializable {
 	// コースの予約を確認する
 
 	public static void reservCourseChk(int c_Id) throws IdealException {
+		 Connection connection = null;
+		 PreparedStatement preparedStatement = null;
+		 ResultSet resultSet = null;
+		 String sql = null;
 		
 		try {
 			// データベースからReservation IDに基づいて予約情報を取得する処理
@@ -449,7 +460,14 @@ public class Reserve implements Serializable {
 	
 
 	public static TableLoc insertChk(String dateStr, int personNum) throws IdealException {
+
+		 
 		TableLoc ｔableLoc =new TableLoc();
+		 Connection connection = null;
+		 PreparedStatement preparedStatement = null;
+		 ResultSet resultSet = null;
+		 String sql = null;
+		 
 		try {
 
 			sql="SELECT table_loc.table_id "
@@ -508,7 +526,13 @@ public class Reserve implements Serializable {
 	//
 	// 予約を変更するための確認処理
 	public static TableLoc updateChk(int rsvID, String dateStr, int personNum) throws IdealException {
+
 		TableLoc ｔableLoc =new TableLoc();
+		
+		 Connection connection = null;
+		 PreparedStatement preparedStatement = null;
+		 ResultSet resultSet = null;
+		 String sql = null;
 		try {
 
 			sql="SELECT table_loc.table_id "
@@ -565,6 +589,11 @@ public class Reserve implements Serializable {
 	public static Reserve insert(Reserve reserve) throws IdealException {
 		
 		Reserve lastRsv = null;
+		
+		 Connection connection = null;
+		 PreparedStatement preparedStatement = null;
+		 ResultSet resultSet = null;
+		 String sql = null;
 		try {
 			// 予約情報をデータベースに登録する処理
 			//Reserve reserve = new Reserve();
@@ -612,6 +641,12 @@ public class Reserve implements Serializable {
 	// 予約を変更する
 	public static Reserve update(Reserve reserve) throws IdealException {
 		Reserve updatedReserve = null;
+		
+		 Connection connection = null;
+		 PreparedStatement preparedStatement = null;
+		 //ResultSet resultSet = null;
+		 String sql = null;
+		 
 		try {
 			
 			connection = DriverManager.getConnection
@@ -651,6 +686,10 @@ public class Reserve implements Serializable {
 
 	// 予約を削除する
 	public static void delete(Reserve reserve) throws IdealException {
+		 Connection connection = null;
+		 PreparedStatement preparedStatement = null;
+		 //ResultSet resultSet = null;
+		 String sql = null;
 		try {
 			
 			connection = DriverManager.getConnection

@@ -42,6 +42,9 @@ public class UserLoginSvl extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("usrId"));
 		String pass = request.getParameter("password");
 		String name = request.getParameter("usrName");
+		String address = request.getParameter("usrAddress");
+		String phone = request.getParameter("usrPhone");
+		String mail = request.getParameter("usrMail");
 		
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession(false);
@@ -57,16 +60,19 @@ public class UserLoginSvl extends HttpServlet {
 				throw ie;
 			}else {
 				session.setAttribute("userInfo", user);
-				session.setAttribute("usrName", user);
+				session.setAttribute("usrName", name);
+				session.setAttribute("usrAddress", address);
+				session.setAttribute("usrPhone", phone);
+				session.setAttribute("usrMail", mail);
 				rd = request.getRequestDispatcher("../userIndex.jsp");
 			}
 		} catch(IdealException e) {
-			session.setAttribute("msg", e.getMsg());
+			request.setAttribute("msg", e.getMsg());
 			rd = request.getRequestDispatcher("../userLogin.jsp");
 			e.printStackTrace();
 
 		} catch(Exception e2) {
-			session.setAttribute("msg", e2.getMessage());
+			request.setAttribute("msg", e2.getMessage());
 			rd = request.getRequestDispatcher("../userLogin.jsp");
 			e2.printStackTrace();
 

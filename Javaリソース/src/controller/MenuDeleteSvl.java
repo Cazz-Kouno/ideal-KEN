@@ -65,7 +65,7 @@ public class MenuDeleteSvl extends HttpServlet {
 						}
 					}
 					request.setAttribute("typeMenuList", menuTypes);
-					request.setAttribute("oneCourse", Course.getOneCourseList(menuId));	//クラス完成待ち
+					request.setAttribute("oneCourse", Course.getOneCourse(menuId));	//クラス完成待ち
 					rd = request.getRequestDispatcher("/ideal/courseUpdate.jsp");
 
 				} else {

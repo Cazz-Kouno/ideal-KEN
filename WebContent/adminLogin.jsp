@@ -8,7 +8,20 @@
     
     <style>
         table {
-            width: 100%;}
+            width: 100%;
+            
+            text-align:center;
+            
+            background:linear-gradient(red,white,white,green);
+            }
+
+        html{
+            min-height:100%;
+            
+            }
+            
+            
+            }
         th, td {
             padding: 8px;
             text-align: left;
@@ -65,10 +78,9 @@
 <body>
     <h2>管理者ログイン</h2>
     <br />
-	<p>ここにメッセージを表示</p>
     <%-- メッセージがnullでない場合にのみ表示 --%>
     <%
-        String message = (String) session.getAttribute("msg");
+        String message = (String) request.getAttribute("msg");
         if (message != null && !message.isEmpty()) {
     %>
         <div>
@@ -97,5 +109,7 @@
             </tr>
         </table>
     </form>
+    <br />
+    <a href="home.jsp">ホームページ</a>
 </body>
 </html>

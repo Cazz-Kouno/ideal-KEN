@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*,java.text.*,model.*" %>
+<%@ page import="java.util.*,java.text.*,model.*,controller.*" %>
 <%-- include file="incFile.jsp" --%>
 
 <!DOCTYPE html >
@@ -20,8 +20,8 @@ th{background:#007B66;color:#ECFFF3;}
 td{text-align:left;vertical-align:top;white-space:nowrap;}
 td#outer{padding:10px;background:#FAFFE3;}
 #code{width:40px;text-align:center;}
-#menu{width:250px}
-#price{width:60px;text-align:right;padding-right:5px;}
+#menu{width:280px}
+#price{width:80px;text-align:right;padding-right:5px;}
 #comm{width:400px;}
 #ord{width:100px;text-align:center;}
 #btn{width:100px;}
@@ -39,14 +39,11 @@ background:#007B53;color:#E3FFE3;padding:2px;cursor:pointer;margin-top:5px;}
 <%
 String[] order = {"不可","可"};
 
-NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("ja","JP")); int typeId;
+NumberFormat cf = NumberFormat.getCurrencyInstance(new Locale("ja","JP"));
+int typeId;
 String style = "id = 'type1'";
 
-try{
-	typeId = Integer.parseInt(request.getParameter("typeId"));
-}catch(NumberFormatException e){
-	typeId = 200;
-}
+typeId = (Integer)request.getAttribute("typeId");
 
 %>
 <!-- Beanを作成 -->
@@ -89,7 +86,7 @@ for(int i = 0 ; i < mType.size() ; i++){
      <th id = "price">価格</th>
      <th id = "comm">コメント</th>
      <th id = "ord">オーダー可</th>
-     <th id = "bth" colspan = "2"></th>
+     <th id = "btn" colspan = "2"></th>
      </tr>
 
 <%
@@ -102,14 +99,20 @@ for(int i = 0 ; i < menu.size() ; i++){
   <td id = "price"><%= cf.format(m.getPrice()) %></td>
   <td id = "comm"><%= m.getDetail() == null ? "" : m.getDetail()%></td>
   <td id = "ord"><%= order[m.getOrderFlg()]%></td>
-  <form action = "MenuController" method = "post">
+  <form action = "" method = "post">
   <td>
   <input type = "submit" value = "更新"
-  onclick = "this.form.mode.value = '999<%-- <%= MenuController.TO_UPDATE --%>'">
+  onclick = "this.form.mode.value = '<%= MenuOperationSvl.UPDATE %>';
+    request.setAttribute('menuId',m.getMenuId());
+  request.setAttribute('typeId',m.getTypeId());
+  this.form.action = '/ideal/controller/MenuUpdateSvl'">
   </td>
   <td>
   <input type = "submit" value = "削除"
-  onclick = "this.form.mode.value = '999<%-- <%= MenuController.TO_DELETE --%>'"/>
+  onclick = "this.form.mode.value = '<%= MenuOperationSvl.DELETE %>';
+  request.setAttribute('menuId',m.getMenuId());
+  request.setAttribute('typeId',m.getTypeId());
+  this.form.action = '/ideal/controller/MenuDeleteSvl'">
   </td>
   <!--隠しフィールド-->
   <input type = "hidden" name = "mode"/>
@@ -119,10 +122,10 @@ for(int i = 0 ; i < menu.size() ; i++){
   </tr>
 <%    }                %>
 <tr>
-<form action = "MenuController" method = "post">
+<form action = "/ideal/controller/MenuInsertSvl" method = "post">
 <th colspan = "7">
 <input type = "hidden" name = "typeId" value = "<%= typeId %>" />
-<input type = "hidden" name = "mode" value = "555<%--  %><%= ManuController.TO_INSERT --%>" />
+<input type = "hidden" name = "mode" value = "<%= MenuOperationSvl.INSERT %>" />
 <input type = "submit" value = "新しいメニューの追加"/>
 </th>
 </form>
