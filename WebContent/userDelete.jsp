@@ -9,6 +9,12 @@
     <title>顧客脱会画面</title>
     
     <style>
+        body{
+            background-image:url(./img/レストラン8.jpg);
+    		 background-size:100% auto;
+        
+        }
+    
        	table {
             width: 100%;
             text-align:center;
@@ -91,26 +97,26 @@
             </tr>
             <tr>
                 <th>お名前</th>
-                <td><%= userInfo.getUsrName() %></td>
+                <td><%= (userInfo.getUsrName() != null) ? userInfo.getUsrName() : "" %></td>
             </tr>
             <tr>
                 <th>住所</th>
-                <td><%= userInfo.getAddress() %></td>
+                <td><%= (userInfo.getAddress() != null) ? userInfo.getAddress() : "" %></td>
             </tr>
             <tr>
                 <th>電話番号</th>
-                <td><%= userInfo.getPhone() %></td>
+                <td><%= (userInfo.getPhone() != null) ? userInfo.getPhone() : "" %></td>
             </tr>
             <tr>
                 <th>E-mail</th>
-                <td><%= userInfo.getMail() %></td>
+                <td><%= (userInfo.getMail() != null) ? userInfo.getMail() : "" %></td>
             </tr>
             <tr>
                 <td><td2>確認し、脱会ボタンをクリックしてください。</td2>
                 <id="sub" colspan="2">
                     <input type="submit" value="脱会" />
 					 <input type="hidden" name="mode" value=<%= UserOperationSvl.DELETE %> />
-       				 <input type="hidden" name="usrId" size="8" maxlength="8" style="ime-mode: inactive;" /></td>
+       				 <input type="hidden" name="usrId" value=<%= request.getAttribute("usrId") %>" />
                 </td>
             </tr>
         </table>
@@ -118,6 +124,6 @@
     <br />
 
     <!-- 9．処理メニューに戻る -->
-    <a href="userIndex.jsp">処理メニューに戻る</a>
+    <a href="../userIndex.jsp">処理メニューに戻る</a>
 </body>
 </html>

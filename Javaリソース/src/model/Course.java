@@ -339,14 +339,12 @@ public class Course {
 				while (rs.next()) {
 					Course crs = new Course();
 					try {
-						crs.setCourseId(rs.getInt("c.c_id"));
-						crs.setCourseName(rs.getString("c.c_Name"));
-						crs.setDetail(rs.getString("c.detail"));
-						crs.setOrderFlg(rs.getInt("c.orderFlg"));
-						crs.setPrice(rs.getInt("c.price"));
-						crs.setTypeId(rs.getInt("c.t_id"));
-						crs.setMenuId(rs.getInt("m.t_id"));
-						crs.setTypeName(rs.getString("m.m_Name"));
+						crs.setCourseId(rs.getInt("c_id"));
+						crs.setCourseName(rs.getString("c_Name"));
+						crs.setDetail(rs.getString("detail"));
+						crs.setOrderFlg(rs.getInt("orderFlg"));
+						crs.setPrice(rs.getInt("price"));
+						crs.setTypeId(rs.getInt("t_id"));
 					} catch (SQLDataException e) {
 						e.printStackTrace();
 						throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);

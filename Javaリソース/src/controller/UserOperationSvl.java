@@ -54,9 +54,14 @@ public class UserOperationSvl extends HttpServlet {
 				rd = request.getRequestDispatcher("/ideal/home.jsp");
 			} else if(mode == INSERT || mode == UPDATE){
 				request_user.setUsrName(request.getParameter("usrName"));
+				System.out.println("UO 57");
 				request_user.setAddress(request.getParameter("address"));
+				System.out.println("UO 59");
 				request_user.setPhone(request.getParameter("phone"));
+				System.out.println("UO 61");
 				request_user.setMail(request.getParameter("mail"));
+				request_user.setExp(request.getParameter("exp"));
+
 				request_user.setPassword(request.getParameter("password"));
 
 			} else {
@@ -77,7 +82,11 @@ public class UserOperationSvl extends HttpServlet {
 				break;
 			case UPDATE:
 				try {
+					System.out.println("UO 83");
+				request_user.setUsrId(session_user.getUsrId());
+				
 				request_user = User.update(request_user);
+				System.out.println("UO 86");
 				session.setAttribute("userInfo", request_user);
 				rd = request.getRequestDispatcher("../userIndex.jsp");
 				}catch (IdealException e) {

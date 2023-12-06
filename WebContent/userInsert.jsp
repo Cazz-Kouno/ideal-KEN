@@ -7,10 +7,15 @@
     <meta charset="UTF-8">
     <title>顧客情報登録画面</title>
     
-    <style>
+    <style charset="utf-8">
+    	body {
+    		 background-image:url(./img/レストラン1.jpg);
+    		 background-size:100% auto;
+    		 
+    	}
        	table {
             width: 100%;
-            body{text-align:center;
+            text-align:center;
             background:linear-gradient(red,white,white,green);
             }
 
@@ -71,7 +76,7 @@
 </head>
 
 <body>
-    <h1>顧客情報登録</h1>
+    <h1>お客様情報登録</h1>
 
     <%-- メッセージがnullでない場合にのみ表示 --%>
     <%

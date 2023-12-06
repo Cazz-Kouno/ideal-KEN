@@ -6,7 +6,13 @@
 <meta charset="UTF-8">
 <title>メニュー情報変更画面</title>
 
-<style>
+<style>body{
+            background-image:url(./img/レストラン10.jpg);
+    		 background-size:100% auto;
+        
+        }
+
+
         table {
             width: 100%;
             
@@ -22,7 +28,7 @@
             }
             
             
-            }
+            
         th, td {
             padding: 8px;
             text-align: left;
@@ -33,8 +39,8 @@
 </head>
 
 <style>
-h1{background-color:Lightgreen;}
-th{background-color:Lightgreen;}
+h1{background-color:green;}
+th{background-color:green;}
 </style>
 
 <body>

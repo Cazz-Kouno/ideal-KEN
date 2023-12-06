@@ -7,6 +7,12 @@
     <title>会員ログイン画面</title>
     
     <style>
+    　　body{
+            background-image:url(./img/レストラン10.jpg);
+    		 background-size:100% auto;
+        
+        }
+    
         table {
             width: 100%;
             
@@ -95,12 +101,12 @@
         <table>
             <tr>
                 <th>管理者氏名</th>
-                <td><input type="text" name="admName" size="4" maxlength="8" 
+                <td><input type="text" name="admName" size="10" maxlength="10" 
                         style="ime-mode: active;"/></td>
             </tr>
             <tr>
                 <th>パスワード</th>
-                <td><input type="password" name="password" size="3" maxlength="8" 
+                <td><input type="password" name="password" size="8" maxlength="8" 
                         style="ime-mode: inactive;"/></td>
             </tr>
             <tr>

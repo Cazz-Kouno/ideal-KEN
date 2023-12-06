@@ -7,6 +7,8 @@
 <title>予約変更画面</title>
 
 <style>
+
+
 table {
 	width: 100%;
 	
@@ -27,9 +29,9 @@ th, td {
 	<h1><%=userInfo.getUsrName() %>様ご予約変更
 	</h1>
 
-	<p>    <%-- メッセージがnullでない場合にのみ表示 --%>
+		<p><%-- メッセージがnullでない場合にのみ表示 --%>
     <%
-        String message = (String) session.getAttribute("msg");
+        String message = (String) request.getAttribute("msg");
         if (message != null && !message.isEmpty()) {
     %>
         <div>
@@ -37,7 +39,8 @@ th, td {
         </div>
     <%
         }
-    %></p>
+    %>
+    </p>
 
 	<form id="frm1" name="frm1" action="./ex12.html" method="get">
 		<table>

@@ -9,17 +9,10 @@
 <link rel="stylesheet" type="text/css" href="login.css" />
 <style>
 body{text-align:center;
-
-background:linear-gradient(red,white,green);
-}
-
-html{
-min-height:100%;
-}
-
-
-
-}
+	background-image:url(./img/レストラン4.jpg);
+	background-size:100% auto;
+	background:linear-gradient(red,white,green);}
+html{min-height:100%;}
 </style>
 </head>
 <body>
@@ -35,7 +28,7 @@ min-height:100%;
     <h2><%= usrName %>様、いらっしゃいませ。</h2>
 <%
 	} else {
-        // セッションが切れている場合はログイン画面に遷移
+    // セッションが切れている場合はログイン画面に遷移
         response.sendRedirect("../userLogin.jsp");
     }
 

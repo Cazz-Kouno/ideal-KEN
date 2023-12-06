@@ -44,6 +44,8 @@ public class ReserveInsertSvl extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User userInfo = (User) session.getAttribute("userInfo");
+		ArrayList<Integer> userData = new ArrayList<>();
+		String[] attributeName = {"rsvYy","rsvMm","rsvDd","rsvHh","rsvMi","usrId","person","courseId"};
 		int rsvYy = 0;
 		int rsvMm = 0;
 		int rsvDd = 0;
@@ -52,7 +54,14 @@ public class ReserveInsertSvl extends HttpServlet {
 		int usrId = 0;
 		int person = 0;
 		int courseId = 0;
-		String usrName = null;
+		userData.add(rsvYy);
+		userData.add(rsvMm);
+		userData.add(rsvDd);
+		userData.add(rsvHh);
+		userData.add(rsvMi);
+		userData.add(usrId);
+		userData.add(person);
+		userData.add(courseId);
 
 		if (userInfo == null) {
 			// セッション情報がない場合、ホームページに遷移
@@ -60,21 +69,15 @@ public class ReserveInsertSvl extends HttpServlet {
 			request.getRequestDispatcher(url).forward(request, response);
 		} else {
 			try {
-				try {
 					// リクエストパラメータから予約情報を生成
-					courseId = Integer.parseInt(request.getParameter("courseId"));
-					rsvYy = Integer.parseInt(request.getParameter("rsvYy"));
-					rsvMm = Integer.parseInt(request.getParameter("rsvMm"));
-					rsvDd = Integer.parseInt(request.getParameter("rsvDd"));
-					rsvHh = Integer.parseInt(request.getParameter("rsvHh"));
-					rsvMi = Integer.parseInt(request.getParameter("rsvMi"));
-					usrId = Integer.parseInt(request.getParameter("usrId"));
-					usrName = userInfo.getUsrName();
-					person = Integer.parseInt(request.getParameter("person"));
-				} catch (NumberFormatException e) {
-					// 数値変換例外が発生した場合、0を設定
-					//既に設定してあるので次へ
-				}
+					for(int i = 0;i < attributeName.length;i++) {
+						try {
+						userData.set(i,Integer.parseInt(request.getParameter(attributeName[i])));
+						}catch (NumberFormatException e) {
+							// 数値変換例外が発生した場合、0を設定
+							//既に設定してあるので次へ
+						}
+					}
 
 					// 予約情報を生成
 					Reserve reserve = new Reserve();
@@ -85,7 +88,7 @@ public class ReserveInsertSvl extends HttpServlet {
 					reserve.setRsvHh(rsvHh);
 					reserve.setRsvMi(rsvMi);
 					reserve.setUsrId(usrId);
-					reserve.setUsrName(usrName);
+					reserve.setUsrName(userInfo.getUsrName());
 					reserve.setPerson(person);
 					reserve.setCourseId(courseId);
 					reserve.setCourseName(course.getCourseName());
@@ -94,7 +97,7 @@ public class ReserveInsertSvl extends HttpServlet {
 					request.setAttribute("reserve", reserve);
 
 					// オーダー可能なコースの一覧情報を取得
-					ArrayList<Course> courseList = getOneCourseList(); //クラス完成待ち
+					ArrayList<Course> courseList = Course.getOneCourseList(); //クラス完成待ち
 					request.setAttribute("courseList", courseList);
 
 					// 新規予約画面に遷移

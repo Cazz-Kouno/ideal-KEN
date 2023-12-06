@@ -6,7 +6,13 @@
 <meta charset="UTF-8">
 <title>コース情報変更画面</title>
 
-<style>
+<style>body{
+            background-image:url(./img/レストラン15.jpg);
+    		 background-size:100% auto;
+        
+        }
+
+
         table {
             width: 100%;}
         th, td {
@@ -14,16 +20,13 @@
             text-align: left;
             border: 1px gray solid;
             }
+h1{background-color:Red;}
+th{background-color:Red;}
 </style>
 
 </head>
 
-<style>
-h1{background-color:Lightgreen;}
-th{background-color:Lightgreen;}
-</style>
 
-<body>
 <body>
 <table>
 <td colspan="2">

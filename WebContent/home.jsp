@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>ホームページ</title>
 <style>
+
 body{text-align:center;
 background:linear-gradient(red,white,white,green);
 }
@@ -14,10 +15,12 @@ html{
 min-height:100%;
 }
 div{
-background:url(/ideal/img/レストラン1.jpg);
+background-image:url(../img/レストラン1.jpg);
+background-size:100% auto;
+
 }
 </style>
-</head><p>
+</head>
 <body>
 <div style="font-size:70px;">■ Restaurante IDEALLE ■</div>
 <p>ここにメッセージを表示</p>

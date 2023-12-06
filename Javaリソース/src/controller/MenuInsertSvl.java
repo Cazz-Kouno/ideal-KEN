@@ -59,7 +59,10 @@ public class MenuInsertSvl extends HttpServlet {
 							typeMenuList.add(Menu.getMenu(mt.getTypeId()));
 						}
 					}
-					request.setAttribute("typeMenuList", menuTypes);
+					System.out.println(typeMenuList);
+					request.setAttribute("typeMenuList", typeMenuList);
+					request.setAttribute("menuTypes", menuTypes);
+
 					rd = request.getRequestDispatcher("../courseInsert.jsp");
 
 				} else {

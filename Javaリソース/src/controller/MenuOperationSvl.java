@@ -78,7 +78,9 @@ public class MenuOperationSvl extends HttpServlet {
 				menu.setPrice(price);
 				menu.setTypeId(typeId);
 				request.setAttribute("typeId", typeId);
-				Menu.updateMenu(menu, mode);
+				if(Menu.updateMenu(menu, mode) == 0) {
+					throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
+				};
 				rd = request.getRequestDispatcher("/ideal/controller/MenuMaintenanceSvl");
 			}
 

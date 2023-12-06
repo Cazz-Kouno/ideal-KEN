@@ -5,23 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <title>お客様ログイン画面</title>
+        <link rel="stylesheet" type="text/css" href="login.css" />
     
-    <link rel="stylesheet" type="text/css" href="login.css" />
-    
-
     <style>
         body {
+            background-image:url(./img/レストラン2.jpg);
+    		background-size:100% auto;            
             font-family: Arial, sans-serif;
-            margin: 20px;
-            
+            margin: 20px;}
+        table{
+            width:100%
             text-align:center;
-            background:linear-gradient(red,white,white,green);
-            }
-
-html{
-min-height:100%;
-}
-            }
+            background:linear-gradient(red,white,white,green);}
+		html{
+			min-height:100%;}
         h2 {
             color: #333;}
         div {
@@ -33,8 +30,7 @@ min-height:100%;
         th, td {
             padding: 8px;
             text-align: left;
-            border: 1px gray solid;
-            }
+            border: 1px gray solid;}
         input[type="text"], input[type="password"] {
             width: 100%;
             padding: 8px;

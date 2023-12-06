@@ -1,6 +1,6 @@
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page import="model.*"%>
 <!DOCTYPE html>
 <html>
@@ -9,41 +9,47 @@
 <title>予約情報一覧画面</title>
 
 <style>
-table {
+
+body{
+	background-image:url(../img/レストラン1.jpg);
+	background-size:100% auto;
+	}
+	html{
+min-height:100%;
+	}
+table{
 	border: 2px glay solid;
 }
 
 th {
 	border: 2px solid glay;
-	?
+	
 }
 
 td {
 	border: 2px solid glay;
 }
-reserveList
 </style>
+</head>
+<body>
 <jsp:useBean id="reserveList" class="java.util.ArrayList"
 	scope="session" />
 <jsp:useBean id="userInfo" class="model.User" scope="session" />
-</head>
-<body>
 	<h1><%=userInfo.getUsrName()%>様、ご予約一覧
 	</h1>
 
-	<p>
-		<%-- メッセージがnullでない場合にのみ表示 --%>
-		<%
-		String message = (String) session.getAttribute("msg");
-		if (message != null && !message.isEmpty()) {
-		%>
-	
-	<div>
-		<p><%=message%></p>
-	</div>
-	<%
-	}
-	%></p>
+	<p><%-- メッセージがnullでない場合にのみ表示 --%>
+    <%
+        String message = (String) request.getAttribute("msg");
+        if (message != null && !message.isEmpty()) {
+    %>
+        <div>
+            <p><%= message %></p>
+        </div>
+    <%
+        }
+    %>
+    </p>
 
 
 	<table>

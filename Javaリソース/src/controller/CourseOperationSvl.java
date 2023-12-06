@@ -25,6 +25,9 @@ public class CourseOperationSvl extends HttpServlet {
 	public static final int UPDATE = 22;
 	public static final int DELETE = 23;
 	public static final int[] COURSE_MENU_TYPE_ID = {200,210,220,300,310,400};
+	public static final String[] COURSE_MENU_TYPE_NAME = 
+		{"appetizerId","soupId","pastaId","meatId","fishId","dessertId"};
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -50,7 +53,6 @@ public class CourseOperationSvl extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession(false);
 		RequestDispatcher rd = null;
-		String[] menuType = {"appetizerId","soupId","pastaId","meatId","fishId","dessertId"};
 		
 		int mode = 100;
 		int typeId = 100;
@@ -74,8 +76,8 @@ public class CourseOperationSvl extends HttpServlet {
 					
 					coursectl = new ArrayList<>();
 					Coursectl menu = null;
-					for(String type:menuType) {
-						if(request.getParameter(type) != null) {
+					for(String type:COURSE_MENU_TYPE_NAME) {
+						if(request.getParameter(type) != null || !(request.getParameter(type).isEmpty())) {
 							menu = new Coursectl();
 							menu.setM_Id(Integer.parseInt(request.getParameter(type)));
 							coursectl.add(menu);
@@ -95,7 +97,7 @@ public class CourseOperationSvl extends HttpServlet {
 					
 					coursectl = new ArrayList<>();
 					menu = null;
-					for(String type:menuType) {
+					for(String type:COURSE_MENU_TYPE_NAME) {
 						if(request.getParameter(type) != null) {
 							menu = new Coursectl();
 							menu.setM_Id(Integer.parseInt(request.getParameter(type)));

@@ -39,7 +39,7 @@
 <h2>大切に保管してください。</h2><br/>
 <br/>
 <!-- 戻るボタン -->
-    <form action="userIndex.jsp" method="post">
+    <form action="../userIndex.jsp" method="post">
         <input type="submit" value="戻る" />
 </div>
 </body>

@@ -66,7 +66,7 @@ public class User {
             // データベースに接続
             connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/ideal","root","root");
             // ログイン情報を取得するSQL文
-            String selectSql = "SELECT * FROM user WHERE usr_id = ? AND user.password = ?";
+            String selectSql = "SELECT * FROM user WHERE usr_id = ? AND password = ?";
             // PreparedStatementを使用してSQLを実行
             preparedStatement = connection.prepareStatement(selectSql);
             // プレースホルダに値を設定
@@ -249,7 +249,8 @@ public class User {
 
             // SQLを実行
             int affectedRows = preparedStatement.executeUpdate();
-
+            System.out.println("U 252:"+preparedStatement);
+            System.out.println(affectedRows);
             if (affectedRows == 0) {
                 // 更新が失敗した場合はIdealExceptionをスロー
                 throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);

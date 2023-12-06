@@ -8,8 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+//import javax.naming.InitialContext;
+//import javax.sql.DataSource;
 
 import controller.MenuOperationSvl;
 
@@ -188,15 +188,15 @@ public class Menu implements Serializable {
 
 		ArrayList<Menu> al = new ArrayList<Menu>();
 	
-		InitialContext ic = null;
-		DataSource ds = null;
+//		InitialContext ic = null;
+//		DataSource ds = null;
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 	
 		String sql = "";
 		try{
-			ic = new InitialContext();
+//			ic = new InitialContext();
 			//ds = (DataSource)ic.lookup("java:comp/env/mysql"); //データソースをリース
 //			ds = (DataSource)ic.lookup("java:comp/env/mariadb");
 //			con = ds.getConnection();
@@ -258,15 +258,15 @@ public class Menu implements Serializable {
 	public static ArrayList<Menu> getMenu(int typeId) throws IdealException{
 		ArrayList<Menu> al = new ArrayList<Menu>();
 	
-		InitialContext ic = null;
-		DataSource ds = null;
+//		InitialContext ic = null;
+//		DataSource ds = null;
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 	
 		String sql = "";
 		try{
-			ic = new InitialContext();
+//			ic = new InitialContext();
 			//ds = (DataSource)ic.lookup("java:comp/env/mysql"); //データソースをリース
 //			ds = (DataSource)ic.lookup("java:comp/env/mariadb");
 //			con = ds.getConnection();
@@ -339,8 +339,8 @@ public class Menu implements Serializable {
 	
 	public static int updateMenu(Menu m, int mode) throws IdealException{
 	
-				InitialContext ic = null;
-				DataSource ds = null;
+//				InitialContext ic = null;
+//				DataSource ds = null;
 				Connection con = null;
 				PreparedStatement pst = null;
 				//変数の宣言と初期化
@@ -348,7 +348,7 @@ public class Menu implements Serializable {
 				int num = 0;
 
 				try{
-					ic = new InitialContext();
+//					ic = new InitialContext();
 					//ds = (DataSource)ic.lookup("java:comp/env/mysql"); //データソースをリース
 //					ds = (DataSource)ic.lookup("java:comp/env/mariadb");
 //					con = ds.getConnection();

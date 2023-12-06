@@ -53,7 +53,7 @@ public class ReserveUpdateSvl extends HttpServlet {
 					request.setAttribute("reserve", reserve);
 
 					// オーダー可能なコースの一覧情報を取得
-					ArrayList<Course> courseList = getOneCourseList(); //クラス完成待ち
+					ArrayList<Course> courseList = Course.getOneCourseList(); //クラス完成待ち
 					request.setAttribute("courseList", courseList);
 
 					// 予約情報変更画面に遷移

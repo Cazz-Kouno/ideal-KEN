@@ -311,7 +311,6 @@ public class Reserve implements Serializable {
 	// 予約IDで予約情報を取得する
 	public static Reserve getReserve(int rsvId) throws IdealException {
 
-		
 		Reserve reserve = new Reserve();
 		 Connection connection = null;
 		 PreparedStatement preparedStatement = null;
@@ -469,6 +468,9 @@ public class Reserve implements Serializable {
 		 String sql = null;
 		 
 		try {
+			connection = DriverManager.getConnection
+					("jdbc:mariadb://localhost:3306/ideal","root","root");
+
 
 			sql="SELECT table_loc.table_id "
 					+ "FROM table_loc "
@@ -534,6 +536,9 @@ public class Reserve implements Serializable {
 		 ResultSet resultSet = null;
 		 String sql = null;
 		try {
+			connection = DriverManager.getConnection
+					("jdbc:mariadb://localhost:3306/ideal","root","root");
+
 
 			sql="SELECT table_loc.table_id "
 					+ "FROM table_loc "

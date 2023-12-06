@@ -30,7 +30,18 @@ th, td {
 	<h1><%=userInfo.getUsrName()%>様ご予約
 	</h1>
 
-	<p>ここにメッセージを表示</p>
+	<p><p><%-- メッセージがnullでない場合にのみ表示 --%>
+    <%
+        String message = (String) request.getAttribute("msg");
+        if (message != null && !message.isEmpty()) {
+    %>
+        <div>
+            <p><%= message %></p>
+        </div>
+    <%
+        }
+    %>
+    </p></p>
 
 	<form id="frm1" name="frm1" action="./ex12.html" method="get">
 		<table>

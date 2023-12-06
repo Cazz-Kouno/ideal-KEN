@@ -135,9 +135,11 @@ public class ReserveOperationSvl extends HttpServlet {
 					if (tableLoc != null) {
 						reserve.setTableId(tableLoc.getTableId());
 						reserve.setTableName(tableLoc.getTableName());
-						Reserve.update(reserve);
+						reserve = Reserve.update(reserve);
+						request.setAttribute("reserve", reserve);
+
 						// 遷移先を予約登録画面表示処理に設定
-						String url = "ReserveList";
+						String url = "../reserveCompletion.jsp";
 						rd = request.getRequestDispatcher(url);
 					} else {
 						// 予約不可能な場合、メッセージをセットして遷移
