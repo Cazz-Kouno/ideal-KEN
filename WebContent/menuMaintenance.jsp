@@ -10,7 +10,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Menu Maintenance</title>
+
+
 <style>
+
+body{
+            width: 100%;
+            text-align:center;
+            
+            /*background-image:url(/ideal/img/レストラン18.avif);*/
+    		 background-size:100% auto;
+            }
+            background:linear-gradient(red,white,white,green);
+            }
 <!--
 table{text-align:center;margin:auto;}
 caption{font-size:18pt;color:#009967;}

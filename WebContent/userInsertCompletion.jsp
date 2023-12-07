@@ -9,7 +9,13 @@
 	<title>顧客登録完了画面</title>
     <style>    
     	body{text-align:center;
-    	background:linear-gradient(red,white,white,green);
+    	
+    	
+	    background-image:url(/ideal/img/レストラン19.jpg);
+	    background-size:100% auto;
+    	
+    	
+    	/* background:linear-gradient(red,white,white,green); */
     	}
 
     	html{

@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="login.css" />
 <style>
 body{text-align:center;
-	background-image:url(./img/レストラン4.jpg);
+	background-image:url(/ideal/img/レストラン4.jpg);
 	background-size:100% auto;
 	background:linear-gradient(red,white,green);}
 html{min-height:100%;}

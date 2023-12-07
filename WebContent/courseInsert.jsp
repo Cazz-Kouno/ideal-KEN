@@ -10,7 +10,7 @@
 
 <style>
 body{
-            background-image:url(./img/レストラン８.jsp);
+            background-image:url(/ideal/img/レストラン8.jpg);
     		 background-size:100% auto;
         
         }
@@ -24,15 +24,18 @@ th, td {
 	border: 1px gray solid;
 }
 h1 {
-	background-color: Lightgreen;
+	background-color: Red;
 }
 
 th {
-	background-color: Lightgreen;
+	background-color: Red;
+}
+select {
+	width:300px;
 }
 </style>
 <%! String[] COURSE_MENU_TYPE_NAME = 
-{"appetizerId","soupId","pastaId","meatId","fishId","dessertId"}; %>
+{"courseId","appetizerId","soupId","pastaId","meatId","fishId","dessertId","","","",""}; %>
 </head>
 
 <body>
@@ -48,6 +51,7 @@ th {
 
 <%
 String message = (String) request.getAttribute("msg");
+int count = 1;
 if (message != null && !message.isEmpty()) {
 %>
 			
@@ -59,7 +63,7 @@ if (message != null && !message.isEmpty()) {
  %>
 
 			</p>
-			<form id="frm1" name="frm1" action="./ex12.html" method="get">
+			<form id="frm1" name="frm1" action="/ideal/controller/CourseOperationSvl" method="post">
 
 				<tr>
 					<th>コース名</th>
@@ -70,7 +74,7 @@ if (message != null && !message.isEmpty()) {
 				<tr>
 					<th>価格</th>
 					<td><input type="text" name="price" size="6"
-						style="ime-mode: inactive"></td>
+						style="ime-mode: inactive">円</td>
 				</tr>
 
 				<tr>
@@ -85,15 +89,15 @@ if (message != null && !message.isEmpty()) {
 							style="ime-mode: active" placeholder="ご自由にご記入ください。"></textarea></td>
 				</tr>
 <%
-for(int i=0;i < typeMenuList.size();i++){
-	ArrayList<Menu> menuList = (ArrayList<Menu>)(((ArrayList)typeMenuList).get(i));
+for(Object obj:typeMenuList){
+	if(obj != null){
+		ArrayList<Menu> menuList = (ArrayList<Menu>)obj;
 %>
 				<tr>
-					<th><%=((MenuType)((ArrayList)menuTypes).get(i)).getTypeName() %></th>
-					<td><select name="<%= COURSE_MENU_TYPE_NAME[i] %>" size="30">
-						<option value="">選択してください。</option>
-	<%
-	if(menuList != null){
+					<th><%=((MenuType)menuTypes.get(count)).getTypeName() %></th>
+					<td><select name="<%= COURSE_MENU_TYPE_NAME[count] %>">
+						<option value="">--- 選択してください。 ---</option>
+	<%					
 		for(Menu menu:menuList){
 	%>
 						<option value="<%= menu.getMenuId()%>"><%= menu.getMenuName() %></option>
@@ -102,10 +106,12 @@ for(int i=0;i < typeMenuList.size();i++){
 	}
 	%>
 						
+						</select>
 					</td>
 				</tr>
 
-<%	
+<%
+count++;
 }
 %>
 
@@ -113,9 +119,12 @@ for(int i=0;i < typeMenuList.size();i++){
 					<td colspan="2" style=""><input type="submit" value="登録"></td>
 				</tr>
 	</table>
+	<input type="hidden" name="mode" value="<%= CourseOperationSvl.INSERT %>">
+	<input type="hidden" name="typeId" value="100">
+	
 	</form>
 	<p>
-		<a href="home.jsp">一覧表示に戻る</a>
+		<a href="/ideal/home.jsp">一覧表示に戻る</a>
 	</p>
 
 </body>

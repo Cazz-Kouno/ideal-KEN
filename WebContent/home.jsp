@@ -15,7 +15,7 @@ html{
 min-height:100%;
 }
 div{
-background-image:url(../img/レストラン1.jpg);
+background-image:url(/ideal/img/レストラン1.jpg);
 background-size:100% auto;
 
 }

@@ -53,7 +53,7 @@ public class AdminLoginSvl extends HttpServlet {
 				throw ie;
 			}else {
 				session.setAttribute("adminInfo", admin);
-				rd = request.getRequestDispatcher("../adminIndex.jsp");				System.out.println("1");
+				rd = request.getRequestDispatcher("../adminIndex.jsp");
 			}
 		} catch(IdealException e) {
 			request.setAttribute("msg", e.getMsg());

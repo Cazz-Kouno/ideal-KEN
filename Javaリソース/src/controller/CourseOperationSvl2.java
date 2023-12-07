@@ -18,8 +18,8 @@ import model.IdealException;
 /**
  * Servlet implementation class AdminLoginSvl
  */
-@WebServlet("/controller/CourseOperationSvl")
-public class CourseOperationSvl extends HttpServlet {
+@WebServlet("/controller/CourseOperationSvl2")
+public class CourseOperationSvl2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final int INSERT = 21;
 	public static final int UPDATE = 22;
@@ -31,7 +31,7 @@ public class CourseOperationSvl extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CourseOperationSvl() {
+	public CourseOperationSvl2() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

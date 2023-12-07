@@ -12,7 +12,10 @@
             width: 100%;
             text-align:center;
             
-            background:linear-gradient(red,white,white,green);
+            background-image:url(/ideal/img/レストラン18.avif);
+    		 background-size:100% auto;
+            }
+            /*background:linear-gradient(red,white,white,green);*/
             }
 
         html{
@@ -36,7 +39,7 @@
 <%
     } else {
         // セッションが切れている場合はログイン画面に遷移
-        response.sendRedirect("../adminLogin.jsp");
+        response.sendRedirect("adminLogin.jsp");
     }
 
     // メッセージがnullでない場合にのみ表示
@@ -51,10 +54,10 @@
 %>
  <br />
  <!-- ③．メニューメンテナンス -->
-    <a href="MenuMaintenanceSvl">●メニューメンテナンス</a></p>
+    <a href="/ideal/controller/MenuMaintenanceSvl">●メニューメンテナンス</a></p>
 
  <!-- ④．ログオフ -->
-    <a href="AdminLogoffSvl">●ログオフ</a></p>
+    <a href="/ideal/controller/AdminLogoffSvl">●ログオフ</a></p>
 </form>
 
 </body>

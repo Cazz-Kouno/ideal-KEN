@@ -4,37 +4,24 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>会員ログイン画面</title>
+    <title>管理者ログイン画面</title>
+    	<link rel="stylesheet" type="text/css" href="login.css" />
     
     <style>
     　　body{
-            background-image:url(./img/レストラン10.jpg);
-    		 background-size:100% auto;
-        
-        }
-    
+            background-image:url(/ideal/レストラン10.jpg);
+    		 background-size:100% auto;}    
         table {
-            width: 100%;
-            
-            text-align:center;
-            
-            background:linear-gradient(red,white,white,green);
-            }
-
+            width: 100%;            
+            text-align:center;            
+            background:linear-gradient(red,white,white,green);}
         html{
-            min-height:100%;
-            
-            }
-            
-            
-            }
+            min-height:100%;}            
         th, td {
             padding: 8px;
             text-align: left;
-            border: 1px gray solid;
-            }
-</style>
-    
+            border: 1px gray solid;}
+</style>    
     <link rel="stylesheet" type="text/css" href="login.css"/>
  <style>
         body {
@@ -75,6 +62,9 @@
                     // 1.名前、パスワードが未入力の時、アラートを表示し、"false"をリターンする。
                     alert("管理者氏名、パスワードを必ず入力してください。");
                     return false;
+                }else{
+              	//2.名前、パスワードがともに入力されていた時、"true"をリターンする。
+					return true;
                 }
             }
         //-->
@@ -95,19 +85,21 @@
     <%
         }
     %>
-
+    <jsp:useBean id="adminInfo" class="model.Admin" scope="session"/>
     <form name="AdminloginForm" action="/ideal/controller/AdminLoginSvl" method="post" 
        											 onsubmit="return dataCheck(this);">
         <table>
             <tr>
                 <th>管理者氏名</th>
                 <td><input type="text" name="admName" size="10" maxlength="10" 
-                        style="ime-mode: active;"/></td>
+                        style="ime-mode: active" 
+                        placeholder=<%= (adminInfo.getAdmName() != null) ? adminInfo.getAdmName() : "" %> ></td>
             </tr>
             <tr>
                 <th>パスワード</th>
                 <td><input type="password" name="password" size="8" maxlength="8" 
-                        style="ime-mode: inactive;"/></td>
+                        style="ime-mode: inactive;" /></td>
+                       
             </tr>
             <tr>
                 <td id="sub" colspan="2">
@@ -116,6 +108,6 @@
         </table>
     </form>
     <br />
-    <a href="home.jsp">ホームページ</a>
+    <a href="/ideal/home.jsp">ホームページ</a>
 </body>
 </html>

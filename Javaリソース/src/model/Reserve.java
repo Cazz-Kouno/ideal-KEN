@@ -285,8 +285,8 @@ public class Reserve implements Serializable {
 			}
 
 		} catch (Exception e) {
-			System.out.println(sql);
-			System.out.println(preparedStatement);
+//			System.out.println(sql);
+//			System.out.println(preparedStatement);
 			
 			throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
 		} finally {
@@ -301,7 +301,7 @@ public class Reserve implements Serializable {
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
-				System.out.println(preparedStatement);
+//				System.out.println(preparedStatement);
 			}
 
 		}
@@ -405,7 +405,7 @@ public class Reserve implements Serializable {
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
-				System.out.println(preparedStatement);
+//				System.out.println(preparedStatement);
 			}
 
 		}
@@ -452,7 +452,7 @@ public class Reserve implements Serializable {
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
-				System.out.println(preparedStatement);
+//				System.out.println(preparedStatement);
 			}
 		}
 	}
@@ -520,7 +520,7 @@ public class Reserve implements Serializable {
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
-				System.out.println(preparedStatement);
+//				System.out.println(preparedStatement);
 			}
 		}
 	}
@@ -585,7 +585,7 @@ public class Reserve implements Serializable {
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
-				System.out.println(preparedStatement);
+//				System.out.println(preparedStatement);
 			}
 		}
 	}

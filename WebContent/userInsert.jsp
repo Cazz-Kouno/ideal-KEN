@@ -9,7 +9,7 @@
     
     <style charset="utf-8">
     	body {
-    		 background-image:url(./img/レストラン1.jpg);
+    		 background-image:url(/ideal/img/レストラン1.jpg);
     		 background-size:100% auto;
     		 
     	}

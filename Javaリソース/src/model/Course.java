@@ -207,7 +207,7 @@ public class Course {
 					+ "JOIN menu m USING(m_id) "
 					+ "WHERE c.c_id = ?";
 
-			System.out.println("getOneCourse の: " + sql);
+//			System.out.println("getOneCourse の: " + sql);
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, c_Id);
 			rs = pst.executeQuery();
@@ -268,7 +268,7 @@ public class Course {
 
 		// 上記 sqlで c.t_id と m.t_id のカラム名表示の重複を避けたい場合は m.t_id as mt_id, m.m_id, m.m_Name を採用予定
 
-		System.out.println("getCourseList の：" + sql);
+//		System.out.println("getCourseList の：" + sql);
 
 		// 比較の為に AutoCloseable の try-with-resources 形式で記述してみる。
 		// 外出しの static con は通用しない？
@@ -322,7 +322,7 @@ public class Course {
 
 		// 上記 sqlで c.t_id と m.t_id のカラム名表示の重複を避けたい場合は m.t_id as mt_id, m.m_id, m.m_Name を採用予定
 
-		System.out.println("getCourseList の：" + sql);
+//		System.out.println("getCourseList の：" + sql);
 
 		// 比較の為に AutoCloseable の try-with-resources 形式で記述してみる。
 		// 外出しの static con は通用しない？
@@ -374,7 +374,7 @@ public class Course {
 				+ "c.price, "
 				+ "m.t_name  "
 				+ "FROM course c JOIN menutype m using(t_id) WHERE t_id = ?";
-		System.out.println("getTypeCourseList: " + sql);
+//		System.out.println("getTypeCourseList: " + sql);
 
 		try (Connection con = DriverManager.getConnection(
 				"jdbc:mariadb://localhost:3306/ideal", "root", "root");

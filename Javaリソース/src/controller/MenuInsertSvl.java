@@ -59,7 +59,7 @@ public class MenuInsertSvl extends HttpServlet {
 							typeMenuList.add(Menu.getMenu(mt.getTypeId()));
 						}
 					}
-					System.out.println(typeMenuList);
+//					System.out.println(typeMenuList);
 					request.setAttribute("typeMenuList", typeMenuList);
 					request.setAttribute("menuTypes", menuTypes);
 

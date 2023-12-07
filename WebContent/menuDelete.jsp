@@ -7,7 +7,7 @@
 <title>メニュー情報削除画面</title>
 
 <style>body{
-            background-image:url(./img/レストラン11.jpg);
+            background-image:url(/ideal/img/レストラン11.jpg);
     		 background-size:100% auto;
         
         }

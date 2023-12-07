@@ -102,19 +102,19 @@ public class Menu implements Serializable {
 		String sql = "";
 		
 		try{
-			System.out.println("1");
+//			System.out.println("1");
 //			ic = new InitialContext();
-			System.out.println("2");
+//			System.out.println("2");
 			
 			//ds = (DataSource)ic.lookup("java:comp/env/mysql"); //データソースをリース
 //			ds = (DataSource)ic.lookup("java:comp/env/mariadb"); //データソースをリース
-			System.out.println("3");
+//			System.out.println("3");
 
 //			con = ds.getConnection();
 			con = DriverManager.getConnection
 					("jdbc:mariadb://localhost:3306/ideal","root","root");
 			
-			System.out.println("4");
+//			System.out.println("4");
 
 			if(typeId == 100){
 				sql = "SELECT "
@@ -166,9 +166,9 @@ public class Menu implements Serializable {
 
 			
 		}catch(Exception e){
-			System.out.println("err");
+//			System.out.println("err");
 			e.printStackTrace();
-			System.out.println(pst);
+//			System.out.println(pst);
 			IdealException idex = new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
 //			idex.getMsg();
 			throw idex;
@@ -425,7 +425,7 @@ public class Menu implements Serializable {
 					
 					
 				}catch(Exception e){
-					System.out.println(pst);
+//					System.out.println(pst);
 					e.printStackTrace();
 					IdealException idex = new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
 //					idex.getMsg();

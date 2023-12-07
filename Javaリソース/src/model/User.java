@@ -74,7 +74,7 @@ public class User {
             preparedStatement.setString(2, password);
             // SQLを実行
             resultSet = preparedStatement.executeQuery();
-            System.out.println(preparedStatement);
+//            System.out.println(preparedStatement);
             if (resultSet.next()) {
                 // Userオブジェクトに取得した情報を設定
                 User user = new User();
@@ -89,7 +89,7 @@ public class User {
                 return user;
             } else {
                 // 該当レコードが存在しない場合はnullを返す
-            	System.out.println("7");
+//            	System.out.println("7");
             	return null;
             }
         } catch (SQLException e) {
@@ -249,8 +249,8 @@ public class User {
 
             // SQLを実行
             int affectedRows = preparedStatement.executeUpdate();
-            System.out.println("U 252:"+preparedStatement);
-            System.out.println(affectedRows);
+//            System.out.println("U 252:"+preparedStatement);
+//            System.out.println(affectedRows);
             if (affectedRows == 0) {
                 // 更新が失敗した場合はIdealExceptionをスロー
                 throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);

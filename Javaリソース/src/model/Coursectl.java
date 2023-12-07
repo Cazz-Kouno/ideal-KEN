@@ -77,7 +77,7 @@ public class Coursectl implements Serializable {
 				} catch (Exception e) {
 					// TODO: handle exception
 					e.printStackTrace();
-					System.out.println(preparedStatement);
+//					System.out.println(preparedStatement);
 				}
 
 			}

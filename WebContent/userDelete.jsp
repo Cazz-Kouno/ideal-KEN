@@ -10,7 +10,7 @@
     
     <style>
         body{
-            background-image:url(./img/レストラン8.jpg);
+            background-image:url(/ideal/img/レストラン8.jpg);
     		 background-size:100% auto;
         
         }

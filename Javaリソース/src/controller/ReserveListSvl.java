@@ -41,9 +41,9 @@ private static final long serialVersionUID = 1L;
         } else {
             // セッション情報から予約情報一覧を取得
             try {
-            	System.out.println("start:" + userInfo.getUsrId());
+//            	System.out.println("start:" + userInfo.getUsrId());
                 ArrayList<Reserve> reserveList = Reserve.getReserveList(userInfo.getUsrId());
-                System.out.println(reserveList);
+//                System.out.println(reserveList);
                 session.setAttribute("reserveList", reserveList);
             } catch (IdealException e) {
                 // 独自例外が発生した場合、エラーメッセージを取得し設定

@@ -51,10 +51,10 @@ public class UserLoginSvl extends HttpServlet {
 		RequestDispatcher rd = null;
 		
 		try {
-			System.out.println("1");
+//			System.out.println("1");
 			User user = User.login(id,pass);
-			System.out.println("2");
-			System.out.println(user);
+//			System.out.println("2");
+//			System.out.println(user);
 			if(user == null) {
 				IdealException ie = new IdealException(IdealException.ERR_NO_NOT_MEMBER_EXCEPTION);
 				throw ie;

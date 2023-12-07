@@ -9,72 +9,54 @@
     
     <style>
         body{
-            background-image:url(./img/レストラン12.jfif);
-    		 background-size:100% auto;
-            }
-            
+            background-image:url(/ideal/img/レストラン12.jfif);
+    		 background-size:100% auto;}
         table {
             width: 100%;         
             text-align:center;
-            background:linear-gradient(red,white,white,green);
-            }
-            
+            background:linear-gradient(red,white,white,green);}
         html{
-            min-height:100%;           
-            }  
-            
+            min-height:100%;}  
         th, td {
             padding: 8px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
-       		}
+            border-bottom: 1px solid #ddd;}
        	p{color:red;}
         td2{color:red;}
         input[type="text"], input[type="password"] {
             width: 100%;
             padding: 8px;
-            box-sizing: border-box;
-        	}
+            box-sizing: border-box;}
         input[type="submit"] {
             padding: 10px;
             background-color: #007B66;
             color: white;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
-        	}
+            cursor: pointer;}
         input[type="submit"]:hover {
-            background-color: #007B66;
-        	}
+            background-color: #007B66;}
     </style>  
             
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/JavaScript" src="validationScript.js"></script>
     <script type="text/JavaScript">
-        <!--
-        function dataCheck(obj) {
-            // 必須項目の未入力チェック
-            if (obj.elements['usrName'].value.length == 0 ||
-                obj.elements['phone'].value.length == 0 ||
-                obj.elements['mail'].value.length == 0 ||{
-                alert("必須項目を入力してください。");
+    <!--
+    function dataCheck(obj){
+       if (obj.elements['usrName'].value.length == 0) {
+                alert("氏名は必須項目です。");
                 return false;
-            }
-
-            // 電話番号の正規化チェック（半角数字およびハイフンのみ）
-            if (!validatePhone(obj.elements['phone'].value)) {
-                alert("電話番号が正しくありません。");
-                return false;
-            }
-
-            // メールアドレスの正規化チェック
-            if (!validateEmail(obj.elements['mail'].value)) {
-                alert("メールアドレスが正しくありません。");
-                return false;
-            }
-
-            return true;
-        }
+                }
+       if (!validatePhone(obj.elements['phone'].value)) {
+           alert("電話番号は必須項目です。");
+           return false;
+           }
+       if (!validateEmail(obj.elements['mail'].value)) {
+           alert("メールアドレスは必須項目です。");
+           return false;
+           }
+       return true;
+       }
         
    		// 電話番号の正規化チェック
        		function validatePhone(phone) {

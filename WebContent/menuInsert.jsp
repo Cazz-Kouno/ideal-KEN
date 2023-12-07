@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,java.text.*,model.*,controller.*" %>
-<%@ page import="java.io.*" %>
+<%-- <%@ page import="java.util.logging.Logger" %> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +72,7 @@ th, td {
 		typeId = 200;
 	}
 	%>
-	<jsp:useBean id="mType" class="java.util.ArrayList" scope="request" />
+	<jsp:useBean id="mType" class="java.util.ArrayList" scope="request"/>
 	<jsp:useBean id="oneMenu" class="model.Menu" scope="request" />
 
 		<table>
@@ -119,8 +120,9 @@ th, td {
 					<td><select name="typeId">
 					　　<%
 						// MenuInsertsvlt.java から
-					      for(MenuType mt: (ArrayList<MenuType>)mType){ // このキャスト必要か？必要です。
-					    	  System.out.println("Type Name: " + mt.getTypeName());
+					      for(MenuType mt: (ArrayList<MenuType>)mType){%> // このキャスト必要か？必要です。
+					
+					   <%
 					      String selected = "";
 					      if(typeId == mt.getTypeId()){
 					    	  selected = "selected";
@@ -148,10 +150,8 @@ th, td {
 		</form>
 		<p>
 			<a href="home.jsp">一覧表示に戻る</a>
-		</p>
 </body>
 </html>
-
 
 
 

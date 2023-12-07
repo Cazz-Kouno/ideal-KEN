@@ -7,7 +7,7 @@
 <title>コース情報変更画面</title>
 
 <style>body{
-            background-image:url(./img/レストラン15.jpg);
+            background-image:url(/ideal/img/レストラン15.jpg);
     		 background-size:100% auto;
         
         }

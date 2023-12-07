@@ -5,11 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <title>お客様ログイン画面</title>
-        <link rel="stylesheet" type="text/css" href="login.css" />
+       <link rel="stylesheet" type="text/css" href="login.css" />
     
     <style>
         body {
-            background-image:url(./img/レストラン2.jpg);
+            background-image:url(/ideal/img/レストラン2.jpg);
     		background-size:100% auto;            
             font-family: Arial, sans-serif;
             margin: 20px;}
@@ -92,7 +92,6 @@
         </table>
     </form>
     <br />
-    <a href="home.jsp">ホームページ</a>
+    <a href="/ideal/home.jsp">ホームページ</a>
 </body>
-
 </html>
