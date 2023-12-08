@@ -67,7 +67,7 @@ public class MenuOperationSvl extends HttpServlet {
 				} catch (NumberFormatException e) {
 				}
 				try {
-					typeId = Integer.parseInt(request.getParameter("mode"));
+					typeId = Integer.parseInt(request.getParameter("typeId"));
 				} catch (NumberFormatException e) {
 				}
 				
@@ -81,7 +81,7 @@ public class MenuOperationSvl extends HttpServlet {
 				if(Menu.updateMenu(menu, mode) == 0) {
 					throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
 				};
-				rd = request.getRequestDispatcher("/ideal/controller/MenuMaintenanceSvl");
+				rd = request.getRequestDispatcher("./MenuMaintenanceSvl");
 			}
 
 		} catch (IdealException e) {
@@ -90,13 +90,13 @@ public class MenuOperationSvl extends HttpServlet {
 
 			switch(mode) {
 			case INSERT:
-				rd = request.getRequestDispatcher("/ideal/controller/MenuInsertSvl");
+				rd = request.getRequestDispatcher("./MenuInsertSvl");
 				break;
 			case UPDATE:
-				rd = request.getRequestDispatcher("/ideal/controller/MenuUpdateSvl");
+				rd = request.getRequestDispatcher("./MenuUpdateSvl");
 				break;
 			case DELETE:
-				rd = request.getRequestDispatcher("/ideal/controller/MenuDeleteSvl");
+				rd = request.getRequestDispatcher("./MenuDeleteSvl");
 				break;
 			}
 		} finally {

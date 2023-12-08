@@ -58,6 +58,19 @@ String style = "id = 'type1'";
 typeId = (Integer)request.getAttribute("typeId");
 
 %>
+
+<%
+String message = (String) request.getAttribute("msg");
+if (message != null && !message.isEmpty()) {
+%>
+			
+			<div>
+				<p><%=message%></p>
+			</div> 
+<%
+ }
+ %>
+
 <!-- Beanを作成 -->
 <jsp:useBean id = "mType" class = "java.util.ArrayList" scope = "request"/>
 <jsp:useBean id = "menu" class = "java.util.ArrayList" scope = "request"/> 
@@ -111,26 +124,23 @@ for(int i = 0 ; i < menu.size() ; i++){
   <td id = "price"><%= cf.format(m.getPrice()) %></td>
   <td id = "comm"><%= m.getDetail() == null ? "" : m.getDetail()%></td>
   <td id = "ord"><%= order[m.getOrderFlg()]%></td>
-  <form action = "" method = "post">
   <td>
-  <input type = "submit" value = "更新"
-  onclick = "this.form.mode.value = '<%= MenuOperationSvl.UPDATE %>';
-    request.setAttribute('menuId',m.getMenuId());
-  request.setAttribute('typeId',m.getTypeId());
-  this.form.action = '/ideal/controller/MenuUpdateSvl'">
-  </td>
-  <td>
-  <input type = "submit" value = "削除"
-  onclick = "this.form.mode.value = '<%= MenuOperationSvl.DELETE %>';
-  request.setAttribute('menuId',m.getMenuId());
-  request.setAttribute('typeId',m.getTypeId());
-  this.form.action = '/ideal/controller/MenuDeleteSvl'">
-  </td>
-  <!--隠しフィールド-->
-  <input type = "hidden" name = "mode"/>
+  <form action = "/ideal/controller/MenuUpdateSvl" method = "post">
+  <input type = "submit" value = "更新"/>
+   <input type = "hidden" name = "mode" value= "<%= MenuOperationSvl.UPDATE %>"/>
   <input type = "hidden" name = "menuId" value = "<%= m.getMenuId() %>"/>
   <input type = "hidden" name = "typeId" value = "<%= typeId %>"/>
   </form>
+  </td>
+  <td>
+  <form action = "/ideal/controller/MenuDeleteSvl" method = "post">
+  <input type = "submit" value = "削除"/>
+  <!--隠しフィールド-->
+  <input type = "hidden" name = "mode" value= "<%= MenuOperationSvl.DELETE %>"/>
+  <input type = "hidden" name = "menuId" value = "<%= m.getMenuId() %>"/>
+  <input type = "hidden" name = "typeId" value = "<%= typeId %>"/>
+  </form>
+  </td>
   </tr>
 <%    }                %>
 <tr>

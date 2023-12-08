@@ -68,13 +68,13 @@ if (message != null && !message.isEmpty()) {
 				<tr>
 					<th>コース名</th>
 					<td><input type="text" name="courseName" size="30"
-						style="ime-mode: active"></td>
+						style="ime-mode: active;"></td>
 				</tr>
 
 				<tr>
 					<th>価格</th>
 					<td><input type="text" name="price" size="6"
-						style="ime-mode: inactive">円</td>
+						style="ime-mode: inactive;">円</td>
 				</tr>
 
 				<tr>
@@ -86,7 +86,7 @@ if (message != null && !message.isEmpty()) {
 				<tr>
 					<th>コメント</th>
 					<td><textarea name="detail" cols="30" rows="4"
-							style="ime-mode: active" placeholder="ご自由にご記入ください。"></textarea></td>
+							style="ime-mode: active;" placeholder="ご自由にご記入ください。"></textarea></td>
 				</tr>
 <%
 for(Object obj:typeMenuList){
@@ -124,7 +124,7 @@ count++;
 	
 	</form>
 	<p>
-		<a href="/ideal/home.jsp">一覧表示に戻る</a>
+		<a href="/ideal/controller/MenuMaintenanceSvl">一覧表示に戻る</a>
 	</p>
 
 </body>

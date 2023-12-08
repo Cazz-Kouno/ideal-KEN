@@ -99,20 +99,8 @@ th, td {
 
 				<tr>
 					<th>オーダー可</th>
-					<%
-					String[] order = { "可", "不可" };
-					%>
-					<td>
-						<%
-					for (int i = 0; i < order.length; i++) {
-						String checked = "";
-						if (oneMenu.getOrderFlg() == i) {
-							checked = "checked";
-						}
-					%> <input type="radio" name="orderFlg" value="<%=i%>" <%=checked%> />
-						<%=order[i]%>&nbsp;&nbsp;&nbsp; 
-						<%}%>
-					</td>
+				<td><input type="radio" name="orderFlg" value="1" checked/>可 <input
+					type="radio" name="orderFlg" value="0" />不可</td>
 				</tr>
 
 				<tr>
@@ -120,7 +108,8 @@ th, td {
 					<td><select name="typeId">
 					　　<%
 						// MenuInsertsvlt.java から
-					      for(MenuType mt: (ArrayList<MenuType>)mType){%> // このキャスト必要か？必要です。
+						// このキャスト必要か？必要です
+					      for(MenuType mt: (ArrayList<MenuType>)mType){%>
 					
 					   <%
 					      String selected = "";
@@ -149,7 +138,7 @@ th, td {
 		</table>
 		</form>
 		<p>
-			<a href="home.jsp">一覧表示に戻る</a>
+			<a href="menuMaintenance">一覧表示に戻る</a>
 </body>
 </html>
 

@@ -43,7 +43,7 @@
     }
 
     // メッセージがnullでない場合にのみ表示
-    String message = (String) session.getAttribute("msg");
+    String message = (String) request.getAttribute("msg");
     if (message != null && !message.isEmpty()) {
 %>
     <div>

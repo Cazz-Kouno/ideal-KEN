@@ -49,11 +49,12 @@ public class MenuUpdateSvl extends HttpServlet {
 		RequestDispatcher rd = null;
 		try {
 			if (session.getAttribute("adminInfo") == null) {
-				rd = request.getRequestDispatcher("/ideal/home.jsp");
+				rd = request.getRequestDispatcher("../home.jsp");
 			} else {
 				int typeId = Integer.parseInt(request.getParameter("typeId"));
 				int menuId = Integer.parseInt(request.getParameter("menuId"));
 				if (typeId == 100) {
+					Course course = Course.getCourse(menuId);
 					ArrayList<ArrayList<Menu>> typeMenuList = new ArrayList<>();
 					ArrayList<MenuType> menuTypes = MenuType.getAllType();
 					for(MenuType mt:menuTypes) {
@@ -61,23 +62,27 @@ public class MenuUpdateSvl extends HttpServlet {
 							typeMenuList.add(Menu.getMenu(mt.getTypeId()));
 						}
 					}
+					request.setAttribute("course", course);
 					request.setAttribute("typeMenuList", menuTypes);
+					request.setAttribute("menuTypes", menuTypes);
 					request.setAttribute("oneCourse", Course.getOneCourse(menuId));	//クラス完成待ち
-					rd = request.getRequestDispatcher("/ideal/courseUpdate.jsp");
+					
+					rd = request.getRequestDispatcher("../courseUpdate.jsp");
 
 				} else {
 					request.setAttribute("mType", MenuType.getAllType());
 					request.setAttribute("typeId", typeId);
 					request.setAttribute("oneMenu", Menu.getMenu(menuId));
 					
-					rd = request.getRequestDispatcher("/ideal/menuUpdate.jsp");
+					rd = request.getRequestDispatcher("../menuUpdate.jsp");
 				}
 			}
 
 		} catch (IdealException e) {
+			System.out.println("MU:err");
 			String msg = e.getMsg();
 			request.setAttribute("msg", msg);
-			rd = request.getRequestDispatcher("MenuMaintenanceSvl");
+			rd = request.getRequestDispatcher("./MenuMaintenanceSvl");
 		} finally {
 			rd.forward(request, response);
 		}

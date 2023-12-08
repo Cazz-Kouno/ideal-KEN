@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*,java.text.*,model.*,controller.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,24 +24,42 @@
 h1{background-color:Red;}
 th{background-color:Red;}
 </style>
+<%! String[] COURSE_MENU_TYPE_NAME = 
+{"courseId","appetizerId","soupId","pastaId","meatId","fishId","dessertId","","","",""}; %>
 
 </head>
 
 
 <body>
+<jsp:useBean id="course" class="model.Course" scope="request"/>
+<jsp:useBean id="oneCourse" class="java.util.ArrayList" scope="request"/>
+<jsp:useBean id="typeMenuList" class="java.util.ArrayList" scope="request"/>
+<jsp:useBean id="menuTypes" class="java.util.ArrayList" scope="request"/>
+
 <table>
 <td colspan="2">
 <h1>コースの更新</h1>
+<%	
+    // メッセージがnullでない場合にのみ表示
+String message = (String) request.getAttribute("msg");
+int count = 1;
+if (message != null && !message.isEmpty()) {
+%>
+    <div>
+        <p><%= message %></p>
+    </div>
+<%
+    }
+%>
 	
-<p>ここにメッセージを表示</p>
-	
-<form id="frm1" name="frm1" action="./ex12.html" method="get">
+<form id="frm1" name="frm1" action="/ideal/controller/CourseOperationSvl" method="post">
 
 
 <tr>
 <th>コース名</th>
 <td>
-<input type="text" name="courseName" size="30" style="ime-mode: active">
+<input type="text" name="courseName" size="30" style="ime-mode: active;"
+ value="<%=course.getCourseName() %>">
 </td>
 </tr>
 
@@ -48,7 +67,8 @@ th{background-color:Red;}
 <th>価格</th>
 
 <td>
-<input type="text" name="price" size="6" style="ime-mode: inactive">
+<input type="text" name="price" size="6" style="ime-mode: inactive;"
+ value="<%=course.getPrice() %>">
 </td>
 </tr>
 			
@@ -56,8 +76,8 @@ th{background-color:Red;}
 <th>オーダー可</th>
 
 <td>
-<input type="radio" name="orderFlg" size="50" style="ime-mode: active">
-
+<input type="radio" name="orderFlg" <% if(course.getOrderFlg() == 1){out.print("checked");} %> value="1">可
+<input type="radio" name="orderFlg" <% if(course.getOrderFlg() == 0){out.print("checked");} %> value="0">不可
 </td>
 </tr>	
 
@@ -65,51 +85,37 @@ th{background-color:Red;}
 <th>コメント</th>
 
 <td>
-<input type="textarea" name="detail" size="50" style="ime-mode: active">
+<textarea name="detail" cols="30" rows="4" style="ime-mode: active;"
+ placeholder="ご自由にご記入ください。"><%=course.getDetail() %></textarea>
 </td>
 </tr>
 
-<tr>
-<th>前菜</th>
-<td>
-<input type="select" name="appetizerId" size="30" style="ime-mode:active">
-</td>
-</tr>
+<%
+for(Object obj:typeMenuList){
+	if(obj != null){
+		ArrayList<Menu> menuList = (ArrayList<Menu>)obj;
+%>
+				<tr>
+					<th><%=((MenuType)menuTypes.get(count)).getTypeName() %></th>
+					<td><select name="<%= COURSE_MENU_TYPE_NAME[count] %>">
+						<option value="">--- 選択してください。 ---</option>
+	<%					
+		for(Menu menu:menuList){
+	%>
+						<option value="<%= menu.getMenuId()%>"><%= menu.getMenuName() %></option>
+	<%
+		}
+	}
+	%>
+						
+						</select>
+					</td>
+				</tr>
 
-<tr>
-<th>スープ</th>
-<td>
-<input type="select" name="soupId" size="30" style="ime-mode:active">
-</td>
-</tr>
-
-<tr>
-<th>パスタ</th>
-<td>
-<input type="select" name="pastaId" size="30" style="ime-mode:active">
-</td>
-</tr>
-
-<tr>
-<th>肉料理</th>
-<td>
-<input type="select" name="meetId" size="30" style="ime-mode:active">
-</td>
-</tr>
-
-<tr>
-<th>魚料理</th>
-<td>
-<input type="select" name="fishId" size="30" style="ime-mode:active">
-</td>
-</tr>
-
-<tr>
-<th>デザート</th>
-<td>
-<input type="select" name="dessertId" size="30" style="ime-mode:active">
-</td>
-</tr>
+<%
+count++;
+}
+%>
 
 <tr>
 <td colspan="2" style="text-align;right;"><input type="submit" value="更新"></td>
@@ -118,7 +124,9 @@ th{background-color:Red;}
 
 </table>
 </form>
-<p><a href="home.jsp">一覧表示に戻る</a></p>
+<p>
+		<a href="/ideal/controller/MenuMaintenanceSvl">一覧表示に戻る</a>
+</p>
 
 
 </body>

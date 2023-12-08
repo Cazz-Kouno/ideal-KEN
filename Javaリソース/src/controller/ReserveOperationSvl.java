@@ -110,18 +110,25 @@ public class ReserveOperationSvl extends HttpServlet {
 					// 予約可能か確認
 					tableLoc = Reserve.insertChk(formattedDateTime, person);
 					if (tableLoc != null) {
+						System.out.println(1);
 						// 予約可能な場合、予約を登録
 						reserve.setTableId(tableLoc.getTableId());
 						Reserve registeredReserve = Reserve.insert(reserve);
+						System.out.println(2);
 						// 登録した予約IDをセット
 						request.setAttribute("rsvId", registeredReserve.getRsvId());
+						System.out.println(3);
 						// 遷移先を予約完了画面に設定
+						System.out.println(4);
 						String url = "../reserveComplete.jsp";
 						rd = request.getRequestDispatcher(url);
 					} else {
 						// 予約不可能な場合、メッセージをセットして遷移
+						System.out.println(5);
 						request.setAttribute("reserve", reserve);
 						String url = "ReserveInsertSvl";
+						System.out.println(6);
+						System.out.println(url);
 						rd = request.getRequestDispatcher(url);
 						throw new IdealException(IdealException.ERR_NO_NOT_VACANCY);
 					}
@@ -167,18 +174,23 @@ public class ReserveOperationSvl extends HttpServlet {
 					}
 				default:
 					// 不正なモードの場合、ホーム画面に遷移
-					String url = "../home.jsp";
-					rd = request.getRequestDispatcher(url);
-					throw new IdealException(IdealException.ERR_NO_EXCEPTION);
+					// 不正なモードの場合、ホーム画面に遷移
+				    String url = "../home.jsp";
+				    rd = request.getRequestDispatcher(url);
+				    break;
 				}
 			} catch (IdealException e) {
 				// 独自例外が発生した場合、エラーメッセージをセットして適切な画面に遷移
 				String errorMessage = e.getMsg();
 				request.setAttribute("msg", errorMessage);
 			} finally {
-				rd.forward(request, response);
+			    if (rd != null) {
+			        rd.forward(request, response);
+			    } else {
+			        // 適切なエラー処理を行うか、ログにメッセージを記録するなど
+			        System.err.println("RequestDispatcher is null.");
+			    }
 			}
 		}
 	}
-
 }

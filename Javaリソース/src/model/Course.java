@@ -8,9 +8,6 @@ import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-
 public class Course {
 
 	private int crsId;
@@ -25,18 +22,9 @@ public class Course {
 
 	public static int[] COURSE_MENU_TYPE_ID = { 200, 210, 220, 300, 310, 400 };
 
-	static InitialContext ic = null;
-	static DataSource ds = null;
-	static Connection con = null;
-	static PreparedStatement pst = null;
-	static ResultSet rs = null;
-
-	static Course crs = null;
-	static String sql = "";
-	
-    public static final int INSERT = 11;
-    public static final int UPDATE = 12;
-    public static final int DELETE = 13;
+	public static final int INSERT = 21;
+	public static final int UPDATE = 22;
+	public static final int DELETE = 23;
 
 	public Course() {
 		super();
@@ -122,12 +110,12 @@ public class Course {
 
 		//		InitialContext ic = null;
 		//		DataSource ds = null;
-		//		Connection con = null;
-		//		PreparedStatement pst = null;
-		//		ResultSet rs = null;
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
 		//
-		//		Course crs = null;
-		//		String sql = "";
+		Course crs = null;
+		String sql = "";
 
 		try {
 			//			ic = new InitialContext();
@@ -186,12 +174,12 @@ public class Course {
 
 		//		InitialContext ic = null;
 		//		DataSource ds = null;
-		//		Connection con = null;
-		//		PreparedStatement pst = null;
-		//		ResultSet rs = null;
-		//
-		//		Course crs = null;
-		//		String sql = "";
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+		Course crs = null;
+		String sql = "";
 
 		try {
 			//			ic = new InitialContext();
@@ -207,7 +195,7 @@ public class Course {
 					+ "JOIN menu m USING(m_id) "
 					+ "WHERE c.c_id = ?";
 
-//			System.out.println("getOneCourse の: " + sql);
+			//			System.out.println("getOneCourse の: " + sql);
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, c_Id);
 			rs = pst.executeQuery();
@@ -268,7 +256,7 @@ public class Course {
 
 		// 上記 sqlで c.t_id と m.t_id のカラム名表示の重複を避けたい場合は m.t_id as mt_id, m.m_id, m.m_Name を採用予定
 
-//		System.out.println("getCourseList の：" + sql);
+		//		System.out.println("getCourseList の：" + sql);
 
 		// 比較の為に AutoCloseable の try-with-resources 形式で記述してみる。
 		// 外出しの static con は通用しない？
@@ -317,12 +305,11 @@ public class Course {
 
 		String sql = "SELECT * "
 				+ "FROM course "
-				+ "WHERE orderFlg = 1 "
-				;
+				+ "WHERE orderFlg = 1 ";
 
 		// 上記 sqlで c.t_id と m.t_id のカラム名表示の重複を避けたい場合は m.t_id as mt_id, m.m_id, m.m_Name を採用予定
 
-//		System.out.println("getCourseList の：" + sql);
+		//		System.out.println("getCourseList の：" + sql);
 
 		// 比較の為に AutoCloseable の try-with-resources 形式で記述してみる。
 		// 外出しの static con は通用しない？
@@ -374,7 +361,7 @@ public class Course {
 				+ "c.price, "
 				+ "m.t_name  "
 				+ "FROM course c JOIN menutype m using(t_id) WHERE t_id = ?";
-//		System.out.println("getTypeCourseList: " + sql);
+		//		System.out.println("getTypeCourseList: " + sql);
 
 		try (Connection con = DriverManager.getConnection(
 				"jdbc:mariadb://localhost:3306/ideal", "root", "root");
@@ -416,79 +403,99 @@ public class Course {
 
 	//--------------------------------------------------------------------------------------------//	
 
-	public static int updateCourse(Course crs, int mode, ArrayList<Coursectl> alCctl) throws IdealException {
-	    int result = 0;
+	public static int updateCourse(Course crs, int mode, ArrayList<Coursectl> alCctl)
+			throws IdealException, SQLException {
+		int result = 0;
+		Connection con = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
 
-//	    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test_heidi", "admin", "52909MySQLadmin1791")) {
-	    try (Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/ideal", "root", "root")) {
-	        
-	     switch (mode) {
-	            case INSERT:
-	                sql = "INSERT INTO course (courseName, detail, orderFlg, price, typeId) VALUES (?, ?, ?, ?, ?)";
-	                break;
-	            case UPDATE:
-	                sql = "UPDATE course SET courseName=?, detail=?, orderFlg=?, price=?, typeId=? WHERE courseId=?";
-	                break;
-	            case DELETE:
-	                sql = "DELETE FROM course WHERE courseId=?";
-	                break;
-	            default:
-	                throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
-	        }
+		String sql = "";
+		try {
+			//	    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test_heidi", "admin", "52909MySQLadmin1791")) {
+			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/ideal", "root", "root");
+			System.out.print("C424:");
+			switch (mode) {
+			case INSERT:
+				sql = "INSERT INTO course VALUES (DEFAULT,?, ?, ?, ?, ?)";
+				break;
+			case UPDATE:
+				sql = "UPDATE course SET courseName=?, detail=?, orderFlg=?, price=?, typeId=? WHERE courseId=?";
+				break;
+			case DELETE:
+				sql = "DELETE FROM course WHERE courseId=?";
+				break;
+			default:
+				throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
+			}
+			System.out.print("C438:");
 
-	        if (sql.isEmpty()) {
-	            throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
-	        }
-	        // mode で振り分けられた何れかのクエリを pst に代入
-	        try (PreparedStatement pst = con.prepareStatement(sql)) {
-	  
-	            switch (mode) {
-	                case INSERT:
-	                    pst.setString(1, crs.getCourseName());
-	                    pst.setString(2, crs.getDetail());
-	                    pst.setInt(3, crs.getOrderFlg());
-	                    pst.setInt(4, crs.getPrice());
-	                    pst.setInt(5, crs.getTypeId());
-	                    break;
-	                case UPDATE:
-	                    pst.setString(1, crs.getCourseName());
-	                    pst.setString(2, crs.getDetail());
-	                    pst.setInt(3, crs.getOrderFlg());
-	                    pst.setInt(4, crs.getPrice());
-	                    pst.setInt(5, crs.getTypeId());
-	                    pst.setInt(6, crs.getCourseId());
-	                    break;
-	                case DELETE:
-	                    pst.setInt(1, crs.getCourseId());
-	                    break;
-	                default:
-	                    throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
-	            }
-	            // Update されたレコード数を戻り値として result にセット、ほぼ1?
-	            result = pst.executeUpdate();
+			// mode で振り分けられた何れかのクエリを pst に代入
+			pst = con.prepareStatement(sql);
+			System.out.println("Before:" + pst);
+			switch (mode) {
+			case INSERT:
+				pst.setString(1, crs.getCourseName());
+				pst.setString(2, crs.getDetail());
+				pst.setInt(3, crs.getOrderFlg());
+				pst.setInt(4, crs.getPrice());
+				pst.setInt(5, crs.getTypeId());
+				break;
+			case UPDATE:
+				pst.setString(1, crs.getCourseName());
+				pst.setString(2, crs.getDetail());
+				pst.setInt(3, crs.getOrderFlg());
+				pst.setInt(4, crs.getPrice());
+				pst.setInt(5, crs.getTypeId());
+				pst.setInt(6, crs.getCourseId());
+				break;
+			case DELETE:
+				pst.setInt(1, crs.getCourseId());
+				break;
+			default:
+				throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
+			}
+			System.out.println("After:" + pst);
+			// Update されたレコード数を戻り値として result にセット、ほぼ1?
+			result = pst.executeUpdate();
+			pst.close();
+			System.out.print("C473:");
+			if (mode == INSERT) {
+				System.out.print("C475:");
+				sql = "SELECT MAX(c_id) FROM course";
+				pst = con.prepareStatement(sql);
+				rs = pst.executeQuery();
+				// 直前の挿入操作で生成された主キーの情報を持つ ResultSet を取得 rs にセット
+				System.out.print("C478:");
+				if (rs.next()) {
+					crs.setCourseId(rs.getInt(1));
+					System.out.println("NewId=" + rs.getInt(1));
+				}
+			}
 
-	            if (mode == INSERT) {
-	            	// 直前の挿入操作で生成された主キーの情報を持つ ResultSet を取得 rs にセット
-	                try (ResultSet rs = pst.getGeneratedKeys()) {
-	                    if (rs.next()) {
-	                        crs.setCourseId(rs.getInt(1));
-	                    }
-	                }
+			for (Coursectl cctl : alCctl) {
+				String cctlSql = "INSERT INTO coursectl VALUES (?, ?)";
+				try (PreparedStatement cctlPst = con.prepareStatement(cctlSql)) {
+					cctlPst.setInt(1, crs.getCourseId());
+					cctlPst.setInt(2, cctl.getM_Id());
+					cctlPst.executeUpdate();
+					cctlPst.close();
+				}
+			}
 
-	                for (Coursectl cctl : alCctl) {
-	                    String cctlSql = "INSERT INTO coursectl (c_id, m_id) VALUES (?, ?)";
-	                    try (PreparedStatement cctlPst = con.prepareStatement(cctlSql)) {
-	                        cctlPst.setInt(1, crs.getCourseId());
-	                        cctlPst.setInt(2, cctl.getM_Id());
-	                        cctlPst.executeUpdate();
-	                    }
-	                }
-	            }
-	        }
+			return result; // 戻り値はこれで正解？
+		} catch (
 
-	        return result; // 戻り値はこれで正解？
-	    } catch (SQLException e) {
-	        throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
-	    }
+		SQLException e) {
+			throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
+		} finally {
+			if (pst != null) {
+				pst.close();
+			}
+			if(con != null) {
+				con.close();
+			}
+		}
+
 	}
 }

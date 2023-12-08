@@ -66,6 +66,7 @@ public class MenuMaintenanceSvl extends HttpServlet {
 			}
 
 		} catch (IdealException e) {
+			System.out.println("MM:err");
 			String msg = e.getMsg();
 			request.setAttribute("msg", msg);
 			rd = request.getRequestDispatcher("../adminIndex.jsp");

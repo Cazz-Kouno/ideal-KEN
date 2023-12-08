@@ -44,33 +44,6 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/JavaScript" src="validationScript.js"></script>
     <script type="text/JavaScript">
-        <!--
-        function dataCheck(obj) {
-            // 必須項目の未入力チェック
-            if (obj.elements['usrName'].value.length == 0 ||
-            	obj.elements['usrId'].value.length == 0 ||
-                obj.elements['address'].value.length == 0 ||
-                obj.elements['phone'].value.length == 0 ||
-                obj.elements['mail'].value.length == 0 ||{
-                alert("必須項目を入力してください。");
-                return false;
-            }
-
-            // 電話番号の正規化チェック（半角数字およびハイフンのみ）
-            if (!validatePhone(obj.elements['phone'].value)) {
-                alert("電話番号が正しくありません。");
-                return false;
-            }
-
-            // メールアドレスの正規化チェック
-            if (!validateEmail(obj.elements['mail'].value)) {
-                alert("メールアドレスが正しくありません。");
-                return false;
-            }
-
-            return true;
-        }
-        //-->
     </script>
 </head>
 

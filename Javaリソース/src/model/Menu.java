@@ -24,6 +24,8 @@ public class Menu implements Serializable {
 	private int price;
 	private int typeId;
 	private String typeName;
+	
+	public static int[] MENU_TYPE_ID = { 200, 210, 220, 300, 310, 400 };
 
 	public Menu() {
 		super();
@@ -216,12 +218,9 @@ public class Menu implements Serializable {
 					+ " JOIN"
 					+ " menuType"
 					+ " USING(t_id)"
-//					+ " WHERE "
-//					+ " menu.t_id = ?"
 					+ " ORDER BY m_id";
 				
 			pst = con.prepareStatement(sql);
-//			pst.setInt(1,typeId);
 			rs = pst.executeQuery(); 
 			while(rs.next()){
 				Menu m = new Menu();
@@ -237,7 +236,7 @@ public class Menu implements Serializable {
 			
 			
 		}catch(Exception e){
-//			System.out.println(pst);
+
 			e.printStackTrace();
 			IdealException idex = new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
 //			idex.getMsg();
@@ -358,18 +357,6 @@ public class Menu implements Serializable {
 					
 					switch(mode) {
 						case MenuOperationSvl.INSERT:
-						
-							//SQL文の生成
-							if(m.getTypeId() == 100) {						
-								sql = "INSERT INTO course VALUES(DEFAULT,?,?,?,?,?)";
-								pst = con.prepareStatement(sql); 								
-								pst.setString(1, m.getMenuName()); 
-								pst.setString(2, m.getDetail());
-								pst.setInt(3, m.getOrderFlg());
-								pst.setInt(4, m.getPrice());
-								pst.setInt(5, m.getTypeId());
-						
-							}else {			
 								sql = "INSERT INTO menu VALUES(DEFAULT,?,?,?,?,?)";
 								pst = con.prepareStatement(sql); 
 								pst.setString(1, m.getMenuName()); 
@@ -377,23 +364,23 @@ public class Menu implements Serializable {
 								pst.setInt(3, m.getOrderFlg());
 								pst.setInt(4, m.getPrice());
 								pst.setInt(5, m.getTypeId());
-							}
+						
 							break;
 						case MenuOperationSvl.UPDATE:		
 							//SQL文の生成
-							if(m.getTypeId() == 100) {
-								sql = "UPDATE course SET "
-									+ " c_name = ?, detail = ?, orderFlg = ?, price = ?, t_id = ?"
-									+ " WHERE c_id = ?";
-								pst = con.prepareStatement(sql); 
-								pst.setString(1, m.getMenuName()); 
-								pst.setString(2, m.getDetail());
-								pst.setInt(3, m.getOrderFlg());
-								pst.setInt(4, m.getPrice());
-								pst.setInt(5, m.getTypeId());
-								pst.setInt(6,m.getMenuId());
-							
-							}else {					
+//							if(m.getTypeId() == 100) {
+//								sql = "UPDATE course SET "
+//									+ " c_name = ?, detail = ?, orderFlg = ?, price = ?, t_id = ?"
+//									+ " WHERE c_id = ?";
+//								pst = con.prepareStatement(sql); 
+//								pst.setString(1, m.getMenuName()); 
+//								pst.setString(2, m.getDetail());
+//								pst.setInt(3, m.getOrderFlg());
+//								pst.setInt(4, m.getPrice());
+//								pst.setInt(5, m.getTypeId());
+//								pst.setInt(6,m.getMenuId());
+//							
+//							}else {					
 								sql = "UPDATE menu SET "
 									+ " m_name = ?,detail = ?,orderFlg = ?, price = ?, t_id = ?"
 									+ " WHERE m_id = ?";			
@@ -404,31 +391,28 @@ public class Menu implements Serializable {
 								pst.setInt(4, m.getPrice());
 								pst.setInt(5, m.getTypeId());
 								pst.setInt(6,m.getMenuId());
-							}
+//							}
 							break;
 						case MenuOperationSvl.DELETE: 
 							//SQL文の生成
-							if(m.getTypeId() == 100) {
-								sql = "DELETE FROM course WHERE c_id = ?";
-								pst = con.prepareStatement(sql);
-								pst.setInt(1, m.getMenuId());
-							}else {
+//							if(m.getTypeId() == 100) {
+//								sql = "DELETE FROM course WHERE c_id = ?";
+//								pst = con.prepareStatement(sql);
+//								pst.setInt(1, m.getMenuId());
+//							}else {
 								sql = "DELETE FROM menu WHERE m_id = ?";
 								pst = con.prepareStatement(sql);
-								pst.setInt(1, m.getMenuId()); 						}
+								pst.setInt(1, m.getMenuId());
+//								}
 							break;
 						default:
 							break;
 					}
 
 					num = pst.executeUpdate();
-					
-					
+							
 				}catch(Exception e){
-//					System.out.println(pst);
-					e.printStackTrace();
 					IdealException idex = new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
-//					idex.getMsg();
 					throw idex;
 					}finally{
 						try{

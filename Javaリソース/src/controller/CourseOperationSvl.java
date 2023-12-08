@@ -52,15 +52,16 @@ public class CourseOperationSvl extends HttpServlet {
 		System.out.println("CO52");
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession(false);
-		RequestDispatcher rd = request.getRequestDispatcher("../ex27.jsp"); //null防止　後でhome.jspにする？
+		RequestDispatcher rd = request.getRequestDispatcher("../home.jsp"); //null防止　後でhome.jspにする？
 
 		int mode = 100;
 		int typeId = 100;
-		System.out.println("CO59");
+		System.out.print("CO59:");
 		System.out.println(request.getParameter("mode"));
 		if (request.getParameter("mode") != null) {
 			mode = Integer.parseInt(request.getParameter("mode"));
 		}
+		System.out.print("CO64:");
 		try {
 			if (session.getAttribute("adminInfo") == null) {
 				rd = request.getRequestDispatcher("../home.jsp");
@@ -79,17 +80,28 @@ public class CourseOperationSvl extends HttpServlet {
 					coursectl = new ArrayList<>();
 					Coursectl menu = null;
 					for (String type : COURSE_MENU_TYPE_NAME) {
-						if (request.getParameter(type) != null || !(request.getParameter(type).isEmpty())) {
+						if (request.getParameter(type) != null) {
+							if(!(request.getParameter(type).isEmpty())) {
+							System.out.println(type);
+							System.out.println(request.getParameter(type));
+							System.out.println( (request.getParameter(type)).getClass());
 							menu = new Coursectl();
+							System.out.print("CO89:");
 							menu.setM_Id(Integer.parseInt(request.getParameter(type)));
+							System.out.print("CO91:");
 							coursectl.add(menu);
+							System.out.print("CO93:");
+							}
 						}
 					}
+					System.out.print("CO97:");
 					Course.updateCourse(course, mode, coursectl);
+					System.out.print("CO99:");
+
 					rd = request.getRequestDispatcher("./MenuMaintenanceSvl");
 					break;
 				case UPDATE:
-					System.out.println("CO90");
+					System.out.print("CO101:");
 					course = new Course();
 					course.setCourseId(Integer.parseInt(request.getParameter("courseId")));
 					course.setCourseName(request.getParameter("courseName"));
@@ -107,9 +119,9 @@ public class CourseOperationSvl extends HttpServlet {
 							coursectl.add(menu);
 						}
 					}
-					System.out.println("CO108");
+					System.out.print("CO108:");
 					Course.updateCourse(course, mode, coursectl);
-					System.out.println("CO110");
+					System.out.print("CO110:");
 					rd = request.getRequestDispatcher("./MenuMaintenanceSvl");
 					break;
 				case DELETE:
@@ -120,7 +132,7 @@ public class CourseOperationSvl extends HttpServlet {
 
 					break;
 				default:
-					System.out.println("CO121");
+					System.out.print("CO121:");
 					rd = request.getRequestDispatcher("../ex27.jsp"); //テスト用
 				}
 				request.setAttribute("typeId", typeId);
@@ -136,6 +148,7 @@ public class CourseOperationSvl extends HttpServlet {
 		} finally {
 			System.out.println("CO132");
 			System.out.println(rd);
+			System.out.println(session.getAttribute("adminInfo"));
 			rd.forward(request, response);
 		}
 	}
