@@ -17,8 +17,18 @@ background:linear-gradient(red,white,white,green);
 html{
 min-height:100%;
 }
+table{width:100%;
+text-align:center;
+margin:auto;
+border: 2px black solid;
 }
-table{width:100%;}
+tr, td{
+border: 2px black solid;
+
+}
+.border{
+   max-width:300px
+   }
 </style>
 
 <%-- ArrayList<Course> courseList = (ArrayList<Course>)session.getAttribute("courseList"); --%>
@@ -32,9 +42,6 @@ table{width:100%;}
 <h1>メニュー紹介</h1>
 <h1>■コース料理</h1>
 
-.border{
-   max-width:300px
-   }
    
 
 <%

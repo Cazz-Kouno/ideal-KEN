@@ -17,13 +17,25 @@ min-height:100%;
 div{
 background-image:url(/ideal/img/レストラン1.jpg);
 background-size:100% auto;
+color: Red;
 
 }
 </style>
 </head>
 <body>
 <div style="font-size:70px;">■ Restaurante IDEALLE ■</div>
-<p>ここにメッセージを表示</p>
+<%	
+    // メッセージがnullでない場合にのみ表示
+String message = (String) request.getAttribute("msg");
+int count = 1;
+if (message != null && !message.isEmpty()) {
+%>
+    <div>
+        <p><%= message %></p>
+    </div>
+<%
+    }
+%>
 <p><a href="/ideal/controller/ShowMenuSvl">●メニュー紹介</a></p>
 <p><a href="/ideal/userLogin.jsp">●ログイン</a></p>
 <p><a href="/ideal/userInsert.jsp">●新規お客様登録</a></p>

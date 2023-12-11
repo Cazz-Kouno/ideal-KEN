@@ -63,7 +63,7 @@ public class MenuUpdateSvl extends HttpServlet {
 						}
 					}
 					request.setAttribute("course", course);
-					request.setAttribute("typeMenuList", menuTypes);
+					request.setAttribute("typeMenuList", typeMenuList);
 					request.setAttribute("menuTypes", menuTypes);
 					request.setAttribute("oneCourse", Course.getOneCourse(menuId));	//クラス完成待ち
 					
@@ -72,7 +72,7 @@ public class MenuUpdateSvl extends HttpServlet {
 				} else {
 					request.setAttribute("mType", MenuType.getAllType());
 					request.setAttribute("typeId", typeId);
-					request.setAttribute("oneMenu", Menu.getMenu(menuId));
+					request.setAttribute("oneMenu", Menu.getOneMenu(menuId,typeId));
 					
 					rd = request.getRequestDispatcher("../menuUpdate.jsp");
 				}

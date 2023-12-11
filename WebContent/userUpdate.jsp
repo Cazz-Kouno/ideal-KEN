@@ -12,7 +12,7 @@
             background-image:url(/ideal/img/レストラン12.jfif);
     		 background-size:100% auto;}
         table {
-            width: 100%;         
+            width: 500px;         
             text-align:center;
             background:linear-gradient(red,white,white,green);}
         html{

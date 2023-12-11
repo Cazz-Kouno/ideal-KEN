@@ -383,7 +383,8 @@ public class Menu implements Serializable {
 //							}else {					
 								sql = "UPDATE menu SET "
 									+ " m_name = ?,detail = ?,orderFlg = ?, price = ?, t_id = ?"
-									+ " WHERE m_id = ?";			
+									+ " WHERE m_id = ?";	
+								System.out.println(pst);
 								pst = con.prepareStatement(sql); 
 								pst.setString(1, m.getMenuName()); 
 								pst.setString(2, m.getDetail());
@@ -391,6 +392,7 @@ public class Menu implements Serializable {
 								pst.setInt(4, m.getPrice());
 								pst.setInt(5, m.getTypeId());
 								pst.setInt(6,m.getMenuId());
+								System.out.println(pst);
 //							}
 							break;
 						case MenuOperationSvl.DELETE: 

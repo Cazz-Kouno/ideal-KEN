@@ -15,7 +15,7 @@
 
 
         table {
-            width: 100%;}
+            width: 500px;}
         th, td {
             padding: 8px;
             text-align: left;
@@ -101,8 +101,15 @@ for(Object obj:typeMenuList){
 						<option value="">--- 選択してください。 ---</option>
 	<%					
 		for(Menu menu:menuList){
+			String selected = "";
+			for(Object menuObj:oneCourse){
+				Course courseMenu = (Course)menuObj;
+				if(courseMenu.getMenuId() == menu.getMenuId()){
+					selected = "selected";
+				}
+			}
 	%>
-						<option value="<%= menu.getMenuId()%>"><%= menu.getMenuName() %></option>
+						<option value="<%= menu.getMenuId()%>" <%=selected %>><%= menu.getMenuName() %></option>
 	<%
 		}
 	}
@@ -123,6 +130,10 @@ count++;
 
 
 </table>
+	<input type="hidden" name="mode" value="<%= CourseOperationSvl.UPDATE %>">
+	<input type="hidden" name="typeId" value="100">
+	<input type="hidden" name="courseId" value="<%= course.getCourseId()%>">
+	
 </form>
 <p>
 		<a href="/ideal/controller/MenuMaintenanceSvl">一覧表示に戻る</a>

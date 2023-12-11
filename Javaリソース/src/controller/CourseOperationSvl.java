@@ -113,7 +113,7 @@ public class CourseOperationSvl extends HttpServlet {
 					coursectl = new ArrayList<>();
 					menu = null;
 					for (String type : COURSE_MENU_TYPE_NAME) {
-						if (request.getParameter(type) != null) {
+						if (request.getParameter(type) != null && !(request.getParameter(type)).isEmpty()) {
 							menu = new Coursectl();
 							menu.setM_Id(Integer.parseInt(request.getParameter(type)));
 							coursectl.add(menu);
@@ -133,7 +133,7 @@ public class CourseOperationSvl extends HttpServlet {
 					break;
 				default:
 					System.out.print("CO121:");
-					rd = request.getRequestDispatcher("../ex27.jsp"); //テスト用
+					rd = request.getRequestDispatcher("../youpasseddefault.jsp"); //テスト用
 				}
 				request.setAttribute("typeId", typeId);
 

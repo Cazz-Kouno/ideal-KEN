@@ -14,19 +14,19 @@
             font-family: Arial, sans-serif;
             margin: 20px;}
         table{
-            width:100%
+            width:500px;
             text-align:center;
             background:linear-gradient(red,white,white,green);}
 		html{
 			min-height:100%;}
         h2 {
-            color: #333;}
+            color: white;}
         div {
             background-color: #ffcccc;
             padding: 10px;
             margin-bottom: 10px;}
         table {
-            width: 100%;}
+            width: 500px;}
         th, td {
             padding: 8px;
             text-align: left;

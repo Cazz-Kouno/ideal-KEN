@@ -9,10 +9,10 @@
     
     <style>
     　　body{
-            background-image:url(/ideal/レストラン10.jpg);
-    		 background-size:100% auto;}    
+            background-image:url(/ideal/img/レストラン37.jpg);    		 
+            background-size:100% auto;}    
         table {
-            width: 100%;            
+           width: 500px;            
             text-align:center;            
             background:linear-gradient(red,white,white,green);}
         html{
@@ -34,7 +34,7 @@
             padding: 10px;
             margin-bottom: 10px;}
        	table {
-            width: 100%;}
+            width: 500px;}
         th, td {
             padding: 8px;
             text-align: left;

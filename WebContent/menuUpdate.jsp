@@ -9,12 +9,12 @@
 
 <style>
 body {
-	background-image: url(./img/レストラン10.jpg);
+	background-image: url(/ideal/img/レストラン10.jpg);
 	background-size: 100% auto;
 }
 
 table {
-	width: 100%;
+	width: 500px;
 	text-align: center;
 	background: linear-gradient(red, white,);
 }
@@ -29,7 +29,30 @@ th, td {
 	border: 1px gray solid;
 }
 </style>
-
+<script type="text/javascript">
+<!--
+	function dataCheck(obj) {
+		var msg = "";
+		if (obj.menuName.value.length < 1) {
+			msg += "メニュー名を入力してください。\n";
+		}
+		if (!obj.price.value.match(/^[0-9]+$/g)) {
+			msg += "価格を数値で入力してください。\n";
+		}
+		var i;
+		for (i = 0; i < obj.orderFlg.length; i++) {
+			if (obj.orderFlg[i].checked)
+				break;
+		}
+		if (msg.length > 0) {
+			alert(msg);
+			return false;
+		} else {
+			return true;
+		}
+	}
+//-->
+</script>
 </head>
 
 <style>
@@ -41,7 +64,30 @@ th {
 	background-color: green;
 }
 </style>
-
+<script type="text/javascript">
+<!--
+	function dataCheck(obj) {
+		var msg = "";
+		if (obj.menuName.value.length < 1) {
+			msg += "メニュー名を入力してください。\n";
+		}
+		if (!obj.price.value.match(/^[0-9]+$/g)) {
+			msg += "価格を数値で入力してください。\n";
+		}
+		var i;
+		for (i = 0; i < obj.orderFlg.length; i++) {
+			if (obj.orderFlg[i].checked)
+				break;
+		}
+		if (msg.length > 0) {
+			alert(msg);
+			return false;
+		} else {
+			return true;
+		}
+	}
+	-->
+</script>
 <body>
 	<%
 	request.setCharacterEncoding("UTF-8");
@@ -52,8 +98,8 @@ th {
 		typeId = 200;
 	}
 	%>
-	<jsp:useBean id="upD_mType" class="java.util.ArrayList" scope="request" />
-	<jsp:useBean id="upD_oneMenu" class="model.Menu" scope="request" />
+	<jsp:useBean id="mType" class="java.util.ArrayList" scope="request" />
+	<jsp:useBean id="oneMenu" class="model.Menu" scope="request" />
 
 	<table>
 		<td colspan="2">
@@ -61,18 +107,22 @@ th {
 
 			<p>ここにメッセージを表示</p>
 
-			<form id="frm1" name="frm1" action="./ex12.html" method="get">
+			<form id="frm1" name="frm1"
+				action="/ideal/controller/MenuOperationSvl" method="post"
+				onsubmit="return dataCheck(this);">
 
 
 				<tr>
 					<th>メニュー名</th>
 					<td><input type="text" name="menuName" size="30"
+						value='<jsp:getProperty name = "oneMenu" property = "menuName"/>'
 						style="ime-mode: active"></td>
 				</tr>
 
 				<tr>
 					<th>価格</th>
 					<td><input type="text" name="price" size="6"
+						value='<jsp:getProperty name = "oneMenu" property = "price"/>'
 						style="ime-mode: inactive"></td>
 				</tr>
 
@@ -85,25 +135,43 @@ th {
 
 		<tr>
 			<th>分類</th>
-			<td><input type="select" name="typeId" size="15"
-				style="ime-mode: inactive"></td>
+			<td><select name="typeId">
+					<%
+					for (Object o : mType) {
+						MenuType mt = (MenuType) o;
+						String selected = "";
+						if (typeId == mt.getTypeId()) {
+							selected = "selected";
+						} else {
+							selected = "";
+						}
+					%>
+					<option value="<%=mt.getTypeId()%>" <%=selected%>>
+						<%=((MenuType) o).getTypeName()%></option>
+					<%
+					}
+					%>
+			</select></td>
 		</tr>
 
 		<tr>
 			<th>コメント</th>
-			<td><input type="textarea" name="detail" size="30"
+			<td><input type="textarea" name="detail" size="30" value='<%=oneMenu.getDetail()%>'
 				style="ime-mode: active"></td>
 		</tr>
-
+		<input type="hidden" name="mode" value="<%=MenuOperationSvl.UPDATE%>" />
+		<input type="hidden" name="menuId"
+			value='<jsp:getProperty name = "oneMenu" property = "menuId"/>' />
+	    <input type="hidden" name="typeId"
+			value='<jsp:getProperty name = "oneMenu" property = "typeId"/>' />
 		<tr>
 			<td colspan="2" style=""><input type="submit" value="更新"></td>
 		</tr>
 
-
+		</form>
 	</table>
-	</form>
 	<p>
-		<a href="home.jsp">一覧表示に戻る</a>
+		<a href="/ideal/controller/menuMaintenance">一覧表示に戻る</a>
 	</p>
 
 

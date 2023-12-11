@@ -10,18 +10,24 @@
 <title>新規メニュー登録画面</title>
 
 <style>
+
+body{
+    background-image:url(/ideal/img/レストラン24.jpg);
+    background-size:100% auto;} 
+
+
 h1 {
-	background-color: Lightgreen;
+	background-color: Red;
 }
 
 th {
-	background-color: Lightgreen;
+	background-color: Red;
 }
 
 table {
 	width: 500px;
 	text-align: center;
-	background: linear-gradient(red, white, white, green);
+	*/background: linear-gradient(red, white, white, green)/*;
 }
 
 html {
@@ -37,28 +43,28 @@ th, td {
 <script type="text/javascript">
 <!--
 	function dataCheck(obj) {
-				var msg = "";
-				if (obj.menuName.value.length < 1) {
-					msg += "メニュー名を入力してください。\n";
-				}
-				if (!obj.price.value.match(/^[0-9]+$/g)) {
-					msg += "価格を数値で入力してください。\n";
-				}
-				var i;
-				for (i = 0; i < obj.orderFlg.length; i++) {
-					if (obj.orderFlg[i].checked)
-						break;
-				}
-				if (i >= obj.orderFlg.length) {
-					msg += "オーダーの可否をチェックしてください\n";
-				}
-				if (msg.length > 0) {
-					alert(msg);
-					return false;
-				} else {
-					return true;
-				}
+	    var msg = "";
+    if (obj.menuName.value.length < 1) {
+		msg += "メニュー名を入力してください。\n";
 	}
+	if (!obj.price.value.match(/^[0-9]+$/g)) {
+		msg += "価格を数値で入力してください。\n";
+	}
+	var i;
+	for (i = 0; i < obj.orderFlg.length; i++) {
+		if (obj.orderFlg[i].checked)
+			break;
+	}
+	if (i >= obj.orderFlg.length) {
+	msg += "オーダーの可否をチェックしてください\n";
+	}
+	if (msg.length > 0) {
+		alert(msg);
+		return false;
+	} else {
+		return true;
+	}
+}
 	-->
 </script>
 </head>
@@ -132,13 +138,14 @@ th, td {
 						style="ime-mode: active"></td>
 				</tr>
 				<input type="hidden" name="mode" value="<%= MenuOperationSvl.INSERT  %>" />
+				<input type="hidden" 
 				<tr>
 					<td colspan="2" style=""><input type="submit" value="登録"></td>
 				</tr>
 		</table>
 		</form>
 		<p>
-			<a href="menuMaintenance">一覧表示に戻る</a>
+			<a href="/ideal/controller/menuMaintenance">一覧表示に戻る</a>
 </body>
 </html>
 

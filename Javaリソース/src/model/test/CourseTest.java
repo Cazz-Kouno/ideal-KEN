@@ -3,7 +3,6 @@ package model.test;
 import java.util.ArrayList;
 
 import model.Course;
-import model.Coursectl;
 import model.IdealException;
 
 public class CourseTest {
@@ -50,11 +49,18 @@ public class CourseTest {
 //			System.out.println("--------------------------------");
 //		}
 //		
-		ArrayList<Coursectl>  alCctl = new ArrayList<>();
-		Course.getTypeCourseList(0);
-	
-		Course crs = new Course();
-		Course.updateCourse(crs, 11, alCctl);
+//		ArrayList<Coursectl>  alCctl = new ArrayList<>();
+//		Course.getTypeCourseList(0);
+//	
+//		Course crs = new Course();
+//		Course.updateCourse(crs, 11, alCctl);
+		
+		alCrs = Course.getOneCourse(1);
+		for(Course c:alCrs) {
+			System.out.println(c.getCourseId() + ":" + c.getCourseName() 
+			+ ":" + c.getDetail() + ":" + c.getOrderFlg() + ":" + c.getPrice() 
+			+ ":" + c.getTypeId() + ":" + c.getMenuId() + ":" + c.getMenuName());
+		}
 	}
 
 }

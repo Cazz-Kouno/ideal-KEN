@@ -51,12 +51,15 @@ public class MenuDeleteSvl extends HttpServlet {
 		RequestDispatcher rd = null;
 		try {
 			if (session.getAttribute("adminInfo") == null) {
-				rd = request.getRequestDispatcher("/ideal/home.jsp");
+				rd = request.getRequestDispatcher("../home.jsp");
 			} else {
 				int typeId = Integer.parseInt(request.getParameter("typeId"));
 				int menuId = Integer.parseInt(request.getParameter("menuId"));
+				System.out.print("MD" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
+
 				if (typeId == 100) {
 					Reserve.reservCourseChk(menuId);
+					Course course = Course.getCourse(menuId);
 					ArrayList<ArrayList<Menu>> typeMenuList = new ArrayList<>();
 					ArrayList<MenuType> menuTypes = MenuType.getAllType();
 					for(MenuType mt:menuTypes) {
@@ -64,9 +67,11 @@ public class MenuDeleteSvl extends HttpServlet {
 							typeMenuList.add(Menu.getMenu(mt.getTypeId()));
 						}
 					}
-					request.setAttribute("typeMenuList", menuTypes);
+					request.setAttribute("course", course);
+					request.setAttribute("typeMenuList", typeMenuList);
+					request.setAttribute("menuTypes", menuTypes);
 					request.setAttribute("oneCourse", Course.getOneCourse(menuId));	//クラス完成待ち
-					rd = request.getRequestDispatcher("/ideal/courseUpdate.jsp");
+					rd = request.getRequestDispatcher("../courseDelete.jsp");
 
 				} else {
 					Coursectl.courseMenuChk(menuId);
@@ -77,9 +82,11 @@ public class MenuDeleteSvl extends HttpServlet {
 			}
 
 		} catch (IdealException e) {
+			System.out.print("MD ERR " + new Throwable().getStackTrace()[0].getLineNumber() + ":");
+
 			String msg = e.getMsg();
 			request.setAttribute("msg", msg);
-			rd = request.getRequestDispatcher("/ideal/controller/MenuMaintenanceSvl");
+			rd = request.getRequestDispatcher("./MenuMaintenanceSvl");
 		} finally {
 			rd.forward(request, response);
 		}

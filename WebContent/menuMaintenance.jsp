@@ -153,8 +153,11 @@ for(int i = 0 ; i < menu.size() ; i++){
 </form>
 </tr>
 </table><!--  インナーテーブル終了 -->
+<br>
+<div align="center"><a href="/ideal/adminIndex.jsp">管理者メニューに戻る</a></div>
 </td>
 </tr>
+
 </table>
 </body>
 </html>

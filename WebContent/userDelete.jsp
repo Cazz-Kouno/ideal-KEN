@@ -16,11 +16,20 @@
         }
     
        	table {
-            width: 100%;
+            width: 500px;
             text-align:center;
             background:linear-gradient(red,white,white,green);}
         html{
             min-height:100%;
+            }
+            
+            h1{
+            color: white; 
+            }
+       
+        
+        
+        
         th, td {
             padding: 8px;
             text-align: left;

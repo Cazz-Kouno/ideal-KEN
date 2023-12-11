@@ -29,10 +29,6 @@ th {
 td {
 	border: 2px solid glay;
 }
-
-h1{
-    color: white;
-}
 </style>
 </head>
 <body>

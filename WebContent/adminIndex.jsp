@@ -9,7 +9,7 @@
     
     <style>
        	body{
-            width: 100%;
+            width: 500px;
             text-align:center;
             
             background-image:url(/ideal/img/レストラン18.avif);
@@ -22,6 +22,17 @@
             min-height:100%;
             
             }
+        h1{
+            color: white;
+        }
+            
+        h2{
+            color: white;
+        }
+            
+            
+            
+            
             </style>
 </head>
 

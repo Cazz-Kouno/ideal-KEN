@@ -7,14 +7,14 @@
 <title>メニュー情報削除画面</title>
 
 <style>body{
-            background-image:url(/ideal/img/レストラン11.jpg);
+            background-image:url(/ideal/img/レストラン27.jpg);
     		 background-size:100% auto;
         
         }
 
 
         table {
-            width: 100%;}
+            width: 500px;}
         th, td {
             padding: 8px;
             text-align: left;

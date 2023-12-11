@@ -4,6 +4,18 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>新規予約画面</title>
+    <style>
+    body {
+	background-image: url(/ideal/img/レストラン26.jpg);
+	background-size: 100% auto;
+}
+    table {
+            width: 500px;
+            text-align:center;
+            background:linear-gradient(red,white,white,green);}
+    
+    </style>
+    
     <link rel="stylesheet" type="text/css" href="meisai.css" />
     <script type="text/javascript">
         function checkData(obj) {
@@ -68,12 +80,21 @@
                             <option value="<%= i %>"<%= i == 12 ? " selected" : "" %>><%= i %>月</option>
                         <% } %>
                     </select>
-                    <select name="rsvDd">
-                        <%-- 予約日の選択対象：1日から31日 --%>
-                        <% for (int i = 1; i <= 31; i++) { %>
-                            <option value="<%= i %>"<%= i == 8 ? " selected" : "" %>><%= i %>日</option>
-                        <% } %>
-                    </select>
+     		<%
+    		// JavaScriptの変数としてrsvDdを取得
+    		String rsvDdValue = "document.getElementById('rsvDd').value";
+			%>
+					<select name="rsvDd" id="rsvDd">
+    					<%-- 予約日の選択対象：1日から31日 --%>
+    					<% for (int i = 1; i <= 31; i++) { %>
+        	<%
+            String condition = 
+            "(i == 8 && " + rsvDdValue + " == null) || (" + rsvDdValue + " != null && parseInt(" + rsvDdValue + ") == " + i + ")";
+        	%>
+        			<option value="<%= i %>"<%= condition.equals("true") ? " selected" : "" %>><%= i %>日</option>
+    					<% } %>
+					</select>
+
                 </td>
             </tr>
             <tr>
@@ -130,4 +151,4 @@
         <a href="/ideal/controller/ReserveListSvl">予約一覧に戻る</a>
     </p>
 </body>
-</html
+</html>
