@@ -15,14 +15,22 @@
 
 
         table {
-            width: 500px;}
+            width: 500px;
+            margin:auto;
+            }
         th, td {
             padding: 8px;
             text-align: left;
             border: 1px gray solid;
             }
-h1{background-color:Red;}
+h1{background-color:Red;
+   text-align: center;
+}
 th{background-color:Red;}
+
+div{
+text-align: center;
+}
 </style>
 <%! String[] COURSE_MENU_TYPE_NAME = 
 {"courseId","appetizerId","soupId","pastaId","meatId","fishId","dessertId","","","",""}; %>
@@ -83,11 +91,12 @@ if (message != null && !message.isEmpty()) {
 
 <tr>
 <th>コメント</th>
-
-<td>
-<textarea name="detail" cols="30" rows="4" style="ime-mode: active;"
- placeholder="ご自由にご記入ください。"><%=course.getDetail() %></textarea>
+<td><textarea name="detail" cols="45" rows="6">
+<%=course.getDetail() %></textarea>
 </td>
+
+	style="ime-mode: active;"
+ placeholder="ご自由にご記入ください。">
 </tr>
 
 <%
@@ -136,7 +145,7 @@ count++;
 	
 </form>
 <p>
-		<a href="/ideal/controller/MenuMaintenanceSvl">一覧表示に戻る</a>
+		<div><a href="/ideal/controller/MenuMaintenanceSvl">一覧表示に戻る</a></div>
 </p>
 
 

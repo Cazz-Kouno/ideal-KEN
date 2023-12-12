@@ -16,6 +16,7 @@ body{
         }
 table {
 	width: 500px;
+	margin: auto;
 }
 
 th, td {
@@ -25,6 +26,7 @@ th, td {
 }
 h1 {
 	background-color: Red;
+	text-align: center;
 }
 
 th {
@@ -32,6 +34,9 @@ th {
 }
 select {
 	width:300px;
+}
+div{
+text-align: center;
 }
 </style>
 <%! String[] COURSE_MENU_TYPE_NAME = 
@@ -85,7 +90,9 @@ if (message != null && !message.isEmpty()) {
 
 				<tr>
 					<th>コメント</th>
-					<td><textarea name="detail" cols="30" rows="4"
+					<td><textarea name="detail" cols="45" rows="6">
+					</textarea>
+					</td>
 							style="ime-mode: active;" placeholder="ご自由にご記入ください。"></textarea></td>
 				</tr>
 <%
@@ -124,7 +131,7 @@ count++;
 	
 	</form>
 	<p>
-		<a href="/ideal/controller/MenuMaintenanceSvl">一覧表示に戻る</a>
+		<div><a href="/ideal/controller/MenuMaintenanceSvl">一覧表示に戻る</a></div>
 	</p>
 
 </body>

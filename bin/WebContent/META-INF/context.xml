@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/jsp"
+	reloadable="true"
+	docBase="C:\Users\A47\Desktop\pleiades_Java\workspace\ideal"
+	workDir="C:\Users\A47\Desktop\pleiades_Java\workspace\ideal\work"
+	debug="5"
+	crossContext="true">
+	<Resource name="mariadb" auth="Container" type="javax.sql.DataSource" 
+		maxActive="100" maxIdle="30" maxWait="10000" 
+		username="root" password="root" dirverClassName="org.mriadb.jdbc.Driver" 
+		url="jdbc:mariadb://localhost:3306/ideal" />
+</Context>
+	

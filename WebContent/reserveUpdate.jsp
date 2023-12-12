@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="model.*"%>
+<%@ page import="course.*"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -44,9 +48,10 @@ th, td {
 	<%
         // セッションから User オブジェクトを取得し、型キャストする
         model.User userInfo = (model.User)session.getAttribute("userInfo");
-        model.Reserve reserve = (model.Reserve)session.getAttribute("reserve"); // 予約情報をセッションから取得
+        model.Reserve reserve = (model.Reserve)request.getAttribute("reserve"); // 予約情報をセッションから取得
+        ArrayList<Course> courseList = (ArrayList<Course>)request.getAttribute("courseList");
 
-        if (userInfo == null || reserve == null) {
+        if (userInfo == null || reserve == null || courseList == null) {
     %>
             <h2>エラー: ユーザ情報または予約情報が取得できませんでした。</h2>
     <%
@@ -131,10 +136,13 @@ th, td {
                 <th>コース</th>
                 <td>
                     <select name="courseId">
-                        <%-- 予約コースの選択対象：コース一覧 --%>
-                        <option value="1">Aコース（牛肉料理）</option>
-                        <option value="2">Bコース（鳥肉料理）</option>
-                        <option value="3">Cコース（魚介料理）</option>
+<%
+for(Course c:courseList){
+%>	
+	<option value="<%= c.getCourseId()%>"><%= c.getCourseName() %></option>
+<%	
+}
+%>
                     </select>
                 </td>
             </tr>
@@ -143,7 +151,7 @@ th, td {
                     席を確認します。確認を押してください。 <input type="submit" value="変更" />
                 </td>
             </tr>
-            <input type="hidden" name="rsvId" value=<%= request.getAttribute("rsvId") %> />
+            <input type="hidden" name="rsvId" value=<%= reserve.getRsvId() %> />
             <input type="hidden" name="mode" value="<%= controller.ReserveOperationSvl.UPDATE %>" />
         </table>
         <br />

@@ -38,6 +38,8 @@ public class ReserveUpdateSvl extends HttpServlet {
 		HttpSession session = request.getSession();
 		User userInfo = (User) session.getAttribute("userInfo");
 		RequestDispatcher rd = null;
+		System.out.print("RU" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
+
 
 		if (userInfo == null) {
 			// セッション情報がない場合、ホームページに遷移
@@ -48,12 +50,17 @@ public class ReserveUpdateSvl extends HttpServlet {
 				try {
 					// リクエストパラメーターから予約IDを取得
 					int rsvId = Integer.parseInt(request.getParameter("rsvId"));
+					System.out.print("RU" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
+					System.out.println("\nrsvId="+rsvId);
+
 					Reserve reserve = Reserve.getReserve(rsvId);
 					// リクエストオブジェクトに予約IDの予約情報ををセット
+					System.out.print("RU" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 					request.setAttribute("reserve", reserve);
 
 					// オーダー可能なコースの一覧情報を取得
 					ArrayList<Course> courseList = Course.getOneCourseList(); //クラス完成待ち
+					System.out.print("RU" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 					request.setAttribute("courseList", courseList);
 
 					// 予約情報変更画面に遷移
@@ -61,11 +68,13 @@ public class ReserveUpdateSvl extends HttpServlet {
 					rd = request.getRequestDispatcher(url);
 				} catch (NumberFormatException e) {
 					// 数値変換例外が発生した場合、独自例外をスロー
+					System.out.print("RU" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 					IdealException ie = new IdealException(IdealException.ERR_NO_NOT_MEMBER_EXCEPTION);
 					throw ie;
 				}
 			} catch (IdealException e) {
 				// 独自例外が発生した場合、エラーメッセージを取得し設定
+				System.out.print("RU" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 				String errorMessage = e.getMsg();
 				request.setAttribute("msg", errorMessage);
 

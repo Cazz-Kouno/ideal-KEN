@@ -16,17 +16,22 @@
         table{
             width:500px;
             text-align:center;
-            background:linear-gradient(red,white,white,green);}
+            background:linear-gradient(red,white,white,green);
+        	margin:auto;
+        	}
 		html{
 			min-height:100%;}
         h2 {
+            text-align:center;
             color: white;}
         div {
+            text-align:center;
             background-color: #ffcccc;
             padding: 10px;
             margin-bottom: 10px;}
-        table {
-            width: 500px;}
+        div.link{
+        	background-color: transparent;
+        }
         th, td {
             padding: 8px;
             text-align: left;
@@ -92,6 +97,6 @@
         </table>
     </form>
     <br />
-    <a href="/ideal/home.jsp">ホームページ</a>
+    <div class="link"><a href="/ideal/home.jsp">ホームページ</a></div>
 </body>
 </html>

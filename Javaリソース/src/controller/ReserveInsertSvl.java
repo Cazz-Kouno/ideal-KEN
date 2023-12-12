@@ -45,13 +45,12 @@ public class ReserveInsertSvl extends HttpServlet {
 		HttpSession session = request.getSession();
 		User userInfo = (User) session.getAttribute("userInfo");
 		ArrayList<Integer> userData = new ArrayList<>();
-		String[] attributeName = {"rsvYy","rsvMm","rsvDd","rsvHh","rsvMi","usrId","person","courseId"};
+		String[] attributeName = {"rsvYy","rsvMm","rsvDd","rsvHh","rsvMi","person","courseId"};
 		int rsvYy = 0;
 		int rsvMm = 0;
 		int rsvDd = 0;
 		int rsvHh = 0;
 		int rsvMi = 0;
-		int usrId = 0;
 		int person = 0;
 		int courseId = 0;
 		userData.add(rsvYy);
@@ -59,7 +58,7 @@ public class ReserveInsertSvl extends HttpServlet {
 		userData.add(rsvDd);
 		userData.add(rsvHh);
 		userData.add(rsvMi);
-		userData.add(usrId);
+		userData.add(userInfo.getUsrId());
 		userData.add(person);
 		userData.add(courseId);
 

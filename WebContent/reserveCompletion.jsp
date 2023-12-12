@@ -1,4 +1,4 @@
-<%@page import="model.Reserve"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,6 +16,20 @@ background:linear-gradient(red,white,white,green);
 </style>
 </head>
 <body>
+<%
+        // セッションから User オブジェクトを取得し、型キャストする
+        model.User userInfo = (model.User)session.getAttribute("userInfo");
+        model.Reserve reserve = (model.Reserve)request.getAttribute("reserve"); // 予約情報をセッションから取得
+
+        if (userInfo == null || reserve == null) {
+    %>
+    <h2>エラー: ユーザ情報または予約情報が取得できませんでした。</h2>
+    <%
+            // エラーが発生した場合の適切な処理を行う（例: リダイレクト、エラーページへの遷移など）
+            response.sendRedirect("reserveUpdate.jsp");
+        }
+    %>
+
 	<h1><%=userInfo.getUsrName()%>様、ご予約が完了いたしました。
 	</h1>
 	<h2>
@@ -34,7 +48,7 @@ background:linear-gradient(red,white,white,green);
 	<h2>
 		<%=reserve.getCourseName()%>
 		&nbsp;
-		<%=reserve.getCourseName()%>
+		<%=reserve.getPerson()%>
 		名様
 	</h2>
 	<h2>

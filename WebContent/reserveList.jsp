@@ -57,7 +57,6 @@ h1{
 
 
 	<table>
-		<form id="frm1" name="frm1" action="./ex12.html" method="get">
 			<tr>
 				<td>NO</td>
 				<td>ご予約日時</td>
@@ -93,12 +92,12 @@ h1{
 				<td><%=formattedDateTime%></td>
 				<td>                    <%-- 予約変更ボタン --%>
                     <form action="/ideal/controller/ReserveUpdateSvl" method="post">
-                        <input type="hidden" name="rsvId" value="${reserve.rsvId}">
+                        <input type="hidden" name="rsvId" value="<%=reserve.getRsvId()%>">
                         <input type="submit" value="変更">
                     </form></td>
 				<td>  <%-- 予約削除ボタン --%>
                     <form action="/ideal/controller/ReserveDeleteSvl" method="post">
-                        <input type="hidden" name="rsvId" value="${reserve.rsvId}">
+                        <input type="hidden" name="rsvId" value="<%=reserve.getRsvId()%>">
                         <input type="submit" value="取消">
                     </form></td>
 			</tr>
@@ -107,9 +106,9 @@ h1{
 			%>
 				</table>
 
-    <form>
+    <form action="/ideal/controller/ReserveInsertSvl" method="post">
         <!-- type="submit" で "新規ご予約" という名前のボタンを作成 -->
-        <input type="submit" value="新規ご予約" onclick="/ideal/controller/ReserveInsertSvl">
+        <input type="submit" value="新規ご予約">
     </form>
 
 	<p>

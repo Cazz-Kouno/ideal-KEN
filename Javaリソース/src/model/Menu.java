@@ -384,6 +384,7 @@ public class Menu implements Serializable {
 								sql = "UPDATE menu SET "
 									+ " m_name = ?,detail = ?,orderFlg = ?, price = ?, t_id = ?"
 									+ " WHERE m_id = ?";	
+								System.out.println(sql);
 								System.out.println(pst);
 								pst = con.prepareStatement(sql); 
 								pst.setString(1, m.getMenuName()); 

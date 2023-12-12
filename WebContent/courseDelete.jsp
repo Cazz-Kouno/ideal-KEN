@@ -15,15 +15,26 @@
             width: 500px;
             text-align:center;
             background:linear-gradient(red,white,white,green);
+            align:center;
+            margin: auto;
             }
         html{
-            min-height:100%;
+            min-height:500px;
             }
         th, td {
             padding: 8px;
             text-align: left;
             border: 1px gray solid;
             }
+            
+        h1 {
+	       background-color: Red;
+	       text-align: center;
+           }
+           
+           div{
+           text-align: center;
+           }
 </style>
 
 </head>
@@ -33,7 +44,6 @@
 <jsp:useBean id="typeMenuList" class="java.util.ArrayList" scope="request"/>
 <jsp:useBean id="menuTypes" class="java.util.ArrayList" scope="request"/>
 
-<h1>コースの削除</h1>
 	
 				<%-- メッセージがnullでない場合にのみ表示 --%>
 
@@ -52,6 +62,9 @@ if (message != null && !message.isEmpty()) {
 	
 <form id="frm1" name="frm1" action="/ideal/controller/CourseOperationSvl" method="post">
 <table>
+		<td colspan="2">
+<h1>コースの削除</h1>
+
 
 <tr>
 <th>コース名</th>
@@ -76,9 +89,11 @@ if (message != null && !message.isEmpty()) {
 
 <tr>
 <th>コメント</th>
-<td>
+<td><textarea name="detail" cols="45" rows="6">
 <%=course.getDetail() == null ? "" :course.getDetail()%>
+</textarea>
 </td>
+
 </tr>
 
 <%
@@ -116,8 +131,11 @@ count++;
 
 
 </table>
+	<input type="hidden" name="mode" value="<%= CourseOperationSvl.DELETE %>">
+	<input type="hidden" name="typeId" value="100">
+	<input type="hidden" name="courseId" value="<%= course.getCourseId()%>">
 </form>
-<p><a href="home.jsp">一覧表示画面に戻る</a></p>
+<div><p><a href="/ideal/controller/MenuMaintenanceSvl">一覧表示画面に戻る</a></p></div>
 
 
 </body>

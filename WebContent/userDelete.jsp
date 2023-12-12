@@ -18,7 +18,9 @@
        	table {
             width: 500px;
             text-align:center;
-            background:linear-gradient(red,white,white,green);}
+            background:linear-gradient(red,white,white,green);
+            margin: auto;
+            }
         html{
             min-height:100%;
             }
@@ -48,6 +50,14 @@
             cursor: pointer;}
         input[type="submit"]:hover {
             background-color: #007B66;}  
+            
+        h1{
+        text-align: center;
+        }
+        
+        div{
+        text-align: center;
+        }
     </style>  
             
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -106,6 +116,6 @@
     <br />
 
     <!-- 9．処理メニューに戻る -->
-    <a href="../userIndex.jsp">処理メニューに戻る</a>
+    <div><a href="../userIndex.jsp">処理メニューに戻る</a></div>
 </body>
 </html>

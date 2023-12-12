@@ -17,6 +17,7 @@
             width: 500px;
             text-align: center;
             background: linear-gradient(red, white, white, green);
+            margin: auto;
         }
 
         html {
@@ -55,6 +56,10 @@
         input[type="submit"]:hover {
             background-color: #007B66;
         }  
+        
+        h1{
+        text-align:center;
+        }
     </style>  
             
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -93,7 +98,7 @@
 </head>
 
 <body>
-    <h1>顧客情報登録</h1>
+    <h1>お客様情報登録</h1>
 
     <%-- メッセージがnullでない場合にのみ表示 --%>
     <%

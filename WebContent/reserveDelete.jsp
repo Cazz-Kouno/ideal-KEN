@@ -28,14 +28,14 @@
     <%
     // セッションから User オブジェクトを取得し、型キャストする
     model.User userInfo = (model.User)session.getAttribute("userInfo");
-    model.Reserve reserve = (model.Reserve)session.getAttribute("reserve"); // 予約情報をセッションから取得
+    model.Reserve reserve = (model.Reserve)request.getAttribute("reserve"); // 予約情報をセッションから取得
 
     if (userInfo == null || reserve == null) {
 %>
     <h2>エラー: ユーザ情報または予約情報が取得できませんでした。</h2>
 <%
         // エラーが発生した場合の適切な処理を行う（例: リダイレクト、エラーページへの遷移など）
-        response.sendRedirect("reserveUpdate.jsp");
+        response.sendRedirect("../reserveUpdate.jsp");
         return; // 以降の処理を中断
     }
 
@@ -50,9 +50,8 @@
     <% } %>
     </p>
 
-    <form id="frm1" name="frm1" action="/ideal/controller/ReserveOperationSvl" onsubmit="return checkData(this)" method="post">
+    <form name="reserveDeleteForm" action="/ideal/controller/ReserveOperationSvl" method="post" onsubmit="return dataCheck(this);">
         <table>
-
             <tr>
                 <th>予約番号</th>
                 <td><%=reserve.getRsvId()%></td>
@@ -96,7 +95,7 @@
             <tr>
             	<td colspan="2">
            		 <input type="submit" value="取消"></td>
-           		<input type="hidden" name="rsvId" value=<%= request.getAttribute("rsvId") %> />
+           		<input type="hidden" name="rsvId" value=<%= request.getParameter("rsvId") %> />
             	<input type="hidden" name="mode" value="<%= controller.ReserveOperationSvl.DELETE %>" />
         	</tr>
         </table>

@@ -125,6 +125,10 @@ public class CourseOperationSvl extends HttpServlet {
 					rd = request.getRequestDispatcher("./MenuMaintenanceSvl");
 					break;
 				case DELETE:
+					course = new Course();
+					course.setCourseId(Integer.parseInt(request.getParameter("courseId")));
+					course.setTypeId(100);
+
 					coursectl = new ArrayList<>();
 
 					Course.updateCourse(course, mode, coursectl);
@@ -141,12 +145,12 @@ public class CourseOperationSvl extends HttpServlet {
 		} catch (IdealException e) { //Courseクラス完成時に、スローされませんエラーがきえるはず
 			request.setAttribute("msg", e.getMsg());
 			rd = request.getRequestDispatcher("./MenuMaintenanceSvl");
-			System.out.println("CO130");
+			System.out.print("CO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 		}catch(Exception ee) {
 			ee.printStackTrace();
 			System.out.println("err");
 		} finally {
-			System.out.println("CO132");
+			System.out.print("CO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 			System.out.println(rd);
 			System.out.println(session.getAttribute("adminInfo"));
 			rd.forward(request, response);

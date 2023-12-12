@@ -28,6 +28,7 @@ table {
 	width: 500px;
 	text-align: center;
 	*/background: linear-gradient(red, white, white, green)/*;
+	margin: auto;
 }
 
 html {
@@ -148,7 +149,6 @@ th, td {
 			<a href="/ideal/controller/menuMaintenance">一覧表示に戻る</a>
 </body>
 </html>
-
 
 
 

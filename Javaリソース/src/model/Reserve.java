@@ -327,10 +327,11 @@ public class Reserve implements Serializable {
 			sql = "SELECT * FROM reserve LEFT JOIN user USING (usr_id) "
 					+ "LEFT JOIN table_loc USING (table_id) "
 					+ "LEFT JOIN course USING (c_id) "
-					+ "where rsvId=?";
+					+ "where rsv_id=?";
 
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, rsvId);
+			System.out.println(preparedStatement);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -530,42 +531,44 @@ public class Reserve implements Serializable {
 	public static TableLoc updateChk(int rsvID, String dateStr, int personNum) throws IdealException {
 
 		TableLoc ｔableLoc =new TableLoc();
+		int tableNo = 0;
+		String tableName = null;
+		
 		
 		 Connection connection = null;
 		 PreparedStatement preparedStatement = null;
 		 ResultSet resultSet = null;
 		 String sql = null;
+		 System.out.print("R" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 		try {
 			connection = DriverManager.getConnection
 					("jdbc:mariadb://localhost:3306/ideal","root","root");
 
 
-			sql="SELECT table_loc.table_id "
+			sql="SELECT table_loc.table_id, table_loc.table_name "
 					+ "FROM table_loc "
 					+ "WHERE table_loc.max_capacity >= ? "
 					+ "AND table_loc.table_id NOT IN ("
 					+ "SELECT r.table_id "
-					+ "FROM Reserve r "
-					+ "WHERE NOT rsv_id= ? ("
-					+ " r.rsv_date <= ? + INTERVAL 3 HOUR AND "
-					+ " r.rsv_date + INTERVAL (r.person * 15) MINUTE >= ? "
-					+ ") OR ("
-					+ " ? <= r.rsv_date + INTERVAL (r.person * 15) MINUTE AND "
-					+ " ? + INTERVAL 3 HOUR >= r.rsv_date "
+					+ "FROM reserve r "
+					+ "WHERE NOT rsv_id= ? AND ("
+					+ "(r.rsv_date <= ? + INTERVAL 3 HOUR ) AND "
+					+ "( ? - INTERVAL 3 HOUR <= r.rsv_date)"
 					+ ")"
 					+ ")"
 					+ "ORDER BY table_loc.table_id;";
 			
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, personNum);
-			preparedStatement.setInt(3, rsvID);
-			preparedStatement.setString(2, dateStr);
-			preparedStatement.setString(2, dateStr);
-			preparedStatement.setString(2, dateStr);
-			preparedStatement.setString(2, dateStr);
+			preparedStatement.setInt(2, rsvID);
+			preparedStatement.setString(3, dateStr);
+			preparedStatement.setString(4, dateStr);
+			System.out.println(preparedStatement);
 			resultSet = preparedStatement.executeQuery();
-			
+			System.out.print("R" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 			if (resultSet.next()) {
+				ｔableLoc.setTableId(resultSet.getInt("table_id"));
+				ｔableLoc.setTableName(resultSet.getString("table_name"));
 				return ｔableLoc;
 			}else {
 				return null;

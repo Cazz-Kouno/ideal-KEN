@@ -67,11 +67,13 @@ public class UserLoginSvl extends HttpServlet {
 				rd = request.getRequestDispatcher("../userIndex.jsp");
 			}
 		} catch(IdealException e) {
+			System.out.print("UL" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 			request.setAttribute("msg", e.getMsg());
 			rd = request.getRequestDispatcher("../userLogin.jsp");
 			e.printStackTrace();
 
 		} catch(Exception e2) {
+			System.out.print("UL" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 			request.setAttribute("msg", e2.getMessage());
 			rd = request.getRequestDispatcher("../userLogin.jsp");
 			e2.printStackTrace();

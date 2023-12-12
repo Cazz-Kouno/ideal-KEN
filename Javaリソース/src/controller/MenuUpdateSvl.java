@@ -71,6 +71,7 @@ public class MenuUpdateSvl extends HttpServlet {
 
 				} else {
 					request.setAttribute("mType", MenuType.getAllType());
+					request.setAttribute("menuId", menuId); // 追記
 					request.setAttribute("typeId", typeId);
 					request.setAttribute("oneMenu", Menu.getOneMenu(menuId,typeId));
 					

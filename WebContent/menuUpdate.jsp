@@ -17,6 +17,8 @@ table {
 	width: 500px;
 	text-align: center;
 	background: linear-gradient(red, white,);
+	margin: auto;
+	
 }
 
 html {
@@ -29,39 +31,24 @@ th, td {
 	border: 1px gray solid;
 }
 </style>
-<script type="text/javascript">
-<!--
-	function dataCheck(obj) {
-		var msg = "";
-		if (obj.menuName.value.length < 1) {
-			msg += "メニュー名を入力してください。\n";
-		}
-		if (!obj.price.value.match(/^[0-9]+$/g)) {
-			msg += "価格を数値で入力してください。\n";
-		}
-		var i;
-		for (i = 0; i < obj.orderFlg.length; i++) {
-			if (obj.orderFlg[i].checked)
-				break;
-		}
-		if (msg.length > 0) {
-			alert(msg);
-			return false;
-		} else {
-			return true;
-		}
-	}
-//-->
-</script>
+
 </head>
 
 <style>
 h1 {
-	background-color: green;
+	background-color: Red;
+	text-align: center;
 }
 
+
+
+
 th {
-	background-color: green;
+	background-color: Red;
+}
+
+div{
+text-align: center;
 }
 </style>
 <script type="text/javascript">
@@ -146,7 +133,7 @@ th {
 							selected = "";
 						}
 					%>
-					<option value="<%=mt.getTypeId()%>" <%=selected%>>
+					<option value="<%=((MenuType) o).getTypeId()%>" <%=selected%>>
 						<%=((MenuType) o).getTypeName()%></option>
 					<%
 					}
@@ -156,8 +143,8 @@ th {
 
 		<tr>
 			<th>コメント</th>
-			<td><input type="textarea" name="detail" size="30" value='<%=oneMenu.getDetail()%>'
-				style="ime-mode: active"></td>
+			<td><textarea name="detail" cols="45" rows="6"><%=oneMenu.getDetail()%></textarea>
+				</td>
 		</tr>
 		<input type="hidden" name="mode" value="<%=MenuOperationSvl.UPDATE%>" />
 		<input type="hidden" name="menuId"
@@ -171,7 +158,7 @@ th {
 		</form>
 	</table>
 	<p>
-		<a href="/ideal/controller/menuMaintenance">一覧表示に戻る</a>
+		<div><a href="/ideal/controller/menuMaintenance">一覧表示に戻る</a></div>
 	</p>
 
 

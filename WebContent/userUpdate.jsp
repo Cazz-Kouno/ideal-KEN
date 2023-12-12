@@ -14,7 +14,9 @@
         table {
             width: 500px;         
             text-align:center;
-            background:linear-gradient(red,white,white,green);}
+            background:linear-gradient(red,white,white,green);
+            margin: auto;
+            }
         html{
             min-height:100%;}  
         th, td {
@@ -36,6 +38,14 @@
             cursor: pointer;}
         input[type="submit"]:hover {
             background-color: #007B66;}
+            
+            h1{
+            text-align:center;
+            }
+            
+           div{
+            text-align:center;
+            }
     </style>  
             
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -73,7 +83,7 @@
     </script>
 </head>
 <body>
-    <h1>顧客情報変更</h1>
+    <h1>お客様情報変更</h1>
 
     <%-- メッセージがnullでない場合にのみ表示 --%>
     <% String message = (String) request.getAttribute("msg");
@@ -122,6 +132,6 @@
     </form>
     <br />
 
-    <a href="../userIndex.jsp">処理メニューに戻る</a>
+    <div><a href="../userIndex.jsp">処理メニューに戻る</a></div>
 </body>
 </html>

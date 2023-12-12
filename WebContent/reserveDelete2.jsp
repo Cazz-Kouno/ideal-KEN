@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">>
 <%@ page import="model.*,controller.*" %>
-
-<!DOCTYPE html>
-
-<html>
+<%@ page import="java.util.ArrayList"%>
+<%@page import="model.Reserve"%>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>予約取消画面</title>
@@ -27,14 +28,22 @@
     </style> 
             
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/JavaScript" src="validationScript.js"></script>
     <script type="text/JavaScript">
     </script>
 </head>
-
 <body>
-    <jsp:useBean id="userInfo" class="model.User" scope="session"/>
-    <jsp:useBean id="reserve" class="model.Reserve" scope="session"/>
+	<%
+        // セッションから User オブジェクトを取得し、型キャストする
+        model.User userInfo = (model.User)session.getAttribute("userInfo");
+        model.Reserve reserve = (model.Reserve)request.getAttribute("reserve"); // 予約情報をセッションから取得
+
+        if (userInfo == null || reserve == null) {
+    %>
+            <h2>エラー: ユーザ情報または予約情報が取得できませんでした。</h2>
+    <%
+            // エラーが発生した場合の適切な処理を行う（例: リダイレクト、エラーページへの遷移など）
+            response.sendRedirect("reserveDelete.jsp");
+        }
     
     <h1><%= userInfo.getUsrName()%>様ご予約取消</h1>
 
@@ -45,7 +54,7 @@
     <% } %>
     </p>
     
-    <form name="reserveDeleteForm" action="/ideal/controller/ReserveOperationSvl" method="post" onsubmit="return dataCheck(this);">
+    <form id="frm1" name="frm1" action="/ideal/controller/ReserveOperationSvl" onsubmit="return checkData(this)" method="post">
         <table>
             <tr>
                 <th>予約番号</th>
@@ -74,21 +83,17 @@
             </tr>
             <tr>
                 <th>人数</th>
-                <%
-                    // reserve.getPerson()がnullでない場合はそのまま表示、nullの場合は空文字列を表示
-                    String person = (reserve.getPerson() != null) ? String.valueOf(reserve.getPerson()) : "";
-                %>
-                <td><%= person %></td>
+                <td><%=reserve.getPerson()%></td>
             </tr>
             <tr>
                 <th>コース</th>
-                <td><%= (reserve.getCourseName() != null) ? reserve.getCourseName() : "" %></td>
+                <td><%=reserve.getCourseName()%></td>
             </tr>
             <tr>
                 <td colspan="2">
                     <input type="submit" value="取消">
                 </td>
-                <input type="hidden" name="rsvId" value=<%= request.getAttribute("rsvId") %> />
+                <input type="hidden" name="rsvId" value=<%= reserve.getRsvId() %> />
                 <input type="hidden" name="mode" value="<%= controller.ReserveOperationSvl.DELETE %>" />
             </tr>
         </table>

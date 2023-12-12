@@ -12,9 +12,8 @@
             width: 500px;
             text-align:center;
             
-            background-image:url(/ideal/img/レストラン18.avif);
+            background-image:url(/ideal/img/レストラン18.avif),url(/ideal/img/レストラン1.jpg);
     		 background-size:100% auto;
-            }
             /*background:linear-gradient(red,white,white,green);*/
             }
 
@@ -28,6 +27,10 @@
             
         h2{
             color: white;
+        }
+        
+        h1{
+            text-align: center;
         }
             
             
