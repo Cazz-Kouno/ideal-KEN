@@ -10,12 +10,31 @@
 <title>予約変更画面</title>
 
 <style>
+body {
+	background-image: url(/ideal/img/レストラン35.jpg);
+	background-size: 100% auto;
+}
 table {
-	width: 100%;	}
+	width: 500px;	
+	margin: auto;
+	}
 th, td {
 	padding: 8px;
 	text-align: left;
 	border: 1px gray solid;}
+th {
+	background-color: Red;
+}
+td{
+	background-color: white;
+}
+h1{
+    text-align: center;
+}
+div{
+    text-align: center;
+    
+}
 </style>
 <link rel="stylesheet" type="text/css" href="meisai.css" />
     <script type="text/javascript">
@@ -158,7 +177,7 @@ for(Course c:courseList){
     </form>
     <br />
     <p id="boder">
-        <a href="/ideal/controller/ReserveListSvl">予約一覧に戻る</a>
+        <div><a href="/ideal/controller/ReserveListSvl">予約一覧に戻る</a></div>
     </p>
 </body>
 </html>

@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Admin;
 import model.IdealException;
 import model.Reserve;
-import model.User;
 
-@WebServlet("/controller/ReserveListSvl")
+@WebServlet("/controller/AdminReserveListSvl")
 public class AdminReserveListSvl extends HttpServlet {
 private static final long serialVersionUID = 1L;
     
@@ -32,9 +32,11 @@ private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        User userInfo = (User) session.getAttribute("userInfo");
-
-        if (userInfo == null) {
+        
+//        Reserve allReserve = (Reserve) session.getAttribute("allReserve");
+        Admin adminInfo = (Admin)session.getAttribute("adminInfo");
+        if (adminInfo == null) {
+        	System.out.print("AR" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
             // セッション情報がない場合、ホームページに遷移
             String url = "../home.jsp";
             request.getRequestDispatcher(url).forward(request, response);
@@ -42,22 +44,26 @@ private static final long serialVersionUID = 1L;
             // セッション情報から予約情報一覧を取得
             try {
 //            	System.out.println("start:" + userInfo.getUsrId());
-                ArrayList<Reserve> reserveList = Reserve.getReserveList(userInfo.getUsrId());
+            	//System.out.print("AR" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
+
+                ArrayList<Reserve> allReserveList = Reserve.getAllReserveList();
+            	//System.out.print("AR" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
+
 //                System.out.println(reserveList);
-                session.setAttribute("reserveList", reserveList);
+                request.setAttribute("allReserveList", allReserveList);
             } catch (IdealException e) {
                 // 独自例外が発生した場合、エラーメッセージを取得し設定
                 String errorMessage = e.getMsg();
                 request.setAttribute("msg", errorMessage);
-
+                
                 // エラーが発生した場合、顧客処理選択画面に遷移
-                String url = "../useIndex.jsp";
+                String url = "../userIndex.jsp";
                 request.getRequestDispatcher(url).forward(request, response);
                 return; // エラーが発生した場合、これ以降の処理はスキップ
             }
 
-            // 予約一覧画面に遷移
-            String url = "../reserveList.jsp";
+            // 全体予約一覧画面に遷移
+            String url = "../AdminReserveList.jsp";
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

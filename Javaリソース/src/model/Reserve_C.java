@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Reserve implements Serializable {
+public class Reserve_C implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int rsvId;//予約ＩＤ
@@ -38,7 +38,7 @@ public class Reserve implements Serializable {
 //	static String sql = null;
 	
 	//コンストラクター
-	public Reserve() {
+	public Reserve_C() {
 		super();
 	}
 	
@@ -197,9 +197,9 @@ public class Reserve implements Serializable {
 	}
 
 	// 顧客IDで予約情報一覧を取得する
-	public static ArrayList<Reserve> getReserveList(int usrId) throws IdealException {
+	public static ArrayList<Reserve_C> getReserveList(int usrId) throws IdealException {
 
-		ArrayList<Reserve> listOfReservations = new ArrayList<>();
+		ArrayList<Reserve_C> listOfReservations = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -222,7 +222,7 @@ public class Reserve implements Serializable {
 			preparedStatement.setInt(1, usrId);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				Reserve reserve = new Reserve();
+				Reserve_C reserve = new Reserve_C();
 				SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 				// 日付文字列をDateオブジェクトに変換
@@ -473,44 +473,41 @@ public class Reserve implements Serializable {
 					("jdbc:mariadb://localhost:3306/ideal","root","root");
 
 
-			sql="SELECT table_loc.table_id, table_loc.table_name "
+			sql="SELECT table_loc.table_id "
 					+ "FROM table_loc "
 					+ "WHERE table_loc.max_capacity >= ? "
 					+ "AND table_loc.table_id NOT IN ("
 					+ "SELECT r.table_id "
-					+ "FROM reserve r "
+					+ "FROM Reserve r "
 					+ "WHERE ("
-					+ "(r.rsv_date <= ? + INTERVAL 3 HOUR ) AND "
-					+ "( ? - INTERVAL 3 HOUR <= r.rsv_date)"
-					+ ") "
-					+ ") "
+					+ " r.rsv_date <= ? + INTERVAL 3 HOUR AND "
+					+ " r.rsv_date + INTERVAL (r.person * 15) MINUTE >= ? "
+					+ ") OR ("
+					+ " ? <= r.rsv_date + INTERVAL (r.person * 15) MINUTE AND "
+					+ " ? + INTERVAL 3 HOUR >= r.rsv_date "
+					+ ")"
+					+ ")"
 					+ "ORDER BY table_loc.table_id;";
 			
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, personNum);
 			preparedStatement.setString(2, dateStr);
-			preparedStatement.setString(3, dateStr);
-			System.out.println(preparedStatement);
-			System.out.print("R" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
+			preparedStatement.setString(2, dateStr);
+			preparedStatement.setString(2, dateStr);
+			preparedStatement.setString(2, dateStr);
 			resultSet = preparedStatement.executeQuery();
-			System.out.print("R" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 			
 			if (resultSet.next()) {
-				 System.out.print("R" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
-
 				ｔableLoc.setTableId(resultSet.getInt("table_id"));
 				ｔableLoc.setTableName(resultSet.getString("table_name"));
+				ｔableLoc.setMaxCapacity(resultSet.getInt("max_capacity"));
 				
 				return ｔableLoc;
 			}else {
-				 System.out.print("R" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
-
 				return null;
 			}
 
 		} catch (Exception e) {
-			 System.out.print("R" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
-
 			throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
 		} finally {
 
@@ -555,7 +552,7 @@ public class Reserve implements Serializable {
 					+ "(r.rsv_date <= ? + INTERVAL 3 HOUR ) AND "
 					+ "( ? - INTERVAL 3 HOUR <= r.rsv_date)"
 					+ ")"
-					+ ") "
+					+ ")"
 					+ "ORDER BY table_loc.table_id;";
 			
 			preparedStatement = connection.prepareStatement(sql);
@@ -635,7 +632,6 @@ public class Reserve implements Serializable {
 			int lastRsvID=0;
 			if (resultSet.next()) {
 				lastRsvID = resultSet.getInt(1);
-				System.out.println("lastID="+lastRsvID);
 			}
 			
 			lastRsv = getReserve(lastRsvID);
@@ -719,9 +715,9 @@ public class Reserve implements Serializable {
 	}
 	
 	// 全ての予約情報一覧を取得する
-	public static ArrayList<Reserve> getAllReserveList() throws IdealException {
+	public static ArrayList<Reserve_C> getAllReserveList() throws IdealException {
 
-		ArrayList<Reserve> listOfAllReservations = new ArrayList<>();
+		ArrayList<Reserve_C> listOfAllReservations = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -738,12 +734,12 @@ public class Reserve implements Serializable {
 			sql = "SELECT * FROM reserve LEFT JOIN user USING (usr_id) "
 					+ "LEFT JOIN table_loc USING (table_id) "
 					+ "LEFT JOIN course USING (c_id) "
-					+ "ORDER BY rsv_date";  // ここで rsv_date をソート対象の列に変更
+					+ "ORDER BY rsv_date DESC";  // ここで rsv_date をソート対象の列に変更
 
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				Reserve allReserve = new Reserve();
+				Reserve_C allReserve = new Reserve_C();
 				SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 				// 日付文字列をDateオブジェクトに変換
@@ -828,4 +824,5 @@ public class Reserve implements Serializable {
 		}
 		return listOfAllReservations; // データ
 	}
+
 }

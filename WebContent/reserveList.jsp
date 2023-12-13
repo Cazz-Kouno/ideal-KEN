@@ -19,19 +19,27 @@ min-height:100%;
 	}
 table{
 	border: 2px glay solid;
+	margin:auto;
 }
 
 th {
 	border: 2px solid glay;
+	background-color: Red;
 	
 }
 
 td {
 	border: 2px solid glay;
+	background-color: white;
 }
 
 h1{
     color: white;
+    text-align:center;
+}
+
+div{
+    text-align:center;
 }
 </style>
 </head>
@@ -58,12 +66,12 @@ h1{
 
 	<table>
 			<tr>
-				<td>NO</td>
-				<td>ご予約日時</td>
-				<td>人数</td>
-				<td>コース名</td>
-				<td>テーブル名</td>
-				<td>登録日時</td>
+				<th>NO</th>
+				<th>ご予約日時</th>
+				<th>人数</th>
+				<th>コース名</th>
+				<th>テーブル名</th>
+				<th>登録日時</th>
 			</tr>
 			<%
 			for (Object obj : reserveList) {
@@ -104,15 +112,20 @@ h1{
 			<%
 			}
 			%>
-				</table>
-
+			<tr>
+			<td colspan = "6">
     <form action="/ideal/controller/ReserveInsertSvl" method="post">
         <!-- type="submit" で "新規ご予約" という名前のボタンを作成 -->
         <input type="submit" value="新規ご予約">
     </form>
+    </td>
+    </tr>
+    
+				</table>
+
 
 	<p>
-		<a href="../userIndex.jsp">処理メニューに戻る</a>
+		<div><a href="../userIndex.jsp">処理メニューに戻る</a></div>
 	</p>
 	<br>
 </body>

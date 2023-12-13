@@ -43,54 +43,42 @@ public class ReserveInsertSvl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User userInfo = (User) session.getAttribute("userInfo");
 		ArrayList<Integer> userData = new ArrayList<>();
 		String[] attributeName = {"rsvYy","rsvMm","rsvDd","rsvHh","rsvMi","person","courseId"};
-		int rsvYy = 0;
-		int rsvMm = 0;
-		int rsvDd = 0;
-		int rsvHh = 0;
-		int rsvMi = 0;
-		int person = 0;
-		int courseId = 0;
-		userData.add(rsvYy);
-		userData.add(rsvMm);
-		userData.add(rsvDd);
-		userData.add(rsvHh);
-		userData.add(rsvMi);
-		userData.add(userInfo.getUsrId());
-		userData.add(person);
-		userData.add(courseId);
 
-		if (userInfo == null) {
+		if (session.getAttribute("userInfo") == null) {
 			// セッション情報がない場合、ホームページに遷移
 			String url = "../home.jsp";
 			request.getRequestDispatcher(url).forward(request, response);
 		} else {
 			try {
+				User userInfo = (User) session.getAttribute("userInfo");
 					// リクエストパラメータから予約情報を生成
 					for(int i = 0;i < attributeName.length;i++) {
 						try {
-						userData.set(i,Integer.parseInt(request.getParameter(attributeName[i])));
+							userData.add(Integer.parseInt(request.getParameter(attributeName[i])));
 						}catch (NumberFormatException e) {
+							userData.add(0);
 							// 数値変換例外が発生した場合、0を設定
-							//既に設定してあるので次へ
 						}
 					}
 
 					// 予約情報を生成
 					Reserve reserve = new Reserve();
-					Course course = Course.getCourse(courseId);
-					reserve.setRsvYy(rsvYy);
-					reserve.setRsvMm(rsvMm);
-					reserve.setRsvDd(rsvDd);
-					reserve.setRsvHh(rsvHh);
-					reserve.setRsvMi(rsvMi);
-					reserve.setUsrId(usrId);
+					Course course = null;
+					if(userData.get(6) != 0) {
+						course = Course.getCourse(userData.get(6));
+						reserve.setCourseName(course.getCourseName());
+					}
+					reserve.setRsvYy(userData.get(0));
+					reserve.setRsvMm(userData.get(1));
+					reserve.setRsvDd(userData.get(2));
+					reserve.setRsvHh(userData.get(3));
+					reserve.setRsvMi(userData.get(4));
+					reserve.setUsrId(userInfo.getUsrId());
 					reserve.setUsrName(userInfo.getUsrName());
-					reserve.setPerson(person);
-					reserve.setCourseId(courseId);
-					reserve.setCourseName(course.getCourseName());
+					reserve.setPerson(userData.get(5));
+					reserve.setCourseId(userData.get(6));
 
 					// リクエストオブジェクトに予約情報を設定
 					request.setAttribute("reserve", reserve);

@@ -12,6 +12,9 @@ body{text-align:center;
 
 background:linear-gradient(red,white,white,green);
 }
+        html {
+            min-height: 100%;
+        }
 
 </style>
 </head>
@@ -52,7 +55,7 @@ background:linear-gradient(red,white,white,green);
 		名様
 	</h2>
 	<h2>
-		ご予約番号は<%=reserve.getRsvId()%>番です。
+		ご予約番号は<span font-size="100px"><%=reserve.getRsvId()%></span>番です。
 	</h2>
 
 	<h2>ご来店の際、受付にお申し付けください</h2>

@@ -6,10 +6,17 @@
     <title>予約変更画面</title>
 
     <style>
+        body {
+	       background-image: url(/ideal/img/レストラン38.jpg);
+	       background-size: 100% auto;
+             }
+    
+    
         table {
-            width: 100%;
+            width: 500px;
             text-align: center;
             background: linear-gradient(red, white, white, green);
+            margin: auto;
         }
 
         html {
@@ -20,6 +27,12 @@
             padding: 8px;
             text-align: left;
             border: 1px gray solid;
+        }
+        h1{
+        text-align: center;
+        }
+        div{
+        text-align: center;
         }
     </style>
 
@@ -101,7 +114,7 @@
         </table>
     </form>
     <p>
-        <a href="/ideal/controller/ReserveListSvl">予約一覧に戻る</a>
+        <div><a href="/ideal/controller/ReserveListSvl">予約一覧に戻る</a></div>
     </p>
 </body>
 </html>

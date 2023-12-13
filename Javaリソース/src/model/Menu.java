@@ -321,7 +321,7 @@ public class Menu implements Serializable {
 			 	
 		}catch(Exception e){
 			IdealException idex = new IdealException(1);
-//			idex.getMsg();
+			idex.getMsg();
 			throw idex;
 			
 		}finally{
@@ -363,7 +363,7 @@ public class Menu implements Serializable {
 								pst.setString(2, m.getDetail());
 								pst.setInt(3, m.getOrderFlg());
 								pst.setInt(4, m.getPrice());
-								pst.setInt(5, m.getTypeId());
+								//pst.setInt(5, m.getTypeId()); // エラー表示テスト
 						
 							break;
 						case MenuOperationSvl.UPDATE:		
@@ -384,8 +384,6 @@ public class Menu implements Serializable {
 								sql = "UPDATE menu SET "
 									+ " m_name = ?,detail = ?,orderFlg = ?, price = ?, t_id = ?"
 									+ " WHERE m_id = ?";	
-								System.out.println(sql);
-								System.out.println(pst);
 								pst = con.prepareStatement(sql); 
 								pst.setString(1, m.getMenuName()); 
 								pst.setString(2, m.getDetail());
@@ -393,10 +391,11 @@ public class Menu implements Serializable {
 								pst.setInt(4, m.getPrice());
 								pst.setInt(5, m.getTypeId());
 								pst.setInt(6,m.getMenuId());
-								System.out.println(pst);
-//							}
+							//							}
 							break;
 						case MenuOperationSvl.DELETE: 
+							System.out.print("M" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
+
 							//SQL文の生成
 //							if(m.getTypeId() == 100) {
 //								sql = "DELETE FROM course WHERE c_id = ?";
@@ -406,6 +405,7 @@ public class Menu implements Serializable {
 								sql = "DELETE FROM menu WHERE m_id = ?";
 								pst = con.prepareStatement(sql);
 								pst.setInt(1, m.getMenuId());
+
 //								}
 							break;
 						default:
@@ -413,7 +413,7 @@ public class Menu implements Serializable {
 					}
 
 					num = pst.executeUpdate();
-							
+								
 				}catch(Exception e){
 					IdealException idex = new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
 					throw idex;

@@ -18,7 +18,9 @@ div{
 background-image:url(/ideal/img/レストラン1.jpg);
 background-size:100% auto;
 color: Red;
-
+}
+p.msg{
+background-color:orange;
 }
 </style>
 </head>
@@ -30,9 +32,7 @@ String message = (String) request.getAttribute("msg");
 int count = 1;
 if (message != null && !message.isEmpty()) {
 %>
-    <div>
-        <p><%= message %></p>
-    </div>
+        <p class="msg"><%= message %></p>
 <%
     }
 %>

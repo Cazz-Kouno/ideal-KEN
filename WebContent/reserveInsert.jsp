@@ -12,8 +12,16 @@
     table {
             width: 500px;
             text-align:center;
-            background:linear-gradient(red,white,white,green);}
+            background:linear-gradient(red,white,white,green);
+            margin: auto;
+            }
+    h2{
+    text-align:center;
+    }
     
+    div{
+    text-align:center;
+    }
     </style>
     
     <link rel="stylesheet" type="text/css" href="meisai.css" />
@@ -148,7 +156,7 @@
     </form>
     <br />
     <p id="boder">
-        <a href="/ideal/controller/ReserveListSvl">予約一覧に戻る</a>
+        <div><a href="/ideal/controller/ReserveListSvl">予約一覧に戻る</a></div>
     </p>
 </body>
 </html>

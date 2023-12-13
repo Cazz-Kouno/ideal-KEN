@@ -1,6 +1,3 @@
-Admin予約管理画面を作成中
-jsp,svlそれぞれ作成
-reserve beanに予約全体を追加
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -23,26 +20,35 @@ min-height:100%;
 	}
 table{
 	border: 2px glay solid;
+	margin:auto;
 }
 
 th {
 	border: 2px solid glay;
+	background-color: Red;
 	
 }
 
 td {
 	border: 2px solid glay;
+	background-color: white;
 }
 
 h1{
     color: white;
+    text-align:center;
+}
+
+div{
+    text-align:center;
 }
 </style>
 </head>
 <body>
-<jsp:useBean id="AdminReserveList" class="java.util.ArrayList"
-	scope="session" />
-<jsp:useBean id="userInfo" class="model.User" scope="session" />
+<jsp:useBean id="allReserveList" class="java.util.ArrayList"
+	scope="request" />
+<jsp:useBean id="adminInfo" class="model.Admin" scope="session" />
+	
 	<h1>お客様予約一覧</h1>
 
 	<p><%-- メッセージがnullでない場合にのみ表示 --%>
@@ -60,19 +66,20 @@ h1{
 
 	<table>
 			<tr>
-				<td>NO</td>
-				<td>ご予約日時</td>
-				<td>人数</td>
-				<td>コース名</td>
-				<td>テーブル名</td>
-				<td>登録日時</td>
+				<th>NO</th>
+				<th>ご予約日時</th>
+				<th>人数</th>
+				<th>コース名</th>
+				<th>テーブル名</th>
+				<th>登録日時</th>
 			</tr>
 			<%
-			for (Object obj : AdminReserveList) {
+			for (Object obj : allReserveList) {
 				Reserve reserve = (Reserve) obj;
 			%>
 			<tr>
-				<td><%=reserve.getRsvId()%></td>
+				<td><%=reserve.getRsvId()%></td>	
+				
 				<td>
 					<%
 					int year = reserve.getRsvYy();
@@ -92,12 +99,12 @@ h1{
 						reserve.getAppDd(), reserve.getAppHh(), reserve.getAppMm());
 				%>
 				<td><%=formattedDateTime%></td>
-				<td>                    <%-- 予約変更ボタン --%>
+<%--形だけ残す--%>	<td>                    <%-- 予約変更ボタン --%>
                     <form action="/ideal/controller/ReserveUpdateSvl" method="post">
                         <input type="hidden" name="rsvId" value="<%=reserve.getRsvId()%>">
                         <input type="submit" value="変更">
                     </form></td>
-				<td>  <%-- 予約削除ボタン --%>
+<%--形だけ残す--%>	<td>  <%-- 予約削除ボタン --%>
                     <form action="/ideal/controller/ReserveDeleteSvl" method="post">
                         <input type="hidden" name="rsvId" value="<%=reserve.getRsvId()%>">
                         <input type="submit" value="取消">
@@ -106,8 +113,9 @@ h1{
 			<%
 			}
 			%>
-				</table>
 
+				</table>
+<%--形だけ残す--%>
     <form action="/ideal/controller/ReserveInsertSvl" method="post">
         <!-- type="submit" で "新規ご予約" という名前のボタンを作成 -->
         <input type="submit" value="新規ご予約">

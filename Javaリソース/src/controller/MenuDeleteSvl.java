@@ -75,9 +75,9 @@ public class MenuDeleteSvl extends HttpServlet {
 
 				} else {
 					Coursectl.courseMenuChk(menuId);
-					request.setAttribute("oneMenu", Menu.getMenu(menuId));
+					request.setAttribute("oneMenu", Menu.getOneMenu(menuId,typeId)); // 修正
 					
-					rd = request.getRequestDispatcher("../menuDelete.jsp"); // /ideal/controller/ShowMenuSvl 
+					rd = request.getRequestDispatcher("../menuDelete.jsp"); // 修正　/ideal/controller/ShowMenuSvl 
 				}
 			}
 

@@ -13,8 +13,8 @@ public class Coursectl implements Serializable {
 	private int m_id;
 	
 	//Connection related fields
-	static Connection connection = null;
-	static PreparedStatement preparedStatement = null;
+	static Connection con = null;
+	static PreparedStatement ps = null;
 	static ResultSet resultSet = null;
 	static String sql = null;
 
@@ -49,15 +49,15 @@ public class Coursectl implements Serializable {
 			
 			try {
 				// 引数のメニューIDがSQLのコースコントロールテーブルに存在するかの検索
-				connection = DriverManager.getConnection
+				con = DriverManager.getConnection
 						("jdbc:mariadb://localhost:3306/ideal","root","root");
 
 				sql = "SELECT * FROM coursectl "
 						+ "WHERE m_id = ?";
 
-				preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setInt(1, m_Id);
-				resultSet = preparedStatement.executeQuery();
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, m_Id);
+				resultSet = ps.executeQuery();
 				if (resultSet.next()) {
 					throw new IdealException(IdealException.ERR_NO_NOT_MENU_DELETE);
 				}
@@ -70,14 +70,14 @@ public class Coursectl implements Serializable {
 				try {
 					if (resultSet != null)
 						resultSet.close();
-					if (preparedStatement != null)
-						preparedStatement.close();
-					if (connection != null)
-						connection.close();
+					if (ps != null)
+						ps.close();
+					if (con != null)
+						con.close();
 				} catch (Exception e) {
 					// TODO: handle exception
 					e.printStackTrace();
-//					System.out.println(preparedStatement);
+//					System.out.println(ps);
 				}
 
 			}

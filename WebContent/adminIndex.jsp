@@ -9,7 +9,6 @@
     
     <style>
        	body{
-            width: 500px;
             text-align:center;
             
             background-image:url(/ideal/img/レストラン18.avif),url(/ideal/img/レストラン1.jpg);
@@ -23,17 +22,13 @@
             }
         h1{
             color: white;
+            text-align: center;
         }
             
         h2{
             color: white;
         }
         
-        h1{
-            text-align: center;
-        }
-            
-            
             
             
             </style>
@@ -70,7 +65,11 @@
  <!-- ③．メニューメンテナンス -->
     <a href="/ideal/controller/MenuMaintenanceSvl">●メニューメンテナンス</a></p>
 
- <!-- ④．ログオフ -->
+
+ <!-- ④．予約管理画面 -->
+    <a href="/ideal/controller/AdminReserveListSvl">●予約管理画面</a></p>
+    
+ <!-- ⑤．ログオフ -->
     <a href="/ideal/controller/AdminLogoffSvl">●ログオフ</a></p>
 </form>
 

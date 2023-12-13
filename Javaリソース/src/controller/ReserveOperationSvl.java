@@ -65,8 +65,10 @@ public class ReserveOperationSvl extends HttpServlet {
 		System.out.print("RO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 		if (userInfo == null) {
 			// セッション情報がない場合、ホームページに遷移
+			request.setAttribute("msg", "セッションが途切れました。");
 			String url = "../home.jsp";
 			rd = request.getRequestDispatcher(url);
+			rd.forward(request, response);
 		} else {
 			System.out.print("RO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 			try {
@@ -130,11 +132,11 @@ public class ReserveOperationSvl extends HttpServlet {
 						Reserve registeredReserve = Reserve.insert(reserve);
 						System.out.println(2);
 						// 登録した予約IDをセット
-						request.setAttribute("rsvId", registeredReserve.getRsvId());
+						request.setAttribute("reserve", registeredReserve);
 						System.out.println(3);
 						// 遷移先を予約完了画面に設定
 						System.out.println(4);
-						String url = "../reserveComplete.jsp";
+						String url = "../reserveCompletion.jsp";
 						rd = request.getRequestDispatcher(url);
 					} else {
 						// 予約不可能な場合、メッセージをセットして遷移

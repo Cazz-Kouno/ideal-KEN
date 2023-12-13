@@ -18,11 +18,23 @@ table {
 	text-align: center;
 	background: linear-gradient(red, white,);
 	margin: auto;
-	
 }
 
 html {
 	min-height: 100%;
+}
+
+h1 {
+	background-color: Red;
+	text-align: center;
+}
+
+th {
+	background-color: Red;
+}
+
+div {
+	text-align: center;
 }
 
 th, td {
@@ -34,23 +46,6 @@ th, td {
 
 </head>
 
-<style>
-h1 {
-	background-color: Red;
-	text-align: center;
-}
-
-
-
-
-th {
-	background-color: Red;
-}
-
-div{
-text-align: center;
-}
-</style>
 <script type="text/javascript">
 <!--
 	function dataCheck(obj) {
@@ -73,7 +68,7 @@ text-align: center;
 			return true;
 		}
 	}
-	-->
+//-->
 </script>
 <body>
 	<%
@@ -144,12 +139,12 @@ text-align: center;
 		<tr>
 			<th>コメント</th>
 			<td><textarea name="detail" cols="45" rows="6"><%=oneMenu.getDetail()%></textarea>
-				</td>
+			</td>
 		</tr>
 		<input type="hidden" name="mode" value="<%=MenuOperationSvl.UPDATE%>" />
 		<input type="hidden" name="menuId"
 			value='<jsp:getProperty name = "oneMenu" property = "menuId"/>' />
-	    <input type="hidden" name="typeId"
+		<input type="hidden" name="typeId"
 			value='<jsp:getProperty name = "oneMenu" property = "typeId"/>' />
 		<tr>
 			<td colspan="2" style=""><input type="submit" value="更新"></td>
@@ -158,7 +153,9 @@ text-align: center;
 		</form>
 	</table>
 	<p>
-		<div><a href="/ideal/controller/menuMaintenance">一覧表示に戻る</a></div>
+	<div>
+		<a href="MenuMaintenanceSvl?typeId=<%=typeId %>">一覧表示に戻る</a>
+	</div>
 	</p>
 
 

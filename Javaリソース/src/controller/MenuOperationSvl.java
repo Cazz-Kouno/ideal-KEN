@@ -58,6 +58,8 @@ public class MenuOperationSvl extends HttpServlet {
 				int orderFlg = 0;
 				int price = 0;
 				int typeId = 0;
+				int menuId = 0;
+				
 				try {
 					orderFlg = Integer.parseInt(request.getParameter("orderFlg"));
 				} catch (NumberFormatException e) {
@@ -70,17 +72,25 @@ public class MenuOperationSvl extends HttpServlet {
 					typeId = Integer.parseInt(request.getParameter("typeId"));
 				} catch (NumberFormatException e) {
 				}
-				
+				try {
+					menuId = Integer.parseInt(request.getParameter("menuId"));
+				} catch (NumberFormatException e) {
+				}
+
 				menu = new Menu();
 				menu.setMenuName(menuName);
 				menu.setDetail(detail);
 				menu.setOrderFlg(orderFlg);
 				menu.setPrice(price);
 				menu.setTypeId(typeId);
+				menu.setMenuId(menuId);
 				request.setAttribute("typeId", typeId);
-				if(Menu.updateMenu(menu, mode) == 0) {
-					throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
-				};
+				System.out.print("MO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
+
+				if (Menu.updateMenu(menu, mode) == 0) {
+								throw new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
+				}
+				;
 				rd = request.getRequestDispatcher("./MenuMaintenanceSvl");
 			}
 
@@ -88,7 +98,7 @@ public class MenuOperationSvl extends HttpServlet {
 			request.setAttribute("msg", e.getMsg());
 			request.setAttribute("oneMenu", menu);
 
-			switch(mode) {
+			switch (mode) {
 			case INSERT:
 				rd = request.getRequestDispatcher("./MenuInsertSvl");
 				break;
@@ -98,6 +108,9 @@ public class MenuOperationSvl extends HttpServlet {
 			case DELETE:
 				rd = request.getRequestDispatcher("./MenuDeleteSvl");
 				break;
+			default:
+				rd = request.getRequestDispatcher("./errpage");
+
 			}
 		} finally {
 			rd.forward(request, response);
