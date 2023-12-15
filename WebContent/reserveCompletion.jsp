@@ -58,7 +58,7 @@ background:linear-gradient(red,white,white,green);
 		ご予約番号は<span font-size="100px"><%=reserve.getRsvId()%></span>番です。
 	</h2>
 
-	<h2>ご来店の際、受付にお申し付けください</h2>
+	<h2>ご来店の際、受付にお申し付けください。</h2>
 
 	<a href="/ideal/controller/ReserveListSvl">予約一覧に戻る</a>
 		</th>

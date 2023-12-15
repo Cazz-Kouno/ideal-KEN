@@ -36,6 +36,7 @@
 
         td2 {
             color: red;
+             
         }
 
         input[type="text"], input[type="password"] {
@@ -60,6 +61,11 @@
         h1{
         text-align:center;
         }
+        
+        div{
+        text-align:center;
+        }
+        #sub{text-align: right;}
     </style>  
             
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -136,7 +142,7 @@
             </tr>
             <tr>
                 <td id="sub" colspan="2">
-                    <td2>*は必須入力です。</td2>
+                    <span style="color:red;">*は必須入力です。</span>
                     <input type="submit" value="登録" />
                     <input type="hidden" name="mode" value="<%= UserOperationSvl.INSERT %>" />
                 </td>
@@ -147,6 +153,6 @@
     <br />
 
     <!-- ⑧．処理メニューに戻る -->
-    <a href="home.jsp">処理メニューに戻る</a>
+    <div><a href="home.jsp">ホームページに戻る</a></div>
 </body>
 </html>

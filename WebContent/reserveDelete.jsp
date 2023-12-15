@@ -106,7 +106,7 @@
             </tr>
 
             <tr>
-            	<td colspan="2">
+            	<td colspan="2" style="text-align:right;">
            		 <input type="submit" value="取消"></td>
            		<input type="hidden" name="rsvId" value=<%= request.getParameter("rsvId") %> />
             	<input type="hidden" name="mode" value="<%= controller.ReserveOperationSvl.DELETE %>" />

@@ -34,7 +34,7 @@ public class UserLogoffSvl extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession(true);	//セッションオブジェクトの破棄ルーチンの挿入
+		request.getSession().invalidate();	//セッションオブジェクトの破棄ルーチンの挿入
 		response.sendRedirect("../userLogin.jsp");
 
 	}

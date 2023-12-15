@@ -18,19 +18,22 @@ body{
 min-height:100%;
 	}
 table{
-	border: 2px glay solid;
+	border: 2px gray solid;
 	margin:auto;
+	
 }
 
 th {
-	border: 2px solid glay;
+	border: 2px solid gray;
 	background-color: Red;
+	padding: 10px;
 	
 }
 
 td {
-	border: 2px solid glay;
+	border: 2px solid gray;
 	background-color: white;
+		padding: 10px;
 }
 
 h1{
@@ -72,6 +75,8 @@ div{
 				<th>コース名</th>
 				<th>テーブル名</th>
 				<th>登録日時</th>
+				<th></th>
+				<th></th>
 			</tr>
 			<%
 			for (Object obj : reserveList) {
@@ -90,12 +95,13 @@ div{
 					String formattedDateTime = String.format("%04d年%02d月%02d日 %02d時%02d分", year, month, day, hour, minute);
 					%> <%=formattedDateTime%>
 				</td>
-				<td><%=reserve.getPerson()%></td>
+				<td style="text-align: center;"><%=reserve.getPerson()%></td>
+
 				<td><%=reserve.getCourseName()%></td>
-				<td><%=reserve.getTableName()%></td>
+				<td style="text-align: center;"><%=reserve.getTableName()%></td>
 				<%
 				formattedDateTime = String.format("%04d年%02d月%02d日 %02d時%02d分", reserve.getAppYy(), reserve.getAppMm(),
-						reserve.getAppDd(), reserve.getAppHh(), reserve.getAppMm());
+						reserve.getAppDd(), reserve.getAppHh(), reserve.getAppMi());
 				%>
 				<td><%=formattedDateTime%></td>
 				<td>                    <%-- 予約変更ボタン --%>
@@ -113,7 +119,7 @@ div{
 			}
 			%>
 			<tr>
-			<td colspan = "6">
+			<td colspan="8" style="text-align: center;">
     <form action="/ideal/controller/ReserveInsertSvl" method="post">
         <!-- type="submit" で "新規ご予約" という名前のボタンを作成 -->
         <input type="submit" value="新規ご予約">

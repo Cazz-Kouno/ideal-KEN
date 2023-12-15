@@ -363,7 +363,7 @@ public class Menu implements Serializable {
 								pst.setString(2, m.getDetail());
 								pst.setInt(3, m.getOrderFlg());
 								pst.setInt(4, m.getPrice());
-								//pst.setInt(5, m.getTypeId()); // エラー表示テスト
+								pst.setInt(5, m.getTypeId());
 						
 							break;
 						case MenuOperationSvl.UPDATE:		

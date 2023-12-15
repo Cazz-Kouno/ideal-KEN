@@ -17,24 +17,70 @@ background:linear-gradient(red,white,white,green);
 html{
 min-height:100%;
 }
-table{width:100%;
+table{width:700px;
 text-align:center;
 margin:auto;
-border: 2px black solid;
+/*border: 2px black solid;*/
 }
-tr, td{
+/*tr, td{
 border: 2px black solid;
 
+}*/
+td{width:80%;
+
 }
+th{width:80%;}
+td.price{width:20%;}
 .border{
-   max-width:300px
+   max-width:300px;
    }
+.price{
+	text-align:center;
+	font-style:oblique;
+	font-weight:bold;
+}
+.menuType{
+	background-color:orange;
+}
+.course{
+width:500px;
+text-align:left;
+border: 2px black solid;
+}
+.menu{
+	border-bottom:dotted;
+}
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+var toggleLinks = document.querySelectorAll(".toggleLink");
+var toggleContents = document.querySelectorAll(".toggleContent");
+
+// すべてのtoggleLinkに対してクリックイベントを設定
+toggleLinks.forEach(function (toggleLink) {
+  toggleLink.addEventListener("click", function (event) {
+    // デフォルトの動作を防ぐ
+    event.preventDefault();
+
+    // クリックされたリンクに関連するtargetを取得
+    var targetId = toggleLink.getAttribute("data-target");
+    var targetContent = document.getElementById(targetId);
+
+    // 対象の要素の表示状態を切り替える
+    if (targetContent.style.display === "none") {
+      targetContent.style.display = "block";
+    } else {
+      targetContent.style.display = "none";
+    }
+  });
+});
+});
+</script>
 
 <%-- ArrayList<Course> courseList = (ArrayList<Course>)session.getAttribute("courseList"); --%>
 <% ArrayList<Course> courseList = Course.getCourseList(); %>
 <% ArrayList<Menu> menuList = (ArrayList<Menu>)(session.getAttribute("menuList")); %>
-<% int count = 0;boolean change = false; %>
+<% int count = 0;boolean change = false;int idCount = 0; %>
 <% String admininfo = String.valueOf(session.getAttribute("adminInfo")); %>
 </head>
 <body>
@@ -57,20 +103,20 @@ for(Course list_id:courseList){
 <%
 	}
 %>
-  <table> 
+  <table class="course"> 
 	<tr>
-		<td><%= list_id.getCourseName() %></td>
-		<td rawspan="2"><%= list_id.getPrice() %></td>
+		<th><%= list_id.getCourseName() %></th>
+		<td rowspan="2" class="price">￥<%= list_id.getPrice() %></td>
 	</tr>
 	<tr>
-		<td padding="20px"><%= list_id.getDetail() %></td>
+		<td style="padding-left:40px;"><%= list_id.getDetail() %></td>
 	</tr> 
 <%
 	}
 	change = false;
 %>	
 	<tr>
-		<td colspan="2"><%= list_id.getMenuName() %></td>
+		<td colspan="2" style="padding-left:80px;">・<%= list_id.getMenuName() %></td>
 	</tr>
 <% 	
 }
@@ -96,20 +142,36 @@ for(Menu id:menuList){
 %>
 <table>
 	<tr>
-		<td colspan="2"><%= id.getTypeName() %></td>
+		<th colspan="2" class="menuType"><%= id.getTypeName() %></th>
 	</tr>
 <%
 	}
 	change = false;
 %>
 	<tr>
-		<td><%= id.getMenuName() %></td>
-		<td rowspan="2"><%= id.getPrice() %></td>
+		<td>
+		<%
+		if(id.getDetail() == null || id.getDetail().isEmpty()){
+		%>
+		<%= id.getMenuName() %>
+		<%
+		}else{
+		%>
+		<a href="#" class="toggleLink" data-target="content<%=idCount%>"><%= id.getMenuName() %></a>
+		<%
+		}
+		%>
+		</td>
+		<td class="price">￥<%= id.getPrice() %></td>
 	</tr>
 	<tr>
-		<td padding="20px"><%= id.getDetail() %></td>
+		<td colspan="2" class="menu">
+			<div id="content<%=idCount %>" class="toggleContent" style="display: none;">
+			<%= id.getDetail() == null ? "":id.getDetail() %></div>
+		</td>
 	</tr>
-<% 	
+<% 
+idCount++;
 }
 %>
 </table>

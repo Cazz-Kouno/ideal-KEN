@@ -47,7 +47,7 @@ html{min-height:100%;}
 
 <p><a href="/ideal/controller/ShowMenuSvl">●メニュー紹介</a></p>
 <p><a href="/ideal/controller/ReserveListSvl">●ご予約</a></p>
-<p><a href="/ideal/controller/UserUpdateSvl">●お客様情報変更
+<p><a href="/ideal/controller/UserUpdateSvl">●お客様情報変更</a>
 <p><a href="/ideal/controller/UserDeleteSvl">●お客様脱会手続き</a></p>
 <p><a href="/ideal/controller/UserLogoffSvl">●ログオフ</a></p>
 </form>

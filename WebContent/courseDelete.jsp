@@ -26,7 +26,7 @@
             text-align: left;
             border: 1px gray solid;
             }
-            
+		th{background-color: Red;}
         h1 {
 	       background-color: Red;
 	       text-align: center;
@@ -89,9 +89,8 @@ if (message != null && !message.isEmpty()) {
 
 <tr>
 <th>コメント</th>
-<td><textarea name="detail" cols="45" rows="6">
+<td>
 <%=course.getDetail() == null ? "" :course.getDetail()%>
-</textarea>
 </td>
 
 </tr>
@@ -126,7 +125,7 @@ count++;
 %>
 
 <tr>
-<td colspan="2" style="text-align;right;"><input type="submit" value="削除"></td>
+<td colspan="2" style="text-align:right;"><input type="submit" value="削除"></td>
 </tr>
 
 

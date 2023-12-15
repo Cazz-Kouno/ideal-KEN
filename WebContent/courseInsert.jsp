@@ -8,36 +8,34 @@
 <meta charset="UTF-8">
 <title>新規コース登録画面</title>
 
-<style>
-body{
-            background-image:url(/ideal/img/レストラン8.jpg);
+<style>body{
+            background-image:url(/ideal/img/レストラン7.jpg);
     		 background-size:100% auto;
-        
-        }
-table {
-	width: 500px;
-	margin: auto;
-}
-
-th, td {
-	padding: 8px;
-	text-align: left;
-	border: 1px gray solid;
-}
-h1 {
-	background-color: Red;
-	text-align: center;
-}
-
-th {
-	background-color: Red;
-}
-select {
-	width:300px;
-}
-div{
-text-align: center;
-}
+            }
+        table {
+            width: 500px;
+            text-align:center;
+            background:linear-gradient(red,white,white,green);
+            align:center;
+            margin: auto;
+            }
+        html{
+            min-height:500px;
+            }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px gray solid;
+            }
+		th{background-color: Red;}
+        h1 {
+	       background-color: Red;
+	       text-align: center;
+           }
+           
+           div{
+           text-align: center;
+           }
 </style>
 <%! String[] COURSE_MENU_TYPE_NAME = 
 {"courseId","appetizerId","soupId","pastaId","meatId","fishId","dessertId","","","",""}; %>
@@ -71,13 +69,13 @@ if (message != null && !message.isEmpty()) {
 			<form id="frm1" name="frm1" action="/ideal/controller/CourseOperationSvl" method="post">
 
 				<tr>
-					<th>コース名</th>
+					<th>コース名*</th>
 					<td><input type="text" name="courseName" size="30"
 						style="ime-mode: active;"></td>
 				</tr>
 
 				<tr>
-					<th>価格</th>
+					<th>価格*</th>
 					<td><input type="text" name="price" size="6"
 						style="ime-mode: inactive;">円</td>
 				</tr>
@@ -93,7 +91,6 @@ if (message != null && !message.isEmpty()) {
 					<td><textarea name="detail" cols="45" rows="6">
 					</textarea>
 					</td>
-							style="ime-mode: active;" placeholder="ご自由にご記入ください。"></textarea></td>
 				</tr>
 <%
 for(Object obj:typeMenuList){
@@ -123,16 +120,19 @@ count++;
 %>
 
 				<tr>
-					<td colspan="2" style=""><input type="submit" value="登録"></td>
+					<td colspan="2" style="text-align: right; 
+					                       right; background-color: Red;">
+				     ※は必修入力です。<input type="submit" value="登録"></td>
 				</tr>
 	</table>
 	<input type="hidden" name="mode" value="<%= CourseOperationSvl.INSERT %>">
 	<input type="hidden" name="typeId" value="100">
 	
 	</form>
+	<div align="center">
 	<p>
-		<div><a href="/ideal/controller/MenuMaintenanceSvl">一覧表示に戻る</a></div>
+		<a href="/ideal/controller/MenuMaintenanceSvl" ><font color="white">一覧表示に戻る</font></a>
 	</p>
-
+    </div>
 </body>
 </html>

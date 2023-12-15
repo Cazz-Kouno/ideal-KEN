@@ -66,6 +66,8 @@ input[type="submit"]:hover {
 div.link {
 	background-color: transparent;
 }
+#sub{text-align: center;
+}
 </style>
 <!--  link rel="stylesheet" type="text/css" href="login.css"/-->
 
@@ -110,7 +112,7 @@ div.link {
 				<th>管理者氏名</th>
 				<td><input type="text" name="admName" size="10" maxlength="10"
 					style="ime-mode: active"
-					placeholder=<%=(adminInfo.getAdmName() != null) ? adminInfo.getAdmName() : ""%>></td>
+				</td>
 			</tr>
 			<tr>
 				<th>パスワード</th>
@@ -119,7 +121,7 @@ div.link {
 
 			</tr>
 			<tr>
-				<td id="sub" colspan="2"><input type="submit" value=" 送 信 " /></td>
+				<td id="sub" colspan="2" style="text-align: right;"><input type="submit" value=" 送 信 " /></td>
 			</tr>
 		</table>
 	</form>

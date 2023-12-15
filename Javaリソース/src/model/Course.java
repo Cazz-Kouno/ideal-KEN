@@ -428,6 +428,7 @@ public class Course {
 					crs.setCourseId(rs.getInt(1));
 					System.out.println("NewId=" + rs.getInt(1));
 				}
+				pst.close();
 			}
 
 			switch (mode) {

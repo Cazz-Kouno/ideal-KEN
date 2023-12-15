@@ -8,30 +8,34 @@
 <title>コース情報変更画面</title>
 
 <style>body{
-            background-image:url(/ideal/img/レストラン15.jpg);
+            background-image:url(/ideal/img/レストラン7.jpg);
     		 background-size:100% auto;
-        
-        }
-
-
+            }
         table {
             width: 500px;
-            margin:auto;
+            text-align:center;
+            background:linear-gradient(red,white,white,green);
+            align:center;
+            margin: auto;
+            }
+        html{
+            min-height:500px;
             }
         th, td {
             padding: 8px;
             text-align: left;
             border: 1px gray solid;
             }
-h1{background-color:Red;
-   text-align: center;
-}
-th{background-color:Red;}
-
-div{
-text-align: center;
-}
-</style>
+		th{background-color: Red;}
+        h1 {
+	       background-color: Red;
+	       text-align: center;
+           }
+           
+           div{
+           text-align: center;
+           }
+</style>>
 <%! String[] COURSE_MENU_TYPE_NAME = 
 {"courseId","appetizerId","soupId","pastaId","meatId","fishId","dessertId","","","",""}; %>
 
@@ -64,7 +68,7 @@ if (message != null && !message.isEmpty()) {
 
 
 <tr>
-<th>コース名</th>
+<th>コース名*</th>
 <td>
 <input type="text" name="courseName" size="30" style="ime-mode: active;"
  value="<%=course.getCourseName() %>">
@@ -72,7 +76,7 @@ if (message != null && !message.isEmpty()) {
 </tr>
 
 <tr>
-<th>価格</th>
+<th>価格*</th>
 
 <td>
 <input type="text" name="price" size="6" style="ime-mode: inactive;"
@@ -94,9 +98,6 @@ if (message != null && !message.isEmpty()) {
 <td><textarea name="detail" cols="45" rows="6">
 <%=course.getDetail() %></textarea>
 </td>
-
-	style="ime-mode: active;"
- placeholder="ご自由にご記入ください。">
 </tr>
 
 <%
@@ -133,9 +134,11 @@ count++;
 }
 %>
 
-<tr>
-<td colspan="2" style="text-align;right;"><input type="submit" value="更新"></td>
-</tr>
+			<tr>
+					<td colspan="2" style="text-align: right; 
+					                       right; background-color: Red;">
+				     ※は必修入力です。<input type="submit" value="更新"></td>
+				</tr>
 
 
 </table>
@@ -144,9 +147,11 @@ count++;
 	<input type="hidden" name="courseId" value="<%= course.getCourseId()%>">
 	
 </form>
-<p>
-		<div><a href="/ideal/controller/MenuMaintenanceSvl">一覧表示に戻る</a></div>
-</p>
+<div align="center">
+	<p>
+		<a href="/ideal/controller/MenuMaintenanceSvl" ><font color="white">一覧表示に戻る</font></a>
+	</p>
+    </div>
 
 
 </body>

@@ -49,6 +49,8 @@
             cursor: pointer;}
         input[type="submit"]:hover {
             background-color: #45a049;}
+        #sub{text-align: center;}
+            
 </style>
     <script type="text/JavaScript" src="incScript.js"></script>
     <script type="text/JavaScript">

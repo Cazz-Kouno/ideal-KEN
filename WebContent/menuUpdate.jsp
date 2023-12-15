@@ -24,11 +24,6 @@ html {
 	min-height: 100%;
 }
 
-h1 {
-	background-color: Red;
-	text-align: center;
-}
-
 th {
 	background-color: Red;
 }
@@ -41,6 +36,9 @@ th, td {
 	padding: 8px;
 	text-align: left;
 	border: 1px gray solid;
+}
+td2 {
+    color: red;
 }
 </style>
 
@@ -85,27 +83,26 @@ th, td {
 
 	<table>
 		<td colspan="2">
-			<h1>メニューの更新</h1>
+			<h1 style="color: black;">メニューの更新</h1>
 
-			<p>ここにメッセージを表示</p>
-
+			<p>
 			<form id="frm1" name="frm1"
 				action="/ideal/controller/MenuOperationSvl" method="post"
 				onsubmit="return dataCheck(this);">
-
+			</p>
 
 				<tr>
-					<th>メニュー名</th>
+					<th>メニュー名 ※</th>
 					<td><input type="text" name="menuName" size="30"
 						value='<jsp:getProperty name = "oneMenu" property = "menuName"/>'
 						style="ime-mode: active"></td>
 				</tr>
 
 				<tr>
-					<th>価格</th>
-					<td><input type="text" name="price" size="6"
-						value='<jsp:getProperty name = "oneMenu" property = "price"/>'
-						style="ime-mode: inactive"></td>
+    				<th>価格 ※</th>
+    				<td><input type="text" name="price" size="6"
+        				value='￥<jsp:getProperty name="oneMenu" property="price"/>'
+        				style="ime-mode: inactive"></td>
 				</tr>
 
 				<tr>
@@ -138,7 +135,7 @@ th, td {
 
 		<tr>
 			<th>コメント</th>
-			<td><textarea name="detail" cols="45" rows="6"><%=oneMenu.getDetail()%></textarea>
+			<td><textarea name="detail" style="ime-mode: active" cols="30" rows="6"><%=oneMenu.getDetail()%></textarea>
 			</td>
 		</tr>
 		<input type="hidden" name="mode" value="<%=MenuOperationSvl.UPDATE%>" />
@@ -146,15 +143,16 @@ th, td {
 			value='<jsp:getProperty name = "oneMenu" property = "menuId"/>' />
 		<input type="hidden" name="typeId"
 			value='<jsp:getProperty name = "oneMenu" property = "typeId"/>' />
-		<tr>
-			<td colspan="2" style=""><input type="submit" value="更新"></td>
+		<tr style="background-color: white;">
+    		<td colspan="2" style="text-align: right;"><td2>※は必修入力です。</td2>
+    	<input type="submit" value="更新"></td>
 		</tr>
 
 		</form>
 	</table>
 	<p>
 	<div>
-		<a href="MenuMaintenanceSvl?typeId=<%=typeId %>">一覧表示に戻る</a>
+		<a href="MenuMaintenanceSvl?typeId=<%=typeId %>" style="font-weight: bold;">一覧表示に戻る</a>
 	</div>
 	</p>
 

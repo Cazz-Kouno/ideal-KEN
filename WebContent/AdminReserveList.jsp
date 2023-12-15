@@ -19,19 +19,20 @@ body{
 min-height:100%;
 	}
 table{
-	border: 2px glay solid;
+	border: 2px gray solid;
 	margin:auto;
 }
 
 th {
-	border: 2px solid glay;
+	border: 2px solid gray;
 	background-color: Red;
-	
+		padding: 10px;
 }
 
 td {
-	border: 2px solid glay;
+	border: 2px solid gray;
 	background-color: white;
+		padding: 10px;
 }
 
 h1{

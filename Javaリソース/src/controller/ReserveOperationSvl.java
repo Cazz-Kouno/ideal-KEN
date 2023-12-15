@@ -181,7 +181,7 @@ public class ReserveOperationSvl extends HttpServlet {
 						// 削除処理
 						// 予約を削除
 						Reserve.delete(reserve);
-						// 遷移先を予約一覧表示処理に設定
+						// 遷移先予を約一覧表示処理に設定
 						String url = "ReserveListSvl";
 						rd = request.getRequestDispatcher(url);
 						break;

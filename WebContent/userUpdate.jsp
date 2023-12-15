@@ -101,33 +101,33 @@
                 <td><%= userInfo.getUsrId() %></td>
             </tr>
             <tr>
-                <th>お名前 *</th>
-                <td><input type="text" name="usrName" size="20" maxlength="20" style="ime-mode: active" placeholder=<%= (userInfo.getUsrName() != null) ? userInfo.getUsrName() : "" %> ></td>
+                <th>お名前</th>
+                <td><input type="text" name="usrName" size="20" maxlength="20" style="ime-mode: active" value=<%= (userInfo.getUsrName() != null) ? userInfo.getUsrName() : "" %> ></td>
             </tr>
             <tr>
                 <th>住所</th>
-                <td><input type="text" name="address" size="4" cols="50" style="ime-mode: active" placeholder=<%= (userInfo.getAddress() != null) ? userInfo.getAddress() : "" %> ></td>
+                <td><input type="text" name="address" size="4" cols="50" style="ime-mode: active" value=<%= (userInfo.getAddress() != null) ? userInfo.getAddress() : "" %> ></td>
             </tr>
             <tr>
-                <th>電話番号 *</th>
-                <td><input type="text" name="phone" size="15" maxlength="20" style="ime-mode: inactive" placeholder=<%= (userInfo.getPhone() != null) ? userInfo.getPhone() : "" %> ></td>
+                <th>電話番号</th>
+                <td><input type="text" name="phone" size="15" maxlength="20" style="ime-mode: inactive" value=<%= (userInfo.getPhone() != null) ? userInfo.getPhone() : "" %> ></td>
             </tr>
             <tr>
-                <th>メールアドレス *</th>
-                <td><input type="text" name="mail" size="30" maxlength="100" style="ime-mode: inactive" placeholder=<%= (userInfo.getMail() != null) ? userInfo.getMail() : "" %> ></td>
+                <th>e-mail</th>
+                <td><input type="text" name="mail" size="30" maxlength="100" style="ime-mode: inactive" value=<%= (userInfo.getMail() != null) ? userInfo.getMail() : "" %> ></td>
             </tr>
             <tr>
                 <th>パスワード</th>
-                <td><input type="password" name="password" size="8" maxlength="8" style="ime-mode: inactive" placeholder=<%= (userInfo.getPassword() != null) ? userInfo.getPassword() : "" %> >※変更時のみ入力してください。</td>
+                <td><input type="password" name="password" size="8" maxlength="8" style="ime-mode: inactive" value=<%= (userInfo.getPassword() != null) ? userInfo.getPassword() : "" %> >※変更時のみ入力してください。</td>
             </tr>
-            <tr>
-                <td colspan="2">
-                    <p style="color:red;">* は必須入力です。</p>
-                    <input type="submit" value="変更" />
-                    <input type="hidden" name="mode" value=<%= UserOperationSvl.UPDATE %> />
-                    <input type="hidden" name="usrId" value=<%= request.getAttribute("usrId") %> />
-                </td>
-            </tr>
+           <tr>
+    <td colspan="2" style="text-align: right;"> <!-- Adding a cell for the button and aligning it to the right -->
+        <input type="submit" value="変更" />
+        <input type="hidden" name="mode" value=<%= UserOperationSvl.UPDATE %> />
+        <input type="hidden" name="usrId" value=<%= request.getAttribute("usrId") %> />
+    </td>
+</tr>
+
         </table>    
     </form>
     <br />

@@ -97,8 +97,8 @@ div{
                 <td>
                     <select name="rsvYy">
                         <%-- 予約年の選択対象：当年から一年後 --%>
-                        <option value="<%= java.time.Year.now().getValue() %>" <%= java.time.Year.now().getValue() == reserve.getRsvYy() ? "selected":"" %>><%= java.time.Year.now().getValue() %>年</option>
-                        <option value="<%= java.time.Year.now().plusYears(1).getValue() %>" <%= java.time.Year.now().plusYears(1).getValue() == reserve.getRsvYy() ? "selected":"" %>><%= java.time.Year.now().plusYears(1).getValue() %>年</option>
+                        <option value="<%= java.time.Year.now().getValue() %>" selected><%= java.time.Year.now().getValue() %>年</option>
+                        <option value="<%= java.time.Year.now().plusYears(1).getValue() %>"><%= java.time.Year.now().plusYears(1).getValue() %>年</option>
                     </select>
                     <select name="rsvMm">
                         <%-- 予約月の選択対象：1月から12月 --%>
@@ -106,10 +106,18 @@ div{
                             <option value="<%= i %>"<%= i == reserve.getRsvMm() ? " selected" : "" %>><%= i %>月</option>
                         <% } %>
                     </select>
+     		<%
+    		// JavaScriptの変数としてrsvDdを取得
+    		String rsvDdValue = "document.getElementById('rsvDd').value";
+			%>
 					<select name="rsvDd" id="rsvDd">
     					<%-- 予約日の選択対象：1日から31日 --%>
     					<% for (int i = 1; i <= 31; i++) { %>
-        			<option value="<%= i %>"<%= i == reserve.getRsvDd() ? " selected" : "" %>><%= i %>日</option>
+        	<%
+            String condition = 
+            "(i == 8 && " + rsvDdValue + " == null) || (" + rsvDdValue + " != null && parseInt(" + rsvDdValue + ") == " + i + ")";
+        	%>
+        			<option value="<%= i %>"<%= condition.equals("true") ? " selected" : "" %>><%= i %>日</option>
     					<% } %>
 					</select>
 
@@ -121,13 +129,13 @@ div{
                     <select name="rsvHh">
                         <%-- 予約時の選択対象：17時から21時 --%>
                         <% for (int i = 17; i <= 21; i++) { %>
-                            <option value="<%= i %>"<%= i == reserve.getRsvHh() ? " selected" : "" %>><%= i %>時</option>
+                            <option value="<%= i %>"<%= i == 17 ? " selected" : "" %>><%= i %>時</option>
                         <% } %>
                     </select>
                     <select name="rsvMi">
                         <%-- 予約分の選択対象：0分、15分、30分、45分 --%>
                         <% for (int i = 0; i <= 45; i += 15) { %>
-                            <option value="<%= i %>"<%= i == reserve.getRsvMi() ? " selected" : "" %>><%= i %>分</option>
+                            <option value="<%= i %>"<%= i == 0 ? " selected" : "" %>><%= i %>分</option>
                         <% } %>
                     </select>
                 </td>
@@ -138,7 +146,7 @@ div{
                     <select name="person">
                         <%-- 予約人数の選択対象：1名から6名 --%>
                         <% for (int i = 1; i <= 6; i++) { %>
-                            <option value="<%= i %>"<%= i == reserve.getPerson() ? " selected" : "" %>><%= i %> 名</option>
+                            <option value="<%= i %>"<%= i == 1 ? " selected" : "" %>><%= i %> 名</option>
                         <% } %>
                     </select>
                 </td>
@@ -150,7 +158,7 @@ div{
 <%
 for(Course c:courseList){
 %>	
-	<option value="<%= c.getCourseId()%>" <%= c.getCourseId() == reserve.getCourseId() ? " selected" : "" %>><%= c.getCourseName() %></option>
+	<option value="<%= c.getCourseId()%>"><%= c.getCourseName() %></option>
 <%	
 }
 %>
@@ -158,9 +166,9 @@ for(Course c:courseList){
                 </td>
             </tr>
             <tr>
-                <td id="sub" colspan="2" style="text-align: right;">
-    		<input type="submit" value="変更" />
-				</td>
+                <td id="sub" colspan="2">
+                    席を確認します。確認を押してください。 <input type="submit" value="変更" />
+                </td>
             </tr>
             <input type="hidden" name="rsvId" value=<%= reserve.getRsvId() %> />
             <input type="hidden" name="mode" value="<%= controller.ReserveOperationSvl.UPDATE %>" />

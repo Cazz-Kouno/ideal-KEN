@@ -61,14 +61,12 @@ div {
 				</tr>
 				<tr>
 					<th>価格</th>
-					<td><jsp:getProperty name="oneMenu" property="price" /></td>
-				</tr>
+					<td>￥<jsp:getProperty name="oneMenu" property="price" /></td>
+				</tr>				
 				<tr>
 					<th>オーダー可</th>
-					<td><jsp:getProperty name="oneMenu" property="orderFlg" />
-						&nbsp;&nbsp;（1:可 / 0:不可）</td>
-				</tr>
-				>
+					<td><%= oneMenu.getOrderFlg() == 1 ? "オーダー可":"オーダー不可" %></td>
+				</tr>				
 				<tr>
 					<th>分類</th>
 					<td><jsp:getProperty name="oneMenu" property="typeName" /></td>
@@ -84,15 +82,14 @@ div {
 					value='<jsp:getProperty name = "oneMenu" property = "typeId"/>' />
 				<input type="hidden" name="menuId"
 					value='<jsp:getProperty name = "oneMenu" property = "menuId"/>' />
-				<tr>
-					<th colspan="2" class="bottom"><input type="submit"
-						value="メニューを削除" /></th>
-				</tr>
+				<th colspan="2" class="bottom" style="text-align: right;">
+        		<input type="submit" value="メニューを削除" />
+    			</th>
 			</form>
 	</table>
 	<p>
 	<div>
-		<a href="MenuMaintenanceSvl?typeId=<%=typeId%>">一覧表示画面へ戻る</a>
+		<a href="MenuMaintenanceSvl?typeId=<%=typeId %>" style="font-weight: bold;">一覧表示画面へ戻る</a>
 	</div>
 	</p>
 </body>

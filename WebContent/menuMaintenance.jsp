@@ -19,9 +19,7 @@ body{
             text-align:center;
             
             /*background-image:url(/ideal/img/レストラン18.avif);*/
-    		 background-size:100% auto;
-            }
-            background:linear-gradient(red,white,white,green);
+    		background-size:100% auto;
             }
 <!--
 table{text-align:center;margin:auto;}
@@ -47,7 +45,7 @@ background:#007B53;color:#E3FFE3;padding:2px;cursor:pointer;margin-top:5px;}
 </head>
 
 <body>
-<h1>===メニューマスターメンテナンス===</h1>
+<h1>===メニューメンテナンス===</h1>
 <%
 String[] order = {"不可","可"};
 

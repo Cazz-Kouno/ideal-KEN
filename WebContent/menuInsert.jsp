@@ -44,6 +44,7 @@ div {
 	text-align: center;
 }
 </style>
+
 <script type="text/javascript">
 <!--
 	function dataCheck(obj) {
@@ -102,30 +103,24 @@ div {
 			<h1>新しいメニューを追加</h1>
 		</td>
 		</tr>
-		<tr>
-		 <td>
-		 
-		 </td>
-		</tr>
-
 		<form id="frm1" name="frm1"
 			action="/ideal/controller/MenuOperationSvl" method="post"
 			onsubmit="return dataCheck(this);">
 
 			<tr>
-				<th>メニュー名</th>
+				<th>メニュー名*</th>
 				<td><input type="text" name="menuName" size="30"
-					style="ime-mode: active"></td>
+					style="ime-mode: active; width:98%;"></td>
 
 			</tr>
 			<tr>
-				<th>価格</th>
-				<td><input type="text" name="price" size="6"
+				<th>価格*</th>
+				<td><input type="text" name="price" size="10"
 					style="ime-mode: inactive"></td>
 			</tr>
 
 			<tr>
-				<th>オーダー可</th>
+				<th>オーダー可*</th>
 				<td><input type="radio" name="orderFlg" value="1" checked />可
 					<input type="radio" name="orderFlg" value="0" />不可</td>
 			</tr>
@@ -158,17 +153,22 @@ div {
 
 			<tr>
 				<th>コメント</th>
-				<td><input type="textarea" name="detail" size="30"
-					style="ime-mode: active"></td>
-			</tr>
+					<td><textarea name="detail"  
+					       rows="8" style="overflow-y:scroll; 
+					                  ime-mode: inactive; width:98%;" >
+					    </textarea></td>
+						</tr>
 			<input type="hidden" name="mode" value="<%=MenuOperationSvl.INSERT%>" />
-			<tr>
-				<td colspan="2" style=""><input type="submit" value="登録"></td>
+			<tr align="right">
+				<td colspan="2" style="text-align: right; background-color: Red;">※は必修入力です。<input type="submit" value="登録"></td>
 			</tr>
 	</table>
 	</form>
+	<div align="center">
 	<p>
-		<a href="MenuMaintenanceSvl?typeId=<%=typeId%>">一覧表示に戻る</a>
+		<a href="MenuMaintenanceSvl?typeId=<%=typeId%>">
+<font color="white">一覧表示に戻る</font></a>
+	</div>
 </body>
 </html>
 
