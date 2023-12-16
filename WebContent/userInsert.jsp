@@ -125,15 +125,15 @@
                 <td><input type="text" name="usrName" size="30" maxlength="30" style="ime-mode: active" /></td>
             </tr>
             <tr>
-                <th>住所</th>
+                <th>住所 *</th>
                 <td><input type="text" name="address" rows="4" cols="50" maxlength="200" style="ime-mode: active;" /></td>
             </tr>
             <tr>
-                <th>電話番号</th>
+                <th>電話番号 *</th>
                 <td><input type="text" name="phone" size="15" maxlength="20" style="ime-mode: inactive;" /></td>
             </tr>
             <tr>
-                <th>E-mail</th>
+                <th>E-mail *</th>
                 <td><input type="text" name="mail" size="30" maxlength="100" style="ime-mode: inactive;" /></td>
             </tr>
             <tr>
@@ -153,6 +153,6 @@
     <br />
 
     <!-- ⑧．処理メニューに戻る -->
-    <div><a href="home.jsp">ホームページに戻る</a></div>
+    <div><a href="home.jsp"><font color="white">ホームページに戻る</font></a></div>
 </body>
 </html>

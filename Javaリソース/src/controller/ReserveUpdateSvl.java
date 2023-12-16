@@ -45,6 +45,7 @@ public class ReserveUpdateSvl extends HttpServlet {
 			// セッション情報がない場合、ホームページに遷移
 			String url = "../home.jsp";
 			rd = request.getRequestDispatcher(url);
+			rd.forward(request, response);
 		} else {
 			try {
 				try {

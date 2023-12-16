@@ -7,40 +7,35 @@
 <meta charset="UTF-8">
 <title>メニュー情報変更画面</title>
 
-<style>
-body {
-	background-image: url(/ideal/img/レストラン10.jpg);
-	background-size: 100% auto;
-}
-
-table {
-	width: 500px;
-	text-align: center;
-	background: linear-gradient(red, white,);
-	margin: auto;
-}
-
-html {
-	min-height: 100%;
-}
-
-th {
-	background-color: Red;
-}
-
-div {
-	text-align: center;
-}
-
-th, td {
-	padding: 8px;
-	text-align: left;
-	border: 1px gray solid;
-}
-td2 {
-    color: red;
-}
-</style>
+<style>body{
+            background-image:url(/ideal/img/レストラン7.jpg);
+    		 background-size:100% auto;
+            }
+        table {
+            width: 500px;
+            text-align:center;
+            background:linear-gradient(red,white,white,green);
+            align:center;
+            margin: auto;
+            }
+        html{
+            min-height:500px;
+            }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px gray solid;
+            }
+		th{background-color: Red;}
+        h1 {
+	       background-color: Red;
+	       text-align: center;
+           }
+           
+           div{
+           text-align: center;
+           }
+</style>>
 
 </head>
 
@@ -100,8 +95,8 @@ td2 {
 
 				<tr>
     				<th>価格 ※</th>
-    				<td><input type="text" name="price" size="6"
-        				value='￥<jsp:getProperty name="oneMenu" property="price"/>'
+    				<td>￥<input type="text" name="price" size="6"
+        				value=<jsp:getProperty name="oneMenu" property="price"/>
         				style="ime-mode: inactive"></td>
 				</tr>
 
@@ -152,7 +147,7 @@ td2 {
 	</table>
 	<p>
 	<div>
-		<a href="MenuMaintenanceSvl?typeId=<%=typeId %>" style="font-weight: bold;">一覧表示に戻る</a>
+		<a href="MenuMaintenanceSvl?typeId=<%=typeId %>" style="font-weight: bold;"><font color="white">一覧表示に戻る</font></a>
 	</div>
 	</p>
 

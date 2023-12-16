@@ -127,7 +127,7 @@ div.link {
 	</form>
 	<br />
 	<div class="link">
-		<a href="/ideal/home.jsp">ホームページ</a>
+		<a href="/ideal/home.jsp"><font color="white">ホームページ</font></a>
 	</div>
 </body>
 </html>

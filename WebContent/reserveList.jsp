@@ -131,7 +131,7 @@ div{
 
 
 	<p>
-		<div><a href="../userIndex.jsp">処理メニューに戻る</a></div>
+		<div><a href="../userIndex.jsp"><font color="white">処理メニューに戻る</font></a></div>
 	</p>
 	<br>
 </body>

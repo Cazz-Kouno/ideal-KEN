@@ -134,7 +134,7 @@ count++;
 	<input type="hidden" name="typeId" value="100">
 	<input type="hidden" name="courseId" value="<%= course.getCourseId()%>">
 </form>
-<div><p><a href="/ideal/controller/MenuMaintenanceSvl">一覧表示画面に戻る</a></p></div>
+<div><p><a href="/ideal/controller/MenuMaintenanceSvl"><font color="white">一覧表示画面に戻る</font></a></p></div>
 
 
 </body>

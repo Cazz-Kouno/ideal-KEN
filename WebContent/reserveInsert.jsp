@@ -22,6 +22,10 @@
     div{
     text-align:center;
     }
+     th, td {
+     padding: 8px;
+        text-align: left; /* テーブルの中身を左揃えにする */
+    }
     </style>
     
     <link rel="stylesheet" type="text/css" href="meisai.css" />
@@ -64,7 +68,7 @@
             return; // 以降の処理を中断
         }
     %>
-    <h2><%= userInfo.getUsrName() %> 様ご予約</h2>
+    <h2><%= userInfo.getUsrName() %> 様 ご予約</h2>
     <br />
 
     <%-- メッセージがnullでない場合のみ表示 --%>

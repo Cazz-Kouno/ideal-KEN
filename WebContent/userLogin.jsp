@@ -99,6 +99,6 @@
         </table>
     </form>
     <br />
-    <div class="link"><a href="/ideal/home.jsp">ホームページ</a></div>
+    <div class="link"><a href="/ideal/home.jsp"><font color="White">ホームページ</font></a></div>
 </body>
 </html>

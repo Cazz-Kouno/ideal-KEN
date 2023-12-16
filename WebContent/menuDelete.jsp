@@ -8,41 +8,35 @@
 
 <title>メニュー情報削除画面</title>
 
-<style>
-body {
-	background-image: url(/ideal/img/レストラン27.jpg);
-	background-size: 100% auto;
-}
-
-table {
-	width: 500px;
-	margin: auto;
-}
-
-th, td {
-	padding: 8px;
-	text-align: left;
-	border: 1px gray solid;
-}
-</style>
-
-</head>
-
-<style>
-h1 {
-	background-color: Red;
-	text-align: center;
-}
-
-th {
-	background-color: Red;
-}
-
-div {
-	text-align: center;
-}
-</style>
-
+<style>body{
+            background-image:url(/ideal/img/レストラン7.jpg);
+    		 background-size:100% auto;
+            }
+        table {
+            width: 500px;
+            text-align:center;
+            background:linear-gradient(red,white,white,green);
+            align:center;
+            margin: auto;
+            }
+        html{
+            min-height:500px;
+            }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px gray solid;
+            }
+		th{background-color: Red;}
+        h1 {
+	       background-color: Red;
+	       text-align: center;
+           }
+           
+           div{
+           text-align: center;
+           }
+</style>>
 <body>
 	<%
 	request.setCharacterEncoding("UTF-8");
@@ -89,7 +83,7 @@ div {
 	</table>
 	<p>
 	<div>
-		<a href="MenuMaintenanceSvl?typeId=<%=typeId %>" style="font-weight: bold;">一覧表示画面へ戻る</a>
+		<a href="MenuMaintenanceSvl?typeId=<%=typeId %>" style="font-weight: bold;"><font color="white">一覧表示画面へ戻る</font></a>
 	</div>
 	</p>
 </body>

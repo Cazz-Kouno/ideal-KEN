@@ -132,6 +132,6 @@
     </form>
     <br />
 
-    <div><a href="../userIndex.jsp">処理メニューに戻る</a></div>
+    <div><a href="../userIndex.jsp"><font color="black">処理メニューに戻る</font></a></div>
 </body>
 </html>

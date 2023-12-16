@@ -17,7 +17,6 @@
     
        	table {
             width: 500px;
-            text-align:center;
             background:linear-gradient(red,white,white,green);
             margin: auto;
             }
@@ -36,7 +35,6 @@
             padding: 8px;
             text-align: left;
             border-bottom: 1px solid #ddd;}
-        td2{color:red;}
         input[type="text"], input[type="password"] {
             width: 100%;
             padding: 8px;
@@ -104,8 +102,7 @@
                 <td><%= (userInfo.getMail() != null) ? userInfo.getMail() : "" %></td>
             </tr>
             <tr>
-                <td><td2>確認し、脱会ボタンをクリックしてください。</td2>
-                <id="sub" colspan="2">
+                <td colspan="2" id="sub"><font color="red">確認し、脱会ボタンをクリックしてください。</font>
                     <input type="submit" value="脱会" />
 					 <input type="hidden" name="mode" value=<%= UserOperationSvl.DELETE %> />
        				 <input type="hidden" name="usrId" value=<%= request.getAttribute("usrId") %>" />
@@ -116,6 +113,6 @@
     <br />
 
     <!-- 9．処理メニューに戻る -->
-    <div><a href="../userIndex.jsp">処理メニューに戻る</a></div>
+    <div><a href="../userIndex.jsp"><font color="white">処理メニューに戻る</font></a></div>
 </body>
 </html>

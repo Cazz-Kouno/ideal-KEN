@@ -9,41 +9,35 @@
 <meta charset="UTF-8">
 <title>新規メニュー登録画面</title>
 
-<style>
-body {
-	background-image: url(/ideal/img/レストラン24.jpg);
-	background-size: 100% auto;
-}
-
-h1 {
-	background-color: Red;
-}
-
-th {
-	background-color: Red;
-}
-
-table {
-	width: 500px;
-	text-align: center;
-	/*background: linear-gradient(red, white, white, green);*/
-	margin: auto;
-}
-
-html {
-	min-height: 100%;
-}
-
-th, td {
-	padding: 8px;
-	text-align: left;
-	border: 1px gray solid;
-}
-
-div {
-	text-align: center;
-}
-</style>
+<style>body{
+            background-image:url(/ideal/img/レストラン7.jpg);
+    		 background-size:100% auto;
+            }
+        table {
+            width: 500px;
+            text-align:center;
+            background:linear-gradient(red,white,white,green);
+            align:center;
+            margin: auto;
+            }
+        html{
+            min-height:500px;
+            }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px gray solid;
+            }
+		th{background-color: Red;}
+        h1 {
+	       background-color: Red;
+	       text-align: center;
+           }
+           
+           div{
+           text-align: center;
+           }
+</style>>
 
 <script type="text/javascript">
 <!--
@@ -167,7 +161,7 @@ div {
 	<div align="center">
 	<p>
 		<a href="MenuMaintenanceSvl?typeId=<%=typeId%>">
-<font color="white">一覧表示に戻る</font></a>
+<font color="Red">一覧表示に戻る</font></a>
 	</div>
 </body>
 </html>

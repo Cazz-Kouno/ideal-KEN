@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Course;
 import model.IdealException;
 import model.Menu;
 
@@ -45,14 +46,13 @@ public class ShowMenuSvl extends HttpServlet {
 		RequestDispatcher rd = null;
 		String name = String.valueOf(session.getAttribute("userInfo"));
 		try {
-//			ArrayList<Course> courseList = Course.getCourseList();//Courseが出来たら解放
-//			session.setAttribute("courseList", courseList);
+			ArrayList<Course> courseList = Course.getCourseList();//Courseが出来たら解放
+			session.setAttribute("courseList", courseList);
 			
 			ArrayList<Menu> menuList = Menu.getMenuList();
 			session.setAttribute("menuList", menuList);
 			
 			rd = request.getRequestDispatcher("../showMenu.jsp");
-//			rd = request.getRequestDispatcher("../home.jsp");
 
 		} catch (IdealException e) {
 			request.setAttribute("msg", e.getMsg());

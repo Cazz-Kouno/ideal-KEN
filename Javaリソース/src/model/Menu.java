@@ -168,11 +168,8 @@ public class Menu implements Serializable {
 
 			
 		}catch(Exception e){
-//			System.out.println("err");
 			e.printStackTrace();
-//			System.out.println(pst);
 			IdealException idex = new IdealException(IdealException.ERR_NO_DB_EXCEPTION);
-//			idex.getMsg();
 			throw idex;
 		}finally{
 			try{

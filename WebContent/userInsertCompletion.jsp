@@ -33,12 +33,13 @@
 <jsp:useBean id="userInfo" class="model.User" scope="session"/>
     <form name="userInsertCompletionForm" action="/ideal/controller/UserOperationSvl" method="post">
     <tr>
-        <td><input type="text" name="usrName" size="10" maxlength="20"  placeholder=<%= userInfo.getUsrName() %> ;/>
-         様のユーザーIDは <td>
+        <td name="usrName" size="10" maxlength="20" /><font style="font-weight: bold; font-size:30px; color:green;"><%= userInfo.getUsrName() %></font>
+         <font style="font-weight: bold; font-size:30px">&nbsp;様の&nbsp;ユーザーID は&nbsp; </font></td>
     </tr>
     <tr>
-        <td><input type="text" name="usrId" size="10" maxlength="20" style="ime-mode: active" placeholder=<%= userInfo.getUsrId() %> ;/>
-         でございます。<td>
+        <td name="usrId" size="10" maxlength="20" style="font-weight: bold;">
+          <font style="font-weight: bold; font-size:30px; color:green;" ><%= userInfo.getUsrId() %></font>
+            <font style="font-weight: bold; font-size:30px">&nbsp;でございます。</font></td>
     </tr>
 </form><br/>
 <h2>ログインの際に必要となりますので</h2><br/>

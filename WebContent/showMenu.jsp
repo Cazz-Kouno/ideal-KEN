@@ -40,7 +40,8 @@ td.price{width:20%;}
 	font-weight:bold;
 }
 .menuType{
-	background-color:orange;
+	background-color:lime;
+	/*color:white;*/
 }
 .course{
 width:500px;
@@ -77,8 +78,7 @@ toggleLinks.forEach(function (toggleLink) {
 });
 </script>
 
-<%-- ArrayList<Course> courseList = (ArrayList<Course>)session.getAttribute("courseList"); --%>
-<% ArrayList<Course> courseList = Course.getCourseList(); %>
+<% ArrayList<Course> courseList = (ArrayList<Course>)session.getAttribute("courseList"); %>
 <% ArrayList<Menu> menuList = (ArrayList<Menu>)(session.getAttribute("menuList")); %>
 <% int count = 0;boolean change = false;int idCount = 0; %>
 <% String admininfo = String.valueOf(session.getAttribute("adminInfo")); %>
@@ -177,9 +177,9 @@ idCount++;
 </table>
 <br>
 <p><% if(session.getAttribute("userInfo") == null){ %>
-<a href="../home.jsp">[戻る]</a>
+<a href="../home.jsp"><font color="white">[戻る]</font></a>
 <% }else{ %>
-<a href="../userIndex.jsp">[戻る]</a>
+<a href="../userIndex.jsp"><font color="white">[戻る]</font></a>
 <% } %>
 
 </p>
