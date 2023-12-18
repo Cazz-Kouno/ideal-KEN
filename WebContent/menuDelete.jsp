@@ -67,8 +67,7 @@
 				</tr>
 				<tr>
 					<th>コメント</th>
-					<td><textarea name="detail" cols="45" rows="6"><%=oneMenu.getDetail()%>
-			</textarea></td>
+					<td><%=oneMenu.getDetail()%></td>
 				</tr>
 				<input type="hidden" name="mode"
 					value="<%=MenuOperationSvl.DELETE%>" /> <input type="hidden"

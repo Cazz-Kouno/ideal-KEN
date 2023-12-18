@@ -62,15 +62,17 @@
     }
 %>
  <br />
+ 
  <!-- ③．メニューメンテナンス -->
-    <a href="/ideal/controller/MenuMaintenanceSvl">●メニューメンテナンス</a></p>
+    <a href="/ideal/controller/MenuMaintenanceSvl"><font color="white">●メニューメンテナンス</font></a></p>
 
 
  <!-- ④．予約管理画面 -->
-    <a href="/ideal/controller/AdminReserveListSvl">●予約管理画面</a></p>
+    <a href="/ideal/controller/AdminReserveListSvl"><font color="white">●予約管理画面</font></a></p>
     
  <!-- ⑤．ログオフ -->
-    <a href="/ideal/controller/AdminLogoffSvl">●ログオフ</a></p>
+    <a href="/ideal/controller/AdminLogoffSvl"><font color="white">●ログオフ</font></a></p>
+
 </form>
 
 </body>

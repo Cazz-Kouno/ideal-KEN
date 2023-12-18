@@ -25,7 +25,11 @@
         }
         
         h1 {
-            color: white;
+                text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+              0px 1px 0 #FFF,  0-1px 0 #FFF,
+              -1px 0 0 #FFF, 1px 0 0 #FFF;
+            
              
         }
         th, td {
@@ -85,6 +89,12 @@
             alert("メールアドレスは必須項目です。");
             return false;
         }
+        console.log("passlength:" + obj.elements['password'].value.length);
+        if (obj.elements['password'].value.length === 0) {
+            alert("パスワードは必須項目です。");
+            return false;
+        }
+        
         return true;
     }
 
@@ -100,6 +110,7 @@
         return regex.test(mail);
     }
     //-->
+    
     </script>
 </head>
 
@@ -125,7 +136,7 @@
                 <td><input type="text" name="usrName" size="30" maxlength="30" style="ime-mode: active" /></td>
             </tr>
             <tr>
-                <th>住所 *</th>
+                <th>住所</th>
                 <td><input type="text" name="address" rows="4" cols="50" maxlength="200" style="ime-mode: active;" /></td>
             </tr>
             <tr>

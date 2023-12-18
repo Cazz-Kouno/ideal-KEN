@@ -37,8 +37,12 @@ td {
 }
 
 h1{
-    color: white;
     text-align:center;
+        text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+              0px 1px 0 #FFF,  0-1px 0 #FFF,
+              -1px 0 0 #FFF, 1px 0 0 #FFF;
+    
 }
 
 div{
@@ -75,8 +79,7 @@ div{
 				<th>コース名</th>
 				<th>テーブル名</th>
 				<th>登録日時</th>
-				<th></th>
-				<th></th>
+				<th colspan="2"></th>
 			</tr>
 			<%
 			for (Object obj : reserveList) {

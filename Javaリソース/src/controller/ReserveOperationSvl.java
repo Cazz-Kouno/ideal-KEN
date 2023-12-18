@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Admin;
 import model.IdealException;
 import model.Reserve;
 import model.TableLoc;
@@ -48,6 +49,7 @@ public class ReserveOperationSvl extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User userInfo = (User) session.getAttribute("userInfo");
+		Admin adminInfo = (Admin)session.getAttribute("adminInfo");
 		int rsvId = 0;
 		int rsvYy = 0;
 		int rsvMm = 0;
@@ -63,19 +65,17 @@ public class ReserveOperationSvl extends HttpServlet {
 		TableLoc tableLoc = null;
 		RequestDispatcher rd = null;
 		System.out.print("RO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
-		if (userInfo == null) {
+		if (userInfo == null && adminInfo == null) {
 			// セッション情報がない場合、ホームページに遷移
 			request.setAttribute("msg", "セッションが途切れました。");
 			String url = "../home.jsp";
 			rd = request.getRequestDispatcher(url);
 			rd.forward(request, response);
 		} else {
-			System.out.print("RO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 			try {
 				try {
 					// リクエストパラメーターから予約操作モードを取得
 					mode = Integer.parseInt(request.getParameter("mode"));
-					System.out.print("RO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 
 					// 予約情報を取得
 					System.out.println(request.getParameter("rsvId"));
@@ -91,18 +91,16 @@ public class ReserveOperationSvl extends HttpServlet {
 						Integer.parseInt(request.getParameter("rsvHh"));
 					rsvMi = request.getParameter("rsvMi") == null || request.getParameter("rsvMi").equals("") ?	0:
 						Integer.parseInt(request.getParameter("rsvMi"));
-					usrId = ((User)(session.getAttribute("userInfo"))).getUsrId();
+					usrId = request.getParameter("usrId") == null || request.getParameter("usrId").equals("") ?	0:
+						Integer.parseInt(request.getParameter("usrId"));
 					person = request.getParameter("person") == null || request.getParameter("person").equals("") ?	0:
 						Integer.parseInt(request.getParameter("person"));
 					courseId = request.getParameter("courseId") == null || request.getParameter("courseId").equals("") ?	0:
 						Integer.parseInt(request.getParameter("courseId"));
 					//					tableId = Integer.parseInt(request.getParameter("tableId"));
 					formattedDateTime = String.format("%04d-%02d-%02d %02d:%02d:00", rsvYy, rsvMm, rsvDd, rsvHh, rsvMi);
-					System.out.print("RO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
-					System.out.println(rsvId +":"+rsvYy+":"+rsvMm+":"+rsvDd+":"+rsvHh+":"+rsvMi+":"+usrId+":"+person+":"+courseId);
 				} catch (NumberFormatException e) {
 					// 数値変換例外が発生した場合、0に設定（先にしてある)
-					System.out.println("ro err:91");
 				}
 
 				// 予約情報の生成
@@ -152,9 +150,7 @@ public class ReserveOperationSvl extends HttpServlet {
 				case UPDATE:
 					// 変更処理
 					// 予約情報の座席情報を設定
-					System.out.print("RO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 					tableLoc = Reserve.updateChk(rsvId, formattedDateTime, person);
-					System.out.print("RO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
 
 					// 予約を変更
 					if (tableLoc != null) {
@@ -162,16 +158,27 @@ public class ReserveOperationSvl extends HttpServlet {
 						reserve.setTableName(tableLoc.getTableName());
 						reserve = Reserve.update(reserve);
 						request.setAttribute("reserve", reserve);
-						System.out.print("RO" + new Throwable().getStackTrace()[0].getLineNumber() + ":");
-						System.out.println(reserve.getRsvId());
 						// 遷移先を予約登録画面表示処理に設定
-						String url = "../reserveCompletion.jsp";
-						rd = request.getRequestDispatcher(url);
+						if(userInfo != null) {
+							String url = "../reserveCompletion.jsp";
+							rd = request.getRequestDispatcher(url);
+						}else {
+							String url = "./AdminReserveListSvl";
+							rd = request.getRequestDispatcher(url);
+	
+						}
 					} else {
 						// 予約不可能な場合、メッセージをセットして遷移
 						request.setAttribute("reserve", reserve);
-						String url = "ReserveUpdateSvl";
-						rd = request.getRequestDispatcher(url);
+						if(userInfo != null) {
+							String url = "ReserveUpdateSvl";
+							rd = request.getRequestDispatcher(url);
+						}else {
+							String url = "./AdminReserveListSvl";
+							rd = request.getRequestDispatcher(url);
+						}
+
+						
 						throw new IdealException(IdealException.ERR_NO_NOT_VACANCY);
 
 					}

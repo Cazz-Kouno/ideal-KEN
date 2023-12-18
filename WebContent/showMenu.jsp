@@ -136,7 +136,7 @@ for(Menu id:menuList){
 	if(change == true){
 		if(count != 0){
 %>
-</table>
+
 <%
 		}
 %>
@@ -183,5 +183,6 @@ idCount++;
 <% } %>
 
 </p>
+<br><br><br><br><br>
 </body>
 </html>

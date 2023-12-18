@@ -36,8 +36,11 @@ td {
 }
 
 h1{
-    color: white;
     text-align:center;
+    text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+              0px 1px 0 #FFF,  0-1px 0 #FFF,
+              -1px 0 0 #FFF, 1px 0 0 #FFF;
 }
 
 div{
@@ -68,11 +71,13 @@ div{
 	<table>
 			<tr>
 				<th>NO</th>
+				<th>お客様氏名</th>
 				<th>ご予約日時</th>
 				<th>人数</th>
 				<th>コース名</th>
 				<th>テーブル名</th>
 				<th>登録日時</th>
+				<th colspan="2"></th>
 			</tr>
 			<%
 			for (Object obj : allReserveList) {
@@ -80,6 +85,7 @@ div{
 			%>
 			<tr>
 				<td><%=reserve.getRsvId()%></td>	
+				<td style="max-width:120px;"><%=reserve.getUsrName()%>様</td>	
 				
 				<td>
 					<%
@@ -92,7 +98,7 @@ div{
 					String formattedDateTime = String.format("%04d年%02d月%02d日 %02d時%02d分", year, month, day, hour, minute);
 					%> <%=formattedDateTime%>
 				</td>
-				<td><%=reserve.getPerson()%></td>
+				<td style="text-align:center;"><%=reserve.getPerson()%></td>
 				<td><%=reserve.getCourseName()%></td>
 				<td><%=reserve.getTableName()%></td>
 				<%
@@ -115,17 +121,21 @@ div{
 			}
 			%>
 
-				</table>
+				
 <%--形だけ残す--%>
+	<tr><td colspan="9" style="text-align:center;">
     <form action="/ideal/controller/ReserveInsertSvl" method="post">
         <!-- type="submit" で "新規ご予約" という名前のボタンを作成 -->
         <input type="submit" value="新規ご予約">
     </form>
+    </td></tr>
 
-	<p>
-		<a href="../adminIndex.jsp">処理メニューに戻る</a>
-	</p>
-	<br>
+				</table>
+				<br>
+	<div>
+		<a href="../adminIndex.jsp"><font color="white">処理メニューに戻る</font></a>
+	</div>
+	<br><br><br><br><br>
 </body>
 
 </html>

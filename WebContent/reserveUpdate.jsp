@@ -67,10 +67,11 @@ div{
 	<%
         // セッションから User オブジェクトを取得し、型キャストする
         model.User userInfo = (model.User)session.getAttribute("userInfo");
+		model.Admin adminInfo = (model.Admin)session.getAttribute("adminInfo");
         model.Reserve reserve = (model.Reserve)request.getAttribute("reserve"); // 予約情報をセッションから取得
         ArrayList<Course> courseList = (ArrayList<Course>)request.getAttribute("courseList");
 
-        if (userInfo == null || reserve == null || courseList == null) {
+        if (  (userInfo == null && adminInfo == null) || reserve == null || courseList == null) {
     %>
             <h2>エラー: ユーザ情報または予約情報が取得できませんでした。</h2>
     <%
@@ -78,7 +79,7 @@ div{
             response.sendRedirect("reserveUpdate.jsp");
         }
     %>
-	<h1><%= userInfo.getUsrName() %> 様ご予約変更</h1>
+	<h1><%= reserve.getUsrName() %> 様ご予約変更</h1>
 
 	<%-- メッセージがnullでない場合のみ表示 --%>
     <% if (request.getAttribute("msg") != null) { %>
@@ -163,6 +164,7 @@ for(Course c:courseList){
 				</td>
             </tr>
             <input type="hidden" name="rsvId" value=<%= reserve.getRsvId() %> />
+            <input type="hidden" name="usrId" value=<%= reserve.getUsrId() %> />
             <input type="hidden" name="mode" value="<%= controller.ReserveOperationSvl.UPDATE %>" />
         </table>
         <br />

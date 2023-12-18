@@ -17,6 +17,10 @@
             }
     h2{
     text-align:center;
+    text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+              0px 1px 0 #FFF,  0-1px 0 #FFF,
+              -1px 0 0 #FFF, 1px 0 0 #FFF;
     }
     
     div{
@@ -158,9 +162,9 @@
         </table>
         <br />
     </form>
-    <br />
     <p id="boder">
-        <div><a href="/ideal/controller/ReserveListSvl">予約一覧に戻る</a></div>
+        <div><a href="/ideal/controller/ReserveListSvl"><font color="white" style="background-color:black;">予約一覧に戻る</font></a></div>
     </p>
+    <br><br><br><br>
 </body>
 </html>

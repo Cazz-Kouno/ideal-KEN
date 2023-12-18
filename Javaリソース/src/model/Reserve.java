@@ -737,8 +737,8 @@ public class Reserve implements Serializable {
 
 			sql = "SELECT * FROM reserve LEFT JOIN user USING (usr_id) "
 					+ "LEFT JOIN table_loc USING (table_id) "
-					+ "LEFT JOIN course USING (c_id) "
-					+ "ORDER BY rsv_date";  // ここで rsv_date をソート対象の列に変更
+					+ "LEFT JOIN course USING (c_id) ";
+			sql	+= "ORDER BY rsv_date";  // ここで rsv_date をソート対象の列に変更
 
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();

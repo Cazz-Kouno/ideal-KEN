@@ -130,7 +130,7 @@
 
 		<tr>
 			<th>コメント</th>
-			<td><textarea name="detail" style="ime-mode: active" cols="30" rows="6"><%=oneMenu.getDetail()%></textarea>
+			<td><textarea name="detail" style="ime-mode: active" cols="40" rows="6"><%=oneMenu.getDetail()%></textarea>
 			</td>
 		</tr>
 		<input type="hidden" name="mode" value="<%=MenuOperationSvl.UPDATE%>" />
