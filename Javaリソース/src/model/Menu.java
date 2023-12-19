@@ -215,7 +215,7 @@ public class Menu implements Serializable {
 					+ " JOIN"
 					+ " menuType"
 					+ " USING(t_id)"
-					+ " ORDER BY m_id";
+					+ " ORDER BY t_id";
 	
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery(); 
